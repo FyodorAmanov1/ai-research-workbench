@@ -1,0 +1,56 @@
+{
+  "project": "ai-research-workbench",
+  "seed": null,
+  "metrics": {
+    "retrieval_top1_accuracy": 1.0,
+    "evaluation_cases": [
+      {
+        "question": "How do amplitude estimation oracle and state preparation costs enter the benchmark?",
+        "expected": "qae",
+        "retrieved": "qae"
+      },
+      {
+        "question": "Why measure QAOA constraint feasibility?",
+        "expected": "qaoa",
+        "retrieved": "qaoa"
+      },
+      {
+        "question": "How should Monte Carlo confidence intervals handle antithetic pairs?",
+        "expected": "mc",
+        "retrieved": "mc"
+      },
+      {
+        "question": "What does ridge regression regularize?",
+        "expected": "ridge",
+        "retrieved": "ridge"
+      }
+    ],
+    "unknown_query_abstained": true
+  },
+  "provenance": {
+    "data": "Four original short source descriptions and four authored evaluation questions",
+    "sources": [
+      {
+        "id": "qae",
+        "url": "https://arxiv.org/abs/quant-ph/0005055"
+      },
+      {
+        "id": "qaoa",
+        "url": "https://arxiv.org/abs/1411.4028"
+      },
+      {
+        "id": "mc",
+        "url": "https://doi.org/10.1007/978-0-387-21617-1"
+      },
+      {
+        "id": "ridge",
+        "url": "https://doi.org/10.1080/00401706.1970.10488634"
+      }
+    ]
+  },
+  "limitations": [
+    "Small development fixture, not a held-out evaluation or verified full-paper retrieval.",
+    "Extractive keyword baseline; no live LLM is called by this benchmark.",
+    "A live Codex integration must use the portfolio controller's shared daily allowance."
+  ]
+}
