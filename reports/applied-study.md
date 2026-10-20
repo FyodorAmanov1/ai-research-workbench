@@ -24,7 +24,7 @@ The browser performs the same deterministic retrieval locally. Python provides a
 
 | Question | Expected source | Top result | Correct at rank 1 |
 | --- | --- | --- | --- |
-| tail exposure option book | quantum-estimation-lab:risk-1.0 | quantum-estimation-lab:risk-1 | False |
+| tail exposure option book | quantum-estimation-lab:risk-1 | quantum-estimation-lab:risk-1 | True |
 | stressed annual volatility derivatives | quantum-estimation-lab:risk-1.8 | quantum-estimation-lab:risk-1.8 | True |
 | Grover oracle preparation calls | quantum-estimation-lab:amplitude | quantum-estimation-lab:amplitude | True |
 | exactly three holdings turnover | quantum-optimization-lab:allocation | quantum-optimization-lab:allocation | True |
@@ -36,11 +36,12 @@ The browser performs the same deterministic retrieval locally. Python provides a
 | stable regime chronological calibration | statistical-learning-lab:stationary | statistical-learning-lab:stationary | True |
 | volcanology tectonic magma | ABSTAIN | ABSTAIN | True |
 | medieval manuscript paleography | ABSTAIN | ABSTAIN | True |
+| quantum portfolio guaranteed profit tomorrow | ABSTAIN | quantum-estimation-lab:amplitude | False |
 
 ### Limits
 
-- Twelve authored regression questions are small development fixtures, not an independent held-out benchmark. Failed queries remain in the table.
-- Lexical relevance does not prove that evidence supports an arbitrary claim. No semantic answer correctness or hallucination rate is estimated.
+- Thirteen authored regression questions are small development fixtures, not an independent held-out benchmark. Failed queries remain in the table.
+- The guaranteed-profit question deliberately shares corpus terms but has no supporting answer: BM25 retrieves anyway. Empty-lexical-support abstention does not detect semantic false support. No semantic answer correctness or hallucination rate is estimated.
 - Snapshots can become stale. Source artifact digests identify exactly which local public report was ingested; re-ingestion is explicit. Registry hashes detect accidental edits, not a malicious party able to rewrite both data and hashes.
 
 ## Claim audit & integration
@@ -70,6 +71,10 @@ Controller integration uses the same existing daily Codex session, medium effort
 - Matching a recorded number verifies transcription only. It does not validate the underlying study or establish causality, profitability or quantum advantage.
 - Five specified claim probes demonstrate interface behavior, not robustness to all adversarial inputs. JSON boundaries and instructions do not guarantee an LLM will resist prompt injection.
 - The offline browser and CLI do not generate prose using an LLM. Live model integration requires the existing authorized session; no paid fallback is installed.
+
+## Interpretation
+
+All expected-source questions retrieve the registered record, while the misleading guaranteed-profit question exposes lexical false support. Two unrelated-topic questions abstain. The numeric validator catches transcription errors; it cannot turn an unsupported scientific conclusion into evidence.
 
 ## Concepts to explain in an interview
 
