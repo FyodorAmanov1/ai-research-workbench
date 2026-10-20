@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "description": "Explicit snapshot of four public companion studies; not a live index.",
+  "documents": [
+    {
+      "id": "quantum-estimation-lab:risk-1",
+      "title": "Quantum Risk Observatory / Base market",
+      "project": "quantum-estimation-lab",
+      "url": "https://github.com/FyodorAmanov1/quantum-estimation-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/quantum-estimation-lab/#risk-1",
+      "artifact_sha256": "ba04f0ea58315cf2726365152a0a6605c408736148587c179374b557a6acd2cd",
+      "sha256": "abba3f498ae01d530e8be24804a6a1a34e58d8072e173242801c7b1f0e3a7d22",
+      "text": "Four correlated option positions. Revalue the full book at a 21-day horizon and compare three simulation designs at matched path budgets.\n99% value at risk: 683.8816824040545 USD\n99% expected shortfall: 764.1748139172402 USD\n99% potential exposure: 1541.6003364587596 USD\nScenarios: 32768.0 paths\nCorrelated GBM terminal simulation; Black\u2013Scholes revaluation of remaining six-month option maturities. Positions and currency scale are explicit.\nRandomized Sobol and antithetic designs are compared with independent Monte Carlo using 12 separate seeds at four budgets. The high-budget independent reference is itself a simulation estimate.\nVaR is an empirical loss quantile; expected shortfall averages observations in the empirical tail. PFE uses positive future book value, not losses.\nLimitations:\nIllustrative synthetic asset parameters, not calibrated market data or an investment recommendation.\nLognormal dynamics omit stochastic volatility, defaults, liquidity and funding; tail estimates remain model dependent.\nThe chart compares mean-loss error. It does not establish quantum advantage or tail-quantile confidence intervals.",
+      "metrics": [
+        {
+          "label": "99% value at risk",
+          "value": 683.8816824040545,
+          "unit": "USD",
+          "note": ""
+        },
+        {
+          "label": "99% expected shortfall",
+          "value": 764.1748139172402,
+          "unit": "USD",
+          "note": ""
+        },
+        {
+          "label": "99% potential exposure",
+          "value": 1541.6003364587596,
+          "unit": "USD",
+          "note": ""
+        },
+        {
+          "label": "Scenarios",
+          "value": 32768.0,
+          "unit": "paths",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "quantum-estimation-lab:risk-1.8",
+      "title": "Quantum Risk Observatory / Volatility shock",
+      "project": "quantum-estimation-lab",
+      "url": "https://github.com/FyodorAmanov1/quantum-estimation-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/quantum-estimation-lab/#risk-1.8",
+      "artifact_sha256": "ba04f0ea58315cf2726365152a0a6605c408736148587c179374b557a6acd2cd",
+      "sha256": "5f9cf2762b13fe3a9326ff4555cc08803182eb75d4a215481aec38578c92e0d7",
+      "text": "Four correlated option positions. Revalue the full book at a 21-day horizon and compare three simulation designs at matched path budgets.\n99% value at risk: 1118.2351435867747 USD\n99% expected shortfall: 1236.1997941165755 USD\n99% potential exposure: 2617.1566242457857 USD\nScenarios: 32768.0 paths\nCorrelated GBM terminal simulation; Black\u2013Scholes revaluation of remaining six-month option maturities. Positions and currency scale are explicit.\nRandomized Sobol and antithetic designs are compared with independent Monte Carlo using 12 separate seeds at four budgets. The high-budget independent reference is itself a simulation estimate.\nVaR is an empirical loss quantile; expected shortfall averages observations in the empirical tail. PFE uses positive future book value, not losses.\nLimitations:\nIllustrative synthetic asset parameters, not calibrated market data or an investment recommendation.\nLognormal dynamics omit stochastic volatility, defaults, liquidity and funding; tail estimates remain model dependent.\nThe chart compares mean-loss error. It does not establish quantum advantage or tail-quantile confidence intervals.",
+      "metrics": [
+        {
+          "label": "99% value at risk",
+          "value": 1118.2351435867747,
+          "unit": "USD",
+          "note": ""
+        },
+        {
+          "label": "99% expected shortfall",
+          "value": 1236.1997941165755,
+          "unit": "USD",
+          "note": ""
+        },
+        {
+          "label": "99% potential exposure",
+          "value": 2617.1566242457857,
+          "unit": "USD",
+          "note": ""
+        },
+        {
+          "label": "Scenarios",
+          "value": 32768.0,
+          "unit": "paths",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "quantum-estimation-lab:amplitude",
+      "title": "Quantum Risk Observatory / Quantum oracle",
+      "project": "quantum-estimation-lab",
+      "url": "https://github.com/FyodorAmanov1/quantum-estimation-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/quantum-estimation-lab/#amplitude",
+      "artifact_sha256": "ba04f0ea58315cf2726365152a0a6605c408736148587c179374b557a6acd2cd",
+      "sha256": "c51d294d25a2e2daf70ebe017889d70d6ae42edf877607767399785965fec5b9",
+      "text": "An eight-scenario register and a payoff ancilla, explicit unitary preparation, amplitude amplification and maximum-likelihood estimation.\nExact encoded expectation: 0.2495 \nEstimated expectation: 0.25018020656764217 \nOracle preparation calls: 8960.0 \nLogical qubits: 4.0 \nPrepare amplitudes sqrt(p_j(1-f_j)) and sqrt(p_j f_j) on the scenario/ancilla basis. Householder state preparation is unitary and explicitly inverted inside the Grover operator.\nA Bernoulli likelihood over Grover powers estimates the bounded expectation. The profile-likelihood bounding interval is 0.24740 to 0.25293; it is an asymptotic, potentially disconnected likelihood set.\nAt the same 8960 preparation-query budget a recorded direct Bernoulli estimate is 0.24967. One random trial is not a comparative performance study.\nLimitations:\nDense unitary simulation is exponential and is not a compiled fault-tolerant implementation.\nThis bounded discrete payoff is separate from the portfolio's unbounded continuous loss; no claim that the oracle directly estimates its VaR is made.\nState preparation, inverse preparation and Grover queries are counted. Device gates, errors, compilation and classical inference costs are not hidden in a speedup claim.",
+      "metrics": [
+        {
+          "label": "Exact encoded expectation",
+          "value": 0.2495,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Estimated expectation",
+          "value": 0.25018020656764217,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Oracle preparation calls",
+          "value": 8960.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Logical qubits",
+          "value": 4.0,
+          "unit": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "quantum-optimization-lab:allocation",
+      "title": "Quantum Decision Studio / Constrained allocation",
+      "project": "quantum-optimization-lab",
+      "url": "https://github.com/FyodorAmanov1/quantum-optimization-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/quantum-optimization-lab/#allocation",
+      "artifact_sha256": "2c9ab0856b7af244fa88c92ec86473493dde682410c3559f1835156115457a64",
+      "sha256": "fed5029b22d68894da4373c3daa54be9145e0b13b053a5d5883378dff965fd04",
+      "text": "Eight synthetic assets, exactly three holdings, turnover costs and correlated risk. Compare a number-preserving quantum ansatz with exhaustive enumeration and classical local search.\nExact minimum cost: -0.03829410872888889 \nQAOA expected cost: -0.03078526296591523 \nOptimal-sample probability: 10.528668658051656 %\nFeasible configurations: 56.0 \nObjective = 4 w\u1d40\u03a3w \u2212 \u03bc\u1d40w + 0.003\u2016w\u2212w_previous\u2016\u2081; equal weights on exactly three of eight assets. Covariance is positive definite by construction.\nDepth-2 cost phases alternate with an exact ring-XY mixer in the 56-state feasible sector. Six seeded Nelder\u2013Mead restarts each have a 350-iteration cap. Uniform feasible-state preparation is assumed, not compiled.\nExact enumeration gives A, D, H. Swap local search gives A, D, H, cost -0.038294, after 30 neighbour evaluations. The ansatz is not claimed to outperform either baseline.\nLimitations:\nSynthetic forward-looking means/covariance: no historical backtest or investment claim. Small exact simulation is the reference, not evidence of scalability.\nMixer construction and dense exponentiation operate in a constrained subspace; physical preparation, compiled gates and measurement overhead are not benchmarked.\nUniform probability mixing is a sensitivity model, not calibrated gate noise. Both expected objective and success probability must be inspected.",
+      "metrics": [
+        {
+          "label": "Exact minimum cost",
+          "value": -0.03829410872888889,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "QAOA expected cost",
+          "value": -0.03078526296591523,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Optimal-sample probability",
+          "value": 10.528668658051656,
+          "unit": "%",
+          "note": ""
+        },
+        {
+          "label": "Feasible configurations",
+          "value": 56.0,
+          "unit": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "quantum-optimization-lab:electrons",
+      "title": "Quantum Decision Studio / Correlated electrons",
+      "project": "quantum-optimization-lab",
+      "url": "https://github.com/FyodorAmanov1/quantum-optimization-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/quantum-optimization-lab/#electrons",
+      "artifact_sha256": "2c9ab0856b7af244fa88c92ec86473493dde682410c3559f1835156115457a64",
+      "sha256": "a251bb80a19f49515539e560fb574b499ef7e19a592916f838a2f2a262a4f851",
+      "text": "A spinful two-site Hubbard dimer isolates the competition between electron hopping and on-site repulsion. A symmetry-preserving variational state is checked against exact and analytic ground-state energies.\nMaximum energy error: 5.551115123125783e-16 t\nSpin orbitals: 4.0 \nSector dimension: 4.0 \nDouble occupancy at U/t=8: 0.05278640618919383 \nConstruct \u2212t \u03a3\u03c3(c\u2020\u2080\u03c3c\u2081\u03c3+h.c.) + U\u03a3\u1d62n\u1d62\u2191n\u1d62\u2193 using fermionic parity signs; restrict to one spin-up and one spin-down electron.\nThree real two-level Givens rotations span the four-state real sector. Three seeded BFGS starts minimize the statevector energy for each interaction.\nEach result obeys the variational bound and agrees with E\u2080=(U\u2212\u221a(U\u00b2+16t\u00b2))/2 within 10\u207b\u2076 t. Double occupancy is a separate observable, not inferred from a fitted curve.\nLimitations:\nThis is an effective correlated-electron benchmark, not an ab initio molecule or a battery-material prediction. It is a foundation for extending the battery-design theme.\nThe ansatz can span this tiny real sector; success does not demonstrate a scalable chemistry algorithm.\nNo finite-shot Pauli measurement, molecular geometry, basis-set error, device noise or battery voltage is represented.",
+      "metrics": [
+        {
+          "label": "Maximum energy error",
+          "value": 5.551115123125783e-16,
+          "unit": "t",
+          "note": ""
+        },
+        {
+          "label": "Spin orbitals",
+          "value": 4.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Sector dimension",
+          "value": 4.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Double occupancy at U/t=8",
+          "value": 0.05278640618919383,
+          "unit": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "market-microstructure-lab:balanced",
+      "title": "Market Replay Studio / Balanced flow",
+      "project": "market-microstructure-lab",
+      "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/market-microstructure-lab/#balanced",
+      "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+      "sha256": "0ed10fd6f4e4504b5b45e63938fcc6dc895219b3a3521675ec0e518294ea1a38",
+      "text": "Balanced flow: a price/time-priority book, cancellable orders, inventory-constrained quoting and stale quotes. Replay the managed policy, then compare net results across sixteen paired seeds.\nManaged net after liquidation: 607.9 ticks\nPaired improvement vs symmetric: -497.64374999999995 ticks\nPaired difference standard error: 42.4131504456951 ticks\nCash / inventory violations: 0.0 \nOrders match at the resting price, best price then FIFO. Partial fills and owner-checked cancellations use the same book as the replay, with integer price/quantity accounting.\nAll trader accounts conserve aggregate cash and inventory after every batch. Agent fees are a separate external charge of 0.05 tick/unit; the net ledger includes that fee sink. Final liquidation executes through five refreshed LP levels, ten units each, starting at mid \u00b13 ticks. Price slippage and fees are included.\nInventory is bounded at \u00b120 units through quote sizing. Latency means quotes refresh every five batches; background liquidity and marketable external orders continue each batch.\nSixteen independent seeds compare policies with identical pre-generated price, order-size and flow draws. In the adverse regime, 70% of eligible flow is informed by the next reference move; this privileged signal is unavailable to the agent.\nLimitations:\nSynthetic event flow and exogenous reference prices are not calibrated exchange data. No claim of profitable live trading is made.\nBackground refreshes may trade against stale agent quotes; losses from those crossings are included. The agent does not control market impact or reference prices.\nLatency is measured in event batches, not network nanoseconds. Hidden liquidity, auctions, credit limits and exchange-specific order types are omitted.\nRecorded replay uses seed 1729; summary uncertainty uses separate paired seeds 100\u2013115. Mark-to-mid equity differs from final liquidated net.",
+      "metrics": [
+        {
+          "label": "Managed net after liquidation",
+          "value": 607.9,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Paired improvement vs symmetric",
+          "value": -497.64374999999995,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Paired difference standard error",
+          "value": 42.4131504456951,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Cash / inventory violations",
+          "value": 0.0,
+          "unit": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "market-microstructure-lab:trend",
+      "title": "Market Replay Studio / Directional market",
+      "project": "market-microstructure-lab",
+      "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/market-microstructure-lab/#trend",
+      "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+      "sha256": "227a2044c36503afb0b1ac941a0c2271f09ea1ccc9aa2490c8f63723a549d85b",
+      "text": "Directional market: a price/time-priority book, cancellable orders, inventory-constrained quoting and stale quotes. Replay the managed policy, then compare net results across sixteen paired seeds.\nManaged net after liquidation: 611.9 ticks\nPaired improvement vs symmetric: -528.83125 ticks\nPaired difference standard error: 115.80331123603143 ticks\nCash / inventory violations: 0.0 \nOrders match at the resting price, best price then FIFO. Partial fills and owner-checked cancellations use the same book as the replay, with integer price/quantity accounting.\nAll trader accounts conserve aggregate cash and inventory after every batch. Agent fees are a separate external charge of 0.05 tick/unit; the net ledger includes that fee sink. Final liquidation executes through five refreshed LP levels, ten units each, starting at mid \u00b13 ticks. Price slippage and fees are included.\nInventory is bounded at \u00b120 units through quote sizing. Latency means quotes refresh every five batches; background liquidity and marketable external orders continue each batch.\nSixteen independent seeds compare policies with identical pre-generated price, order-size and flow draws. In the adverse regime, 70% of eligible flow is informed by the next reference move; this privileged signal is unavailable to the agent.\nLimitations:\nSynthetic event flow and exogenous reference prices are not calibrated exchange data. No claim of profitable live trading is made.\nBackground refreshes may trade against stale agent quotes; losses from those crossings are included. The agent does not control market impact or reference prices.\nLatency is measured in event batches, not network nanoseconds. Hidden liquidity, auctions, credit limits and exchange-specific order types are omitted.\nRecorded replay uses seed 1729; summary uncertainty uses separate paired seeds 100\u2013115. Mark-to-mid equity differs from final liquidated net.",
+      "metrics": [
+        {
+          "label": "Managed net after liquidation",
+          "value": 611.9,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Paired improvement vs symmetric",
+          "value": -528.83125,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Paired difference standard error",
+          "value": 115.80331123603143,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Cash / inventory violations",
+          "value": 0.0,
+          "unit": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "market-microstructure-lab:adverse",
+      "title": "Market Replay Studio / Informed flow",
+      "project": "market-microstructure-lab",
+      "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/market-microstructure-lab/#adverse",
+      "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+      "sha256": "29fd62dc459aa0b1794ad78ecd351f4880dacc4caa03436689053253eeb5634a",
+      "text": "Informed flow: a price/time-priority book, cancellable orders, inventory-constrained quoting and stale quotes. Replay the managed policy, then compare net results across sixteen paired seeds.\nManaged net after liquidation: 367.5 ticks\nPaired improvement vs symmetric: -428.70625 ticks\nPaired difference standard error: 41.90019139649006 ticks\nCash / inventory violations: 0.0 \nOrders match at the resting price, best price then FIFO. Partial fills and owner-checked cancellations use the same book as the replay, with integer price/quantity accounting.\nAll trader accounts conserve aggregate cash and inventory after every batch. Agent fees are a separate external charge of 0.05 tick/unit; the net ledger includes that fee sink. Final liquidation executes through five refreshed LP levels, ten units each, starting at mid \u00b13 ticks. Price slippage and fees are included.\nInventory is bounded at \u00b120 units through quote sizing. Latency means quotes refresh every five batches; background liquidity and marketable external orders continue each batch.\nSixteen independent seeds compare policies with identical pre-generated price, order-size and flow draws. In the adverse regime, 70% of eligible flow is informed by the next reference move; this privileged signal is unavailable to the agent.\nLimitations:\nSynthetic event flow and exogenous reference prices are not calibrated exchange data. No claim of profitable live trading is made.\nBackground refreshes may trade against stale agent quotes; losses from those crossings are included. The agent does not control market impact or reference prices.\nLatency is measured in event batches, not network nanoseconds. Hidden liquidity, auctions, credit limits and exchange-specific order types are omitted.\nRecorded replay uses seed 1729; summary uncertainty uses separate paired seeds 100\u2013115. Mark-to-mid equity differs from final liquidated net.",
+      "metrics": [
+        {
+          "label": "Managed net after liquidation",
+          "value": 367.5,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Paired improvement vs symmetric",
+          "value": -428.70625,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Paired difference standard error",
+          "value": 41.90019139649006,
+          "unit": "ticks",
+          "note": ""
+        },
+        {
+          "label": "Cash / inventory violations",
+          "value": 0.0,
+          "unit": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "statistical-learning-lab:stationary",
+      "title": "RegimeLab / Stable regime",
+      "project": "statistical-learning-lab",
+      "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/statistical-learning-lab/#stationary",
+      "artifact_sha256": "1edf111efcf2a6136552f88a777a13d683ffc4112be5a4bbff1e1b908467e99c",
+      "sha256": "e09e7cdd5fafd57386dbb339a1dc60d32b5f27ab29a85df0df97a7a8f7a6e075",
+      "text": "Predict next-day realized variance from six causal return features. Compare a small neural network, regularized regression, persistence and an expanding-window adaptation under a controlled volatility shock.\nFrozen ridge MAE: 0.4030305544093381 \nExpanding ridge MAE: 0.40378462688112504 \nNominal interval coverage: 90.0 %\nObserved test coverage: 91.07468123861567 %\nSeed 73: simulated GARCH-like returns. Features at close t: squared return, 5/20-day realized variance, return, 20-day mean absolute return and 5-day mean return. Label: r\u00b2 at t+1. Shift starts at target day 1450 when enabled.\nTraining targets <1000; validation 1001\u20131199 chooses ridge penalty 0.01; calibration 1201\u20131449 sets a finite-sample absolute-residual quantile; test starts 1451. Scaling is fitted on training only. Embargoed boundaries prevent target overlap.\nA 6\u219212\u21921 tanh MLP trains for 350 full-batch epochs on log1p variance, with fixed settings and training-only normalization. No claim that this architecture is optimal is made.\nFrozen ridge interval radius = 0.860936; lower endpoint clipped at zero. Expanding ridge refits every 60 targets, uses only earlier observed labels and keeps the previously selected penalty. It does not reuse the frozen interval as an adaptive guarantee.\nLimitations:\nSynthetic heteroscedastic data tests a known mechanism; it is not a historical market backtest or evidence of alpha. Squared returns are noisy variance proxies.\nSerial dependence and deliberate distribution shift violate exchangeability. Split-conformal intervals here are diagnostics; 90% empirical coverage is not guaranteed under these conditions.\nMean absolute error, RMSE and QLIKE can rank models differently. QLIKE uses a 10\u207b\u2075 positivity floor, disclosed because near-zero forecasts can dominate it.\nOnly one process seed is shown. Hyperparameters are selected without test data, but broad model selection uncertainty and transaction costs are not quantified.",
+      "metrics": [
+        {
+          "label": "Frozen ridge MAE",
+          "value": 0.4030305544093381,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Expanding ridge MAE",
+          "value": 0.40378462688112504,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Nominal interval coverage",
+          "value": 90.0,
+          "unit": "%",
+          "note": ""
+        },
+        {
+          "label": "Observed test coverage",
+          "value": 91.07468123861567,
+          "unit": "%",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "statistical-learning-lab:shift",
+      "title": "RegimeLab / Volatility regime break",
+      "project": "statistical-learning-lab",
+      "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+      "demo": "https://fyodoramanov1.github.io/statistical-learning-lab/#shift",
+      "artifact_sha256": "1edf111efcf2a6136552f88a777a13d683ffc4112be5a4bbff1e1b908467e99c",
+      "sha256": "f3f766bb71ad60123908eef540814e30d0d16a15df2850839c2b7e4c3ccd76c1",
+      "text": "Predict next-day realized variance from six causal return features. Compare a small neural network, regularized regression, persistence and an expanding-window adaptation under a controlled volatility shock.\nFrozen ridge MAE: 9.190811689009081 \nExpanding ridge MAE: 9.838731697519906 \nNominal interval coverage: 90.0 %\nObserved test coverage: 18.761384335154826 %\nSeed 73: simulated GARCH-like returns. Features at close t: squared return, 5/20-day realized variance, return, 20-day mean absolute return and 5-day mean return. Label: r\u00b2 at t+1. Shift starts at target day 1450 when enabled.\nTraining targets <1000; validation 1001\u20131199 chooses ridge penalty 0.01; calibration 1201\u20131449 sets a finite-sample absolute-residual quantile; test starts 1451. Scaling is fitted on training only. Embargoed boundaries prevent target overlap.\nA 6\u219212\u21921 tanh MLP trains for 350 full-batch epochs on log1p variance, with fixed settings and training-only normalization. No claim that this architecture is optimal is made.\nFrozen ridge interval radius = 0.860936; lower endpoint clipped at zero. Expanding ridge refits every 60 targets, uses only earlier observed labels and keeps the previously selected penalty. It does not reuse the frozen interval as an adaptive guarantee.\nLimitations:\nSynthetic heteroscedastic data tests a known mechanism; it is not a historical market backtest or evidence of alpha. Squared returns are noisy variance proxies.\nSerial dependence and deliberate distribution shift violate exchangeability. Split-conformal intervals here are diagnostics; 90% empirical coverage is not guaranteed under these conditions.\nMean absolute error, RMSE and QLIKE can rank models differently. QLIKE uses a 10\u207b\u2075 positivity floor, disclosed because near-zero forecasts can dominate it.\nOnly one process seed is shown. Hyperparameters are selected without test data, but broad model selection uncertainty and transaction costs are not quantified.",
+      "metrics": [
+        {
+          "label": "Frozen ridge MAE",
+          "value": 9.190811689009081,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Expanding ridge MAE",
+          "value": 9.838731697519906,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Nominal interval coverage",
+          "value": 90.0,
+          "unit": "%",
+          "note": ""
+        },
+        {
+          "label": "Observed test coverage",
+          "value": 18.761384335154826,
+          "unit": "%",
+          "note": ""
+        }
+      ]
+    }
+  ]
+}
