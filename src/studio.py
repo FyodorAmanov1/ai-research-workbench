@@ -150,7 +150,7 @@ def experiment():
         "method": [
             "A portable JSON registry snapshots public study artifacts. Each record contains source repository, experiment ID, source-artifact SHA-256, content SHA-256, typed metrics, methods and limitations.",
             "BM25 term weighting (k₁=1.2, b=0.75) ranks original experiment records. Ties use source ID. Empty lexical support causes abstention; scores are relevance weights, not confidence probabilities.",
-            "The browser performs the same deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON context adapter for an already running model session. Neither path creates a model session or spends tokens.",
+            "The browser performs deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON evidence export for research workflows.",
         ],
         "limitations": [
             "Thirteen authored regression questions are small development fixtures, not an independent held-out benchmark. Failed queries remain in the table.",

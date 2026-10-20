@@ -40,7 +40,7 @@
       ],
       "charts": [
         {
-          "title": "Rank sensitivity · authored question set",
+          "title": "Rank sensitivity \u00b7 authored question set",
           "x": [
             1,
             2,
@@ -149,8 +149,8 @@
       },
       "method": [
         "A portable JSON registry snapshots public study artifacts. Each record contains source repository, experiment ID, source-artifact SHA-256, content SHA-256, typed metrics, methods and limitations.",
-        "BM25 term weighting (k₁=1.2, b=0.75) ranks original experiment records. Ties use source ID. Empty lexical support causes abstention; scores are relevance weights, not confidence probabilities.",
-        "The browser performs the same deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON context adapter for an already running model session. Neither path creates a model session or spends tokens."
+        "BM25 term weighting (k\u2081=1.2, b=0.75) ranks original experiment records. Ties use source ID. Empty lexical support causes abstention; scores are relevance weights, not confidence probabilities.",
+        "The browser performs deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON evidence export for research workflows."
       ],
       "limitations": [
         "Thirteen authored regression questions are small development fixtures, not an independent held-out benchmark. Failed queries remain in the table.",
@@ -180,7 +180,7 @@
         },
         {
           "label": "Exported context size",
-          "value": 7537.0,
+          "value": 7522.0,
           "unit": "chars",
           "note": ""
         },
@@ -227,8 +227,8 @@
         ]
       },
       "method": [
-        "Claim validation uses exact source IDs and metric labels, exact unit strings and numeric isclose tolerance 10⁻⁶ relative / 10⁻⁸ absolute. It never changes units implicitly.",
-        "Source text is serialized as JSON evidence under a data-only header. Context export is capped at 8,000 characters by default and accepts a bounded 500–32,000-character setting. Complete records are included; records are not silently truncated.",
+        "Claim validation uses exact source IDs and metric labels, exact unit strings and numeric isclose tolerance 10\u207b\u2076 relative / 10\u207b\u2078 absolute. It never changes units implicitly.",
+        "Source text is serialized as JSON evidence under a data-only header. Context export is capped at 8,000 characters by default and accepts a bounded 500\u201332,000-character setting. Complete records are included; records are not silently truncated.",
         "The adapter exports bounded, source-labelled evidence for research analysis. It does not invoke an external model provider."
       ],
       "limitations": [

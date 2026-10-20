@@ -18,7 +18,7 @@ A portable JSON registry snapshots public study artifacts. Each record contains 
 
 BM25 term weighting (k₁=1.2, b=0.75) ranks original experiment records. Ties use source ID. Empty lexical support causes abstention; scores are relevance weights, not confidence probabilities.
 
-The browser performs the same deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON context adapter for an already running model session. Neither path creates a model session or spends tokens.
+The browser performs deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON evidence export for research workflows.
 
 ### Measured comparison
 
