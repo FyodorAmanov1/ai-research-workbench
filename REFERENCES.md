@@ -1,7 +1,6 @@
-# Primary references and boundaries
+# Primary references and implementation boundaries
 
-- Salton and Buckley (1988), Term-weighting approaches in automatic text retrieval: https://doi.org/10.1016/0306-4573(88)90021-0
-- Lewis et al. (2020), Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks: https://arxiv.org/abs/2005.11401
-- Codex scripted execution: https://learn.chatgpt.com/docs/non-interactive-mode
+- [BM25: The Probabilistic Relevance Framework](https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf)
+- [Retrieval-augmented generation](https://arxiv.org/abs/2005.11401)
 
-Corpus descriptions are short original summaries, not downloaded full papers. The baseline is extractive keyword retrieval; the cited RAG work motivates later integration. Offline checks do not call an LLM.
+The implementation, data provenance and scope limits are documented in [the technical case study](reports/applied-study.md). Citation identifies an algorithmic foundation, not equivalence with the full paper or a claim of hardware performance.

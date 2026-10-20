@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "slug": "ai-research-workbench",
+  "title": "Research Evidence Observatory",
+  "subtitle": "An inspectable bridge from experiments to AI-assisted research.",
+  "accent": "#ff9caa",
+  "seed": null,
+  "cases": [
+    {
+      "id": "evidence",
+      "label": "Evidence explorer",
+      "kicker": "AI INTEGRATION / TRACEABLE RESEARCH RECORDS",
+      "title": "Ask a question. Follow the evidence.",
+      "description": "Search actual experiment records across four public research projects. Every result carries its source URL, content digest, measured metrics and limitations. No model or API is called by this offline explorer.",
+      "metrics": [
+        {
+          "label": "Public experiment records",
+          "value": 10.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Top-1 authored regression accuracy",
+          "value": 91.66666666666667,
+          "unit": "%",
+          "note": ""
+        },
+        {
+          "label": "Top-3 authored regression accuracy",
+          "value": 91.66666666666667,
+          "unit": "%",
+          "note": ""
+        },
+        {
+          "label": "Unsupported-topic abstentions",
+          "value": 2.0,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "charts": [
+        {
+          "title": "Rank sensitivity \u00b7 authored question set",
+          "x": [
+            1,
+            2,
+            3
+          ],
+          "xlabel": "Maximum retrieved evidence records",
+          "series": [
+            {
+              "name": "Expected source recall / %",
+              "values": [
+                91.66666666666667,
+                91.66666666666667,
+                91.66666666666667
+              ]
+            }
+          ]
+        }
+      ],
+      "table": {
+        "columns": [
+          "Question",
+          "Expected source",
+          "Top result",
+          "Correct at rank 1"
+        ],
+        "rows": [
+          [
+            "tail exposure option book",
+            "quantum-estimation-lab:risk-1.0",
+            "quantum-estimation-lab:risk-1",
+            false
+          ],
+          [
+            "stressed annual volatility derivatives",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8",
+            true
+          ],
+          [
+            "Grover oracle preparation calls",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude",
+            true
+          ],
+          [
+            "exactly three holdings turnover",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation",
+            true
+          ],
+          [
+            "fermionic electron double occupancy",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons",
+            true
+          ],
+          [
+            "informed flow latency",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse",
+            true
+          ],
+          [
+            "directional market inventory",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend",
+            true
+          ],
+          [
+            "balanced flow cancellations",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced",
+            true
+          ],
+          [
+            "volatility regime break coverage",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift",
+            true
+          ],
+          [
+            "stable regime chronological calibration",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary",
+            true
+          ],
+          [
+            "volcanology tectonic magma",
+            "ABSTAIN",
+            "ABSTAIN",
+            true
+          ],
+          [
+            "medieval manuscript paleography",
+            "ABSTAIN",
+            "ABSTAIN",
+            true
+          ]
+        ]
+      },
+      "method": [
+        "A portable JSON registry snapshots public study artifacts. Each record contains source repository, experiment ID, source-artifact SHA-256, content SHA-256, typed metrics, methods and limitations.",
+        "BM25 term weighting (k\u2081=1.2, b=0.75) ranks original experiment records. Ties use source ID. Empty lexical support causes abstention; scores are relevance weights, not confidence probabilities.",
+        "The browser performs the same deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON context adapter for an already running model session. Neither path creates a model session or spends tokens."
+      ],
+      "limitations": [
+        "Twelve authored regression questions are small development fixtures, not an independent held-out benchmark. Failed queries remain in the table.",
+        "Lexical relevance does not prove that evidence supports an arbitrary claim. No semantic answer correctness or hallucination rate is estimated.",
+        "Snapshots can become stale. Source artifact digests identify exactly which local public report was ingested; re-ingestion is explicit. Registry hashes detect accidental edits, not a malicious party able to rewrite both data and hashes."
+      ],
+      "reproduce": "python src/evidence.py --query \"fermionic double occupancy\""
+    },
+    {
+      "id": "claims",
+      "label": "Claim audit & integration",
+      "kicker": "TYPED METRICS / BOUNDED CONTEXT",
+      "title": "Check the number before it becomes a claim.",
+      "description": "A numeric claim must name an existing experiment, a recorded metric, its exact unit and a matching value. Export source-labelled context into an existing AI workflow without launching another agent.",
+      "metrics": [
+        {
+          "label": "Claim probes matching specification",
+          "value": 5.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Rejected invalid claims",
+          "value": 4.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Exported context size",
+          "value": 7537.0,
+          "unit": "chars",
+          "note": ""
+        },
+        {
+          "label": "Additional model sessions",
+          "value": 0.0,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "charts": [],
+      "table": {
+        "columns": [
+          "Probe",
+          "Accepted",
+          "Reason"
+        ],
+        "rows": [
+          [
+            "Correct value and unit",
+            true,
+            "Matches a recorded typed metric"
+          ],
+          [
+            "Changed numeric value",
+            false,
+            "Numeric value mismatch"
+          ],
+          [
+            "Wrong unit",
+            false,
+            "Unit mismatch"
+          ],
+          [
+            "Unknown evidence",
+            false,
+            "Unknown source ID"
+          ],
+          [
+            "Unknown label",
+            false,
+            "Unknown metric label"
+          ]
+        ]
+      },
+      "method": [
+        "Claim validation uses exact source IDs and metric labels, exact unit strings and numeric isclose tolerance 10\u207b\u2076 relative / 10\u207b\u2078 absolute. It never changes units implicitly.",
+        "Source text is serialized as JSON evidence under a data-only header. Context export is capped at 8,000 characters by default and accepts a bounded 500\u201332,000-character setting. Complete records are included; records are not silently truncated.",
+        "Controller integration uses the same existing daily Codex session, medium effort and cumulative 20-minute cap. This adapter is opt-in input preparation, not a second autonomous worker."
+      ],
+      "limitations": [
+        "Matching a recorded number verifies transcription only. It does not validate the underlying study or establish causality, profitability or quantum advantage.",
+        "Five specified claim probes demonstrate interface behavior, not robustness to all adversarial inputs. JSON boundaries and instructions do not guarantee an LLM will resist prompt injection.",
+        "The offline browser and CLI do not generate prose using an LLM. Live model integration requires the existing authorized session; no paid fallback is installed."
+      ],
+      "reproduce": "python src/evidence.py --query \"quantum portfolio risk\" --context --max-chars 8000"
+    }
+  ],
+  "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
+  "references": [
+    {
+      "title": "BM25: The Probabilistic Relevance Framework",
+      "url": "https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf"
+    },
+    {
+      "title": "Retrieval-augmented generation",
+      "url": "https://arxiv.org/abs/2005.11401"
+    }
+  ]
+}
