@@ -40,7 +40,7 @@ CI reproduces every applied case with `python src/studio.py --check docs/study.j
 
 - Claim probes matching specification: **5 **
 - Rejected invalid claims: **4 **
-- Exported context size: **7537 chars**
+- Exported context size: **7522 chars**
 - External provider calls: **0 **
 
 ## Interpretation
