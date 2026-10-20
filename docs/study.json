@@ -21,13 +21,13 @@
         },
         {
           "label": "Top-1 authored regression accuracy",
-          "value": 91.66666666666667,
+          "value": 92.3076923076923,
           "unit": "%",
           "note": ""
         },
         {
           "label": "Top-3 authored regression accuracy",
-          "value": 91.66666666666667,
+          "value": 92.3076923076923,
           "unit": "%",
           "note": ""
         },
@@ -51,9 +51,9 @@
             {
               "name": "Expected source recall / %",
               "values": [
-                91.66666666666667,
-                91.66666666666667,
-                91.66666666666667
+                92.3076923076923,
+                92.3076923076923,
+                92.3076923076923
               ]
             }
           ]
@@ -69,9 +69,9 @@
         "rows": [
           [
             "tail exposure option book",
-            "quantum-estimation-lab:risk-1.0",
             "quantum-estimation-lab:risk-1",
-            false
+            "quantum-estimation-lab:risk-1",
+            true
           ],
           [
             "stressed annual volatility derivatives",
@@ -138,6 +138,12 @@
             "ABSTAIN",
             "ABSTAIN",
             true
+          ],
+          [
+            "quantum portfolio guaranteed profit tomorrow",
+            "ABSTAIN",
+            "quantum-estimation-lab:amplitude",
+            false
           ]
         ]
       },
@@ -147,8 +153,8 @@
         "The browser performs the same deterministic retrieval locally. Python provides an extractive answer interface and a bounded JSON context adapter for an already running model session. Neither path creates a model session or spends tokens."
       ],
       "limitations": [
-        "Twelve authored regression questions are small development fixtures, not an independent held-out benchmark. Failed queries remain in the table.",
-        "Lexical relevance does not prove that evidence supports an arbitrary claim. No semantic answer correctness or hallucination rate is estimated.",
+        "Thirteen authored regression questions are small development fixtures, not an independent held-out benchmark. Failed queries remain in the table.",
+        "The guaranteed-profit question deliberately shares corpus terms but has no supporting answer: BM25 retrieves anyway. Empty-lexical-support abstention does not detect semantic false support. No semantic answer correctness or hallucination rate is estimated.",
         "Snapshots can become stale. Source artifact digests identify exactly which local public report was ingested; re-ingestion is explicit. Registry hashes detect accidental edits, not a malicious party able to rewrite both data and hashes."
       ],
       "reproduce": "python src/evidence.py --query \"fermionic double occupancy\""
