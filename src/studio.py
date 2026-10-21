@@ -6,9 +6,11 @@ import numpy as np
 try:
     from .common import finalize, metric
     from .evidence import load_registry, retrieve, answer, validate_claim, context
+    from .confirmation import experiment as confirmation_experiment
 except ImportError:
     from common import finalize, metric
     from evidence import load_registry, retrieve, answer, validate_claim, context
+    from confirmation import experiment as confirmation_experiment
 
 # Authored regression questions, intentionally separate from source descriptions. Not a research-grade held-out benchmark.
 QUESTIONS = [
@@ -192,7 +194,7 @@ def experiment():
         "subtitle": "An inspectable bridge from experiments to evidence-based research.",
         "accent": "#ff9caa",
         "seed": None,
-        "cases": [retrieval, claims],
+        "cases": [retrieval, claims, confirmation_case()],
         "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
         "references": [
             {
@@ -204,6 +206,61 @@ def experiment():
                 "url": "https://arxiv.org/abs/2005.11401",
             },
         ],
+    }
+
+
+def confirmation_case():
+    result = confirmation_experiment()
+    methods = result["methods"]
+    bm25 = methods["bm25"]["summary"]
+    overlap = methods["term_overlap"]["summary"]
+    return {
+        "id": "confirmation",
+        "label": "Frozen retrieval confirmation",
+        "kicker": "FIXED PROTOCOL / SOURCE RECALL & FALSE SUPPORT",
+        "title": "Relevant records can still be unsupported answers.",
+        "description": "Thirty new authored questions test the unchanged ten-record registry and BM25 rules against unweighted term overlap. Inspect both rankings and the source-based labels; failures are retained.",
+        "metrics": [
+            metric("BM25 source recall at 1", 100 * bm25["source_recall"]["1"]["rate"], "%", "Answerable questions only (n=20)."),
+            metric("BM25 source recall at 3", 100 * bm25["source_recall"]["3"]["rate"], "%", "Answerable questions only (n=20)."),
+            metric("BM25 false support proxy", 100 * bm25["false_support"]["rate"], "%", "Any retrieval on an unanswerable question (n=10); not generated-answer error."),
+            metric("BM25 empty unsupported retrieval", bm25["empty_retrieval"]["unanswerable"], "questions", "Separate from false support; denominator 10."),
+            metric("Overlap source recall at 1", 100 * overlap["source_recall"]["1"]["rate"], "%", "Same twenty answerable questions."),
+            metric("Overlap false support proxy", 100 * overlap["false_support"]["rate"], "%", "Same ten unanswerable questions."),
+        ],
+        "charts": [{
+            "title": "Source recall on answerable confirmation questions only",
+            "x": [1, 3], "xlabel": "Rank cutoff; denominator = 20 answerable questions",
+            "series": [{"name": name, "values": [100 * data["summary"]["source_recall"][str(k)]["rate"] for k in (1, 3)]} for name, data in methods.items()],
+        }, {
+            "title": "Unsupported questions: returned records versus empty retrieval",
+            "x": ["Unrelated (n=4)", "Misleading overlap (n=6)"],
+            "xlabel": "Question stratum; counts, not source recall",
+            "series": [{"name": name + " / " + outcome,
+                        "values": [data["summary"]["strata"][s][key] for s in ("unanswerable", "misleading_overlap")]}
+                       for name, data in methods.items()
+                       for outcome, key in (("false support proxy", "retrieved"), ("empty retrieval", "empty"))],
+        }],
+        "table": {
+            "columns": ["ID / stratum", "Question", "Expected source", "BM25 top 3 (ranked)", "BM25 outcome", "Overlap top 3 (ranked)", "Overlap outcome", "Label rationale"],
+            "rows": [[a["id"] + " / " + a["stratum"], a["question"], ", ".join(a["expected_sources"]) or "UNANSWERABLE",
+                      "; ".join(a["retrieved_ids"]) or "EMPTY", a["outcome"],
+                      "; ".join(b["retrieved_ids"]) or "EMPTY", b["outcome"], a["rationale"]]
+                     for a, b in zip(methods["bm25"]["rows"], methods["term_overlap"]["rows"])],
+        },
+        "method": [
+            "Freeze manifest fingerprints all ten records, the Python retriever and browser implementation before question authoring. Evaluation fails on drift; settings and questions were not tuned on confirmation outcomes.",
+            "Twenty answerable questions cover every record twice; four unrelated unanswerables and six misleading lexical overlaps have no supporting source. Labels and rationales were fixed before running either method.",
+            "Baseline counts unique matching terms using the same fields, tokenizer, positive-score filter and source-ID ties. Both methods are evaluated at ranks 1 and 3; no cutoff is selected from outcomes.",
+            "Source recall uses only answerable questions. False support is any nonempty retrieval on an unanswerable question, a retrieval-as-support risk proxy. Empty retrieval is counted separately by answerability and stratum in results/AI01-confirmation.json.",
+            "Freeze SHA-256: " + result["freeze_sha256"] + "; question SHA-256: " + result["questions_sha256"],
+        ],
+        "limitations": [
+            "These are authored, source-aware confirmation questions, independent of parameter selection but not blinded or representative user samples. No population accuracy or statistical superiority is established.",
+            "Returning related evidence does not assert entailment. False support measures the risk of treating retrieval as an answer, not an LLM hallucination rate; no LLM is used.",
+            "Source recall does not grade extracted answers. Shared methods across near-duplicate records can confuse rank 1. Hashes expose accidental drift but are not tamper-proof provenance.",
+        ],
+        "reproduce": "python -m src.confirmation --output results/AI01-confirmation.json",
     }
 
 

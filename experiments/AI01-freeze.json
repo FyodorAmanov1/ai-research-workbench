@@ -1,0 +1,50 @@
+{
+  "protocol_id": "AI01-frozen-retrieval-v1",
+  "files": {
+    "docs/registry.json": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6",
+    "src/evidence.py": "6858b07ccab8920d760add5b1cfc9ae908ba618826003c027a9b69b758e65100",
+    "docs/app.js": "afd7bd309d21989edc50958ed847fc6c025804830b5c6d6a0fd48781a03ef863"
+  },
+  "source_ids": [
+    "quantum-estimation-lab:risk-1",
+    "quantum-estimation-lab:risk-1.8",
+    "quantum-estimation-lab:amplitude",
+    "quantum-optimization-lab:allocation",
+    "quantum-optimization-lab:electrons",
+    "market-microstructure-lab:balanced",
+    "market-microstructure-lab:trend",
+    "market-microstructure-lab:adverse",
+    "statistical-learning-lab:stationary",
+    "statistical-learning-lab:shift"
+  ],
+  "rules": {
+    "fields": [
+      "title",
+      "text"
+    ],
+    "tokenization": "lowercase ASCII [a-z0-9]+; existing STOP set; no stemming or synonyms",
+    "query_terms": "unique tokens",
+    "bm25_k1": 1.2,
+    "bm25_b": 0.75,
+    "idf": "ln(1 + (N - df + 0.5)/(df + 0.5))",
+    "acceptance": "score > 0 only; no semantic support check",
+    "ties": "ascending source ID",
+    "cutoffs": [
+      1,
+      3
+    ],
+    "baseline": "unique query/document token intersection count on the same title + text, STOP set, positive-score filter and source-ID ties"
+  },
+  "evaluation": {
+    "authoring": "Freeze first; author and label the complete new question set before executing either retriever. Do not change rules, labels or questions after observing outcomes.",
+    "source_recall": "For answerable questions only: fraction with a labelled acceptable source in top k.",
+    "false_support": "For unanswerable questions only: fraction returning any record. This is a retrieval-as-support risk proxy, not semantic entailment or generated-answer error.",
+    "empty_retrieval": "Report empty results separately for answerable and unanswerable questions.",
+    "strata": [
+      "answerable",
+      "unanswerable",
+      "misleading_overlap"
+    ],
+    "independence": "New authored confirmation questions, independent of parameter selection but not blinded or sampled from users; not population accuracy."
+  }
+}

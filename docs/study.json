@@ -237,6 +237,442 @@
         "The browser and CLI use deterministic retrieval and do not generate prose using an LLM."
       ],
       "reproduce": "python src/evidence.py --query \"quantum portfolio risk\" --context --max-chars 8000"
+    },
+    {
+      "id": "confirmation",
+      "label": "Frozen retrieval confirmation",
+      "kicker": "FIXED PROTOCOL / SOURCE RECALL & FALSE SUPPORT",
+      "title": "Relevant records can still be unsupported answers.",
+      "description": "Thirty new authored questions test the unchanged ten-record registry and BM25 rules against unweighted term overlap. Inspect both rankings and the source-based labels; failures are retained.",
+      "metrics": [
+        {
+          "label": "BM25 source recall at 1",
+          "value": 100.0,
+          "unit": "%",
+          "note": "Answerable questions only (n=20)."
+        },
+        {
+          "label": "BM25 source recall at 3",
+          "value": 100.0,
+          "unit": "%",
+          "note": "Answerable questions only (n=20)."
+        },
+        {
+          "label": "BM25 false support proxy",
+          "value": 60.0,
+          "unit": "%",
+          "note": "Any retrieval on an unanswerable question (n=10); not generated-answer error."
+        },
+        {
+          "label": "BM25 empty unsupported retrieval",
+          "value": 4.0,
+          "unit": "questions",
+          "note": "Separate from false support; denominator 10."
+        },
+        {
+          "label": "Overlap source recall at 1",
+          "value": 90.0,
+          "unit": "%",
+          "note": "Same twenty answerable questions."
+        },
+        {
+          "label": "Overlap false support proxy",
+          "value": 60.0,
+          "unit": "%",
+          "note": "Same ten unanswerable questions."
+        }
+      ],
+      "charts": [
+        {
+          "title": "Source recall on answerable confirmation questions only",
+          "x": [
+            1,
+            3
+          ],
+          "xlabel": "Rank cutoff; denominator = 20 answerable questions",
+          "series": [
+            {
+              "name": "bm25",
+              "values": [
+                100.0,
+                100.0
+              ]
+            },
+            {
+              "name": "term_overlap",
+              "values": [
+                90.0,
+                100.0
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Unsupported questions: returned records versus empty retrieval",
+          "x": [
+            "Unrelated (n=4)",
+            "Misleading overlap (n=6)"
+          ],
+          "xlabel": "Question stratum; counts, not source recall",
+          "series": [
+            {
+              "name": "bm25 / false support proxy",
+              "values": [
+                0,
+                6
+              ]
+            },
+            {
+              "name": "bm25 / empty retrieval",
+              "values": [
+                4,
+                0
+              ]
+            },
+            {
+              "name": "term_overlap / false support proxy",
+              "values": [
+                0,
+                6
+              ]
+            },
+            {
+              "name": "term_overlap / empty retrieval",
+              "values": [
+                4,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "table": {
+        "columns": [
+          "ID / stratum",
+          "Question",
+          "Expected source",
+          "BM25 top 3 (ranked)",
+          "BM25 outcome",
+          "Overlap top 3 (ranked)",
+          "Overlap outcome",
+          "Label rationale"
+        ],
+        "rows": [
+          [
+            "c01 / answerable",
+            "In the base market, what is the recorded 99 percent expected shortfall in USD?",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; quantum-optimization-lab:allocation",
+            "source_found",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            "source_found",
+            "Base market metric: 99% expected shortfall = 764.1748139172402 USD."
+          ],
+          [
+            "c02 / answerable",
+            "Which simulation designs are compared at matched path budgets for the base market option positions?",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; quantum-estimation-lab:amplitude",
+            "source_found",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            "source_found",
+            "Base market methods name randomized Sobol, antithetic and independent Monte Carlo."
+          ],
+          [
+            "c03 / answerable",
+            "For the volatility shock case, how many paths were simulated?",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; statistical-learning-lab:shift; statistical-learning-lab:stationary",
+            "source_found",
+            "quantum-estimation-lab:risk-1.8; statistical-learning-lab:shift; statistical-learning-lab:stationary",
+            "source_found",
+            "Volatility shock Scenarios metric = 32768 paths."
+          ],
+          [
+            "c04 / answerable",
+            "What potential exposure was recorded under the volatility shock?",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; quantum-estimation-lab:risk-1; statistical-learning-lab:shift",
+            "source_found",
+            "quantum-estimation-lab:risk-1.8; quantum-estimation-lab:risk-1; statistical-learning-lab:shift",
+            "source_found",
+            "Volatility shock 99% potential exposure = 2617.1566242457857 USD."
+          ],
+          [
+            "c05 / answerable",
+            "How many logical qubits encode the eight scenarios and payoff ancilla?",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation; quantum-estimation-lab:risk-1",
+            "source_found",
+            "quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8",
+            "source_found",
+            "Logical qubits = 4; description specifies an eight-scenario register and payoff ancilla."
+          ],
+          [
+            "c06 / answerable",
+            "What direct Bernoulli estimate is recorded at the same preparation-query budget as amplitude amplification?",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8",
+            "source_found",
+            "quantum-estimation-lab:amplitude; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "source_found",
+            "Methods give direct Bernoulli estimate 0.24967 at 8960 preparation queries."
+          ],
+          [
+            "c07 / answerable",
+            "For constrained allocation, which assets does exact enumeration select?",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude; quantum-optimization-lab:electrons",
+            "source_found",
+            "quantum-optimization-lab:allocation; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "source_found",
+            "Methods state exact enumeration gives A, D, H."
+          ],
+          [
+            "c08 / answerable",
+            "How many feasible configurations are available for choosing three of eight synthetic assets?",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1",
+            "source_found",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8",
+            "source_found",
+            "Feasible configurations metric = 56."
+          ],
+          [
+            "c09 / answerable",
+            "Which analytic ground-state energy checks the two-site Hubbard dimer?",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons; quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "source_found",
+            "quantum-optimization-lab:electrons; quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "source_found",
+            "Methods provide E0=(U-sqrt(U^2+16t^2))/2."
+          ],
+          [
+            "c10 / answerable",
+            "What is the measured double occupancy when the repulsion to hopping ratio is eight?",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude",
+            "source_found",
+            "quantum-optimization-lab:electrons; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "source_found",
+            "Double occupancy at U/t=8 metric = 0.05278640618919383."
+          ],
+          [
+            "c11 / answerable",
+            "In balanced flow, what is the paired improvement against symmetric quoting?",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "source_found",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "source_found",
+            "Balanced flow paired improvement metric = -497.64374999999995 ticks."
+          ],
+          [
+            "c12 / answerable",
+            "How much managed net after liquidation is recorded for balanced flow?",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "source_found",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "source_found",
+            "Balanced flow managed net metric = 607.9 ticks."
+          ],
+          [
+            "c13 / answerable",
+            "What is the paired difference standard error in the directional market?",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "source_found",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "source_found",
+            "Directional market paired difference standard error = 115.80331123603143 ticks."
+          ],
+          [
+            "c14 / answerable",
+            "How many cash or inventory violations occur in the directional market replay?",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "source_found",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "source_found",
+            "Directional market cash / inventory violations metric = 0."
+          ],
+          [
+            "c15 / answerable",
+            "In informed flow, does the managed policy improve on symmetric quoting in the paired comparison?",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "source_found",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "source_found",
+            "Informed flow paired improvement = -428.70625 ticks; negative comparison is preserved."
+          ],
+          [
+            "c16 / answerable",
+            "What managed liquidation net is recorded for informed flow?",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "source_found",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "source_found",
+            "Informed flow managed net after liquidation = 367.5 ticks."
+          ],
+          [
+            "c17 / answerable",
+            "What observed test coverage is recorded for the stable regime?",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; market-microstructure-lab:adverse",
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "source_found",
+            "Stable regime observed test coverage = 91.07468123861567%."
+          ],
+          [
+            "c18 / answerable",
+            "In the stable regime, is expanding ridge MAE smaller than frozen ridge MAE?",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; market-microstructure-lab:adverse",
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "source_found",
+            "Expanding MAE 0.40378462688112504 exceeds frozen MAE 0.4030305544093381."
+          ],
+          [
+            "c19 / answerable",
+            "What happens to observed test coverage in the volatility regime break case?",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:risk-1.8",
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "source_found",
+            "Regime break observed test coverage = 18.761384335154826%, versus nominal 90%."
+          ],
+          [
+            "c20 / answerable",
+            "What frozen ridge MAE is reported for the volatility regime break?",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:risk-1.8",
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "source_found",
+            "Regime break frozen ridge MAE = 9.190811689009081."
+          ],
+          [
+            "c21 / unanswerable",
+            "Which dinosaur species inhabited Jurassic Patagonia?",
+            "UNANSWERABLE",
+            "EMPTY",
+            "empty_retrieval",
+            "EMPTY",
+            "empty_retrieval",
+            "No paleontology records."
+          ],
+          [
+            "c22 / unanswerable",
+            "Who composed the opera Tosca?",
+            "UNANSWERABLE",
+            "EMPTY",
+            "empty_retrieval",
+            "EMPTY",
+            "empty_retrieval",
+            "No music history records."
+          ],
+          [
+            "c23 / unanswerable",
+            "Where are Byzantine mosaics preserved?",
+            "UNANSWERABLE",
+            "EMPTY",
+            "empty_retrieval",
+            "EMPTY",
+            "empty_retrieval",
+            "No art history records; incidental function words do not establish an answer."
+          ],
+          [
+            "c24 / unanswerable",
+            "When did Polynesian navigators settle Hawaii?",
+            "UNANSWERABLE",
+            "EMPTY",
+            "empty_retrieval",
+            "EMPTY",
+            "empty_retrieval",
+            "No settlement history records."
+          ],
+          [
+            "c25 / misleading_overlap",
+            "What battery voltage and cycle lifetime does the Hubbard dimer predict?",
+            "UNANSWERABLE",
+            "quantum-optimization-lab:electrons; statistical-learning-lab:stationary; statistical-learning-lab:shift",
+            "false_support",
+            "quantum-optimization-lab:electrons; statistical-learning-lab:shift; statistical-learning-lab:stationary",
+            "false_support",
+            "Electron record explicitly excludes battery voltage; no cycle lifetime is represented."
+          ],
+          [
+            "c26 / misleading_overlap",
+            "How many nanoseconds of exchange network latency were measured in informed flow?",
+            "UNANSWERABLE",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "false_support",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "false_support",
+            "Market records measure latency in event batches and explicitly exclude network nanoseconds."
+          ],
+          [
+            "c27 / misleading_overlap",
+            "Which quantum hardware device delivers the measured gate fidelity for the amplitude oracle?",
+            "UNANSWERABLE",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation; quantum-optimization-lab:electrons",
+            "false_support",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation; quantum-optimization-lab:electrons",
+            "false_support",
+            "Oracle is dense unitary simulation; no device fidelity measurement."
+          ],
+          [
+            "c28 / misleading_overlap",
+            "What historical annual investment return did the constrained allocation strategy achieve?",
+            "UNANSWERABLE",
+            "quantum-optimization-lab:allocation; statistical-learning-lab:stationary; statistical-learning-lab:shift",
+            "false_support",
+            "quantum-optimization-lab:allocation; statistical-learning-lab:shift; statistical-learning-lab:stationary",
+            "false_support",
+            "Synthetic means/covariance, explicitly no historical backtest."
+          ],
+          [
+            "c29 / misleading_overlap",
+            "Which theorem guarantees 90 percent coverage after the volatility regime break in this experiment?",
+            "UNANSWERABLE",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "false_support",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "false_support",
+            "Record explicitly says exchangeability is violated and coverage is not guaranteed."
+          ],
+          [
+            "c30 / misleading_overlap",
+            "What default probability and funding cost were calibrated for the base market option book?",
+            "UNANSWERABLE",
+            "quantum-estimation-lab:risk-1; quantum-optimization-lab:allocation; quantum-estimation-lab:risk-1.8",
+            "false_support",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            "false_support",
+            "Risk model explicitly omits defaults and funding and uses illustrative synthetic parameters."
+          ]
+        ]
+      },
+      "method": [
+        "Freeze manifest fingerprints all ten records, the Python retriever and browser implementation before question authoring. Evaluation fails on drift; settings and questions were not tuned on confirmation outcomes.",
+        "Twenty answerable questions cover every record twice; four unrelated unanswerables and six misleading lexical overlaps have no supporting source. Labels and rationales were fixed before running either method.",
+        "Baseline counts unique matching terms using the same fields, tokenizer, positive-score filter and source-ID ties. Both methods are evaluated at ranks 1 and 3; no cutoff is selected from outcomes.",
+        "Source recall uses only answerable questions. False support is any nonempty retrieval on an unanswerable question, a retrieval-as-support risk proxy. Empty retrieval is counted separately by answerability and stratum in results/AI01-confirmation.json.",
+        "Freeze SHA-256: d4f79ac5bec62dfba720a5d7d8ac2d77a7e995357ee849fdea5f9bf491ce2261; question SHA-256: f9d2e6e5246cdba01ad2cbcb7a5a7effbc2c420a23ac53933f6ef70116ef7d2c"
+      ],
+      "limitations": [
+        "These are authored, source-aware confirmation questions, independent of parameter selection but not blinded or representative user samples. No population accuracy or statistical superiority is established.",
+        "Returning related evidence does not assert entailment. False support measures the risk of treating retrieval as an answer, not an LLM hallucination rate; no LLM is used.",
+        "Source recall does not grade extracted answers. Shared methods across near-duplicate records can confuse rank 1. Hashes expose accidental drift but are not tamper-proof provenance."
+      ],
+      "reproduce": "python -m src.confirmation --output results/AI01-confirmation.json"
     }
   ],
   "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
