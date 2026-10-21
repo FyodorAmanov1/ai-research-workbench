@@ -37,6 +37,30 @@ That failure is useful: **lexical relevance does not establish support for a cla
 
 The saved context example contains **7,522 characters**, below the default 8,000-character cap. Character limits make exports predictable but do not measure token use or reasoning quality.
 
+## Frozen retrieval confirmation
+
+The [confirmation study](reports/AI01.md) freezes the ten-record registry, Python and browser retrieval implementations, BM25 settings and evaluation protocol before authoring 30 new questions. The question set is sealed before evaluation; drift in the inputs causes evaluation to fail. No rules or labels were tuned on these outcomes.
+
+| Measure | BM25 | Unique-term overlap baseline |
+| --- | --- | --- |
+| Source recall at 1 (20 answerable questions) | 20/20 | 18/20 |
+| Source recall at 3 (20 answerable questions) | 20/20 | 20/20 |
+| False support proxy (10 unanswerable questions) | 6/10 | 6/10 |
+| Empty retrieval on unanswerable questions | 4/10 | 4/10 |
+| Empty retrieval on answerable questions | 0/20 | 0/20 |
+
+All six misleading lexical overlaps retrieve related records despite lacking an answer. All four unrelated questions return nothing. False support here means **any retrieval on a labelled unanswerable question**, not generated-answer error. These source-aware authored questions test fixed rules; they do not estimate real-world accuracy.
+
+Open the **Frozen retrieval confirmation** case in the explorer to compare rankings, label rationales and outcomes, or inspect [the full measured artifact](results/AI01-confirmation.json). Reproduce with:
+
+```bash
+python -m src.confirmation --output results/AI01-confirmation.json
+python lab.py --output results/latest.json
+python src/studio.py --out docs/study.json
+python src/studio.py --check docs/study.json
+python -m unittest discover -s tests -v
+```
+
 ## Use locally
 
 Use Python 3.12 and install [requirements.txt](requirements.txt) in an activated virtual environment. Serve the bundled application:

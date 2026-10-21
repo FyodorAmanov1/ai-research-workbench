@@ -82,6 +82,6 @@ Explain the objective and units, where each baseline obtains its information, wh
 
 ## Next work
 
-- Freeze retrieval rules, then author independent confirmation questions and report false support separately from empty retrieval.
+- Frozen retrieval confirmation is recorded in [AI01](AI01.md): 30 new questions, source recall separated from unsupported retrieval and empty retrieval, with a term-overlap comparison and no tuning on outcomes. The studio exposes the full comparison as its third case.
 - Add compatible experiment comparisons that reject unit, dataset and protocol mismatches.
 - Add explicit registry refresh and stale-artifact diagnostics while retaining source IDs and full evidence boundaries.

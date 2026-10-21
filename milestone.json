@@ -1,0 +1,16 @@
+{
+  "task_id": "AI01",
+  "status": "completed",
+  "summary": "Froze the ten-record registry and existing BM25 implementations before authoring and sealing 30 confirmation questions. Measured source recall, false support proxy and empty retrieval separately against a term-overlap baseline without outcome tuning, and exposed both rankings and labels in the studio.",
+  "evidence_paths": [
+    "experiments/AI01-freeze.json",
+    "experiments/AI01-questions.json",
+    "experiments/AI01-seal.json",
+    "src/confirmation.py",
+    "tests/test_confirmation.py",
+    "results/AI01-confirmation.json",
+    "results/latest.json",
+    "docs/study.json",
+    "reports/AI01.md"
+  ]
+}
