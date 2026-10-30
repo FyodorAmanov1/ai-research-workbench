@@ -673,6 +673,129 @@
         "Source recall does not grade extracted answers. Shared methods across near-duplicate records can confuse rank 1. Hashes expose accidental drift but are not tamper-proof provenance."
       ],
       "reproduce": "python -m src.confirmation --output results/AI01-confirmation.json"
+    },
+    {
+      "id": "comparisons",
+      "label": "Compatible experiment comparisons",
+      "kicker": "REGISTERED METRICS / EXPLICIT COMPATIBILITY",
+      "title": "Compare the same evaluation before interpreting a difference.",
+      "description": "Does expanding ridge reduce recorded test MAE against frozen ridge under matching evaluation conditions?",
+      "metrics": [
+        {
+          "label": "Decisions matching specification",
+          "value": 7.0,
+          "unit": "of 7",
+          "note": ""
+        },
+        {
+          "label": "Compatible comparisons",
+          "value": 2.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Incompatible pairs accepted",
+          "value": 0.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Unit-only baseline: incompatible accepted",
+          "value": 4.0,
+          "unit": "",
+          "note": ""
+        }
+      ],
+      "charts": [],
+      "table": {
+        "columns": [
+          "Probe",
+          "Left source / metric",
+          "Right source / metric",
+          "Decision",
+          "Reason",
+          "Left minus right",
+          "Unit-only baseline accepts"
+        ],
+        "rows": [
+          [
+            "Stable: expanding versus frozen MAE",
+            "statistical-learning-lab:stationary / Expanding ridge MAE",
+            "statistical-learning-lab:stationary / Frozen ridge MAE",
+            "compatible",
+            "Units, dataset, evaluation protocol and quantity match",
+            0.0007540724717869374,
+            true
+          ],
+          [
+            "Shift: expanding versus frozen MAE",
+            "statistical-learning-lab:shift / Expanding ridge MAE",
+            "statistical-learning-lab:shift / Frozen ridge MAE",
+            "compatible",
+            "Units, dataset, evaluation protocol and quantity match",
+            0.647920008510825,
+            true
+          ],
+          [
+            "Cross-regime MAE",
+            "statistical-learning-lab:stationary / Frozen ridge MAE",
+            "statistical-learning-lab:shift / Frozen ridge MAE",
+            "dataset_mismatch",
+            "Dataset mismatch: statistical-learning-lab:stationary:saved-synthetic-case versus statistical-learning-lab:shift:saved-synthetic-case",
+            "REJECTED",
+            true
+          ],
+          [
+            "Nominal target versus observed coverage",
+            "statistical-learning-lab:stationary / Nominal interval coverage",
+            "statistical-learning-lab:stationary / Observed test coverage",
+            "protocol_mismatch",
+            "Protocol mismatch: nominal-design-target versus frozen-ridge-test-empirical-coverage",
+            "REJECTED",
+            true
+          ],
+          [
+            "MAE versus coverage",
+            "statistical-learning-lab:stationary / Frozen ridge MAE",
+            "statistical-learning-lab:stationary / Observed test coverage",
+            "unit_mismatch",
+            "Unit mismatch: exact strings required; no implicit conversion",
+            "REJECTED",
+            false
+          ],
+          [
+            "VaR versus expected shortfall",
+            "quantum-estimation-lab:risk-1 / 99% value at risk",
+            "quantum-estimation-lab:risk-1 / 99% expected shortfall",
+            "quantity_mismatch",
+            "Quantity mismatch: 99% value at risk versus 99% expected shortfall",
+            "REJECTED",
+            true
+          ],
+          [
+            "Unreviewed dimensionless quantities",
+            "quantum-estimation-lab:amplitude / Logical qubits",
+            "quantum-estimation-lab:amplitude / Oracle preparation calls",
+            "missing_metadata",
+            "Exactly one reviewed comparison contract is required for each metric",
+            "REJECTED",
+            true
+          ]
+        ]
+      },
+      "method": [
+        "Select two registered numeric metrics below. Values come from the registry; callers cannot substitute claimed numbers. Accepted differences are left minus right.",
+        "Exact unit, dataset, evaluation protocol and quantity identities must match. Dataset IDs are case-specific; a common project, seed or source artifact is insufficient. Nominal targets and empirical coverage use different protocols.",
+        "Reviewed contracts in docs/comparison-contracts.json bind values, units and source fingerprints. Missing metadata, ambiguous IDs, non-finite values and stale contracts fail closed. Empty units need reviewed quantity identities.",
+        "The unit-only baseline checks exact unit strings and therefore admits cross-regime MAE, nominal versus empirical coverage, different USD quantities and unrelated unreviewed counts.",
+        "Registry SHA-256: f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6; contracts SHA-256: 035fcce859987be47eea4bc37ae91cbfadd69d49e387438dd0fe90056b355dc6"
+      ],
+      "limitations": [
+        "Authored contract probes, not population accuracy. Curated identities are review assertions over a saved synthetic artifact, not independently verified raw-data hashes.",
+        "Differences describe saved point estimates only; no uncertainty, significance, causal effect or real-market performance is inferred.",
+        "An empty source unit remains empty; quantity IDs disambiguate it without inventing physical units. Unreviewed metrics are rejected."
+      ],
+      "reproduce": "python -m src.comparison --output results/AI02-comparisons.json"
     }
   ],
   "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",

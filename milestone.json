@@ -1,16 +1,16 @@
 {
-  "task_id": "AI01",
+  "task_id": "AI02",
   "status": "completed",
-  "summary": "Froze the ten-record registry and existing BM25 implementations before authoring and sealing 30 confirmation questions. Measured source recall, false support proxy and empty retrieval separately against a term-overlap baseline without outcome tuning, and exposed both rankings and labels in the studio.",
+  "summary": "Added registered numeric metric comparisons with exact unit, dataset, evaluation protocol and quantity compatibility, explicit rejection reasons and source-bound reviewed contracts. The studio exposes interactive comparisons and measured expanding versus frozen ridge MAE on two saved synthetic cases, preserving both negative findings. Seven probes pass; a unit-only baseline admits four incompatible pairs while the contract gate admits none.",
   "evidence_paths": [
-    "experiments/AI01-freeze.json",
-    "experiments/AI01-questions.json",
-    "experiments/AI01-seal.json",
-    "src/confirmation.py",
-    "tests/test_confirmation.py",
-    "results/AI01-confirmation.json",
+    "src/comparison.py",
+    "tests/test_comparison.py",
+    "docs/comparison-contracts.json",
+    "docs/comparison.js",
+    "docs/index.html",
+    "results/AI02-comparisons.json",
     "results/latest.json",
     "docs/study.json",
-    "reports/AI01.md"
+    "reports/AI02.md"
   ]
 }

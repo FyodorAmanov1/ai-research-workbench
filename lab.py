@@ -55,6 +55,7 @@ def answer(question):
 
 def experiment():
     from src.confirmation import experiment as confirmation_experiment
+    from src.comparison import experiment as comparison_experiment
 
     outcomes = [{"question": c["question"], "expected": c["expected"],
                  "retrieved": (retrieve(c["question"], k=1) or [{"id": None}])[0]["id"]} for c in CASES]
@@ -62,12 +63,15 @@ def experiment():
     return {"project": "ai-research-workbench", "seed": None,
             "metrics": {"retrieval_top1_accuracy": correct / len(outcomes), "evaluation_cases": outcomes,
                         "unknown_query_abstained": answer("volcanology tectonics")['status'] == "abstained",
-                        "frozen_retrieval_confirmation": confirmation_experiment()},
+                        "frozen_retrieval_confirmation": confirmation_experiment(),
+                        "compatible_experiment_comparisons": comparison_experiment()},
             "provenance": {"data": "Four original short source descriptions and four authored evaluation questions",
                            "confirmation": "Frozen ten-record artifact registry and 30 new source-aware authored questions; protocol and question hashes are recorded in frozen_retrieval_confirmation.",
+                           "comparisons": "Saved registry metrics and reviewed case-specific dataset, evaluation protocol and quantity contracts; fingerprints and seven measured probes are recorded in compatible_experiment_comparisons.",
                            "sources": [{"id": d["id"], "url": d["url"]} for d in CORPUS]},
             "limitations": ["Small development fixture, not a held-out evaluation or verified full-paper retrieval.",
                             "Confirmation source recall and retrieval-based false support use separate denominators; authored questions do not estimate population accuracy or entailment.",
+                            "Compatible comparisons describe saved synthetic point estimates; reviewed dataset identities are not independently revalidated raw-data hashes and no statistical significance is inferred.",
                             "Extractive keyword baseline; no live LLM is called by this benchmark.",
                             "Evidence export is separate from any external model-provider integration."]}
 

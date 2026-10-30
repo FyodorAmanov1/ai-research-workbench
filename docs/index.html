@@ -101,6 +101,23 @@
           <p id="claim-status" role="status"></p>
         </details>
       </section>
+      <section id="comparisons" class="panel" hidden>
+        <span class="eyebrow">COMPATIBILITY GATE</span>
+        <h3>Compare two registered metrics.</h3>
+        <p>Choose the candidate on the left and the baseline on the right. Only compatible recorded values produce a difference.</p>
+        <form id="comparison-form">
+          <div class="claim-grid">
+            <label>Left record<select id="comparison-left-source"></select></label>
+            <label>Left metric<select id="comparison-left-metric"></select></label>
+            <label>Right record<select id="comparison-right-source"></select></label>
+            <label>Right metric<select id="comparison-right-metric"></select></label>
+          </div>
+          <button type="submit">Compare metrics</button>
+        </form>
+        <p id="comparison-status" role="status" aria-live="polite">Loading comparison contracts...</p>
+        <div id="comparison-evidence"></div>
+        <p class="subtle">Differences are descriptive point estimates. Compatibility does not establish significance, causality or real-world performance.</p>
+      </section>
       <section id="replay" class="panel" hidden>
         <div class="panel-heading">
           <div>
@@ -189,5 +206,6 @@
       </footer>
     </main>
     <script type="module" src="app.js"></script>
+    <script type="module" src="comparison.js"></script>
   </body>
 </html>

@@ -19,6 +19,7 @@ The bundled registry contains ten case records from four quantitative and quantu
 - **Search:** BM25 ranking with matching Python and browser implementations.
 - **Inspect:** source-linked evidence cards and the recorded numerical values.
 - **Verify:** check a source, metric name, value and unit together.
+- **Compare:** subtract registered metrics only after units, dataset, evaluation protocol and quantity match; inspect explicit rejection reasons.
 - **Export:** build a character-bounded evidence context for use by another tool or model.
 
 The application does not generate answers with an LLM. Retrieval and typed verification remain explicit operations, making it possible to examine where a proposed claim came from.
@@ -60,6 +61,25 @@ python src/studio.py --out docs/study.json
 python src/studio.py --check docs/study.json
 python -m unittest discover -s tests -v
 ```
+
+## Compatible experiment comparisons
+
+Open **Compatible experiment comparisons** in the explorer (`#comparisons`) to choose two records and metrics. Accepted results show left minus right and both source contracts; incompatible pairs show a rejection reason without a numerical difference. Values come from registered metrics, with exact unit strings and reviewed dataset, evaluation protocol and quantity identities. Missing metadata fails closed. The frozen retrieval registry and rules are preserved.
+
+The [comparison study](reports/AI02.md) asks whether expanding ridge lowers recorded test MAE against frozen ridge on the same synthetic test case. It does not: expanding minus frozen MAE is **+0.0007540725** in the stable case and **+0.6479200085** after the shift. These are saved point estimates, without significance or real-market claims. Cross-regime comparisons are rejected because their datasets differ.
+
+Seven authored probes produce two compatible comparisons and five explicit rejections. An exact-unit-only baseline incorrectly admits four incompatible pairs; the contract gate admits none. Sixteen of forty registry metrics have reviewed metadata; remaining metrics are unavailable for comparison. Dataset identities describe saved cases, not independently verified raw-sample hashes.
+
+```bash
+python -m src.comparison --output results/AI02-comparisons.json
+python -m src.comparison --left-source statistical-learning-lab:stationary --left-metric "Expanding ridge MAE" --right-source statistical-learning-lab:stationary --right-metric "Frozen ridge MAE"
+python lab.py --output results/latest.json
+python src/studio.py --out docs/study.json
+python src/studio.py --check docs/study.json
+python -m unittest discover -s tests -v
+```
+
+Python callers can use `load_inputs()` and `compare_metrics(registry, contracts, left_source, left_metric, right_source, right_metric)` from [src/comparison.py](src/comparison.py). Use the loader to verify the registry fingerprint. [Comparison contracts](docs/comparison-contracts.json) bind selected values, units and source fingerprints. Registry changes require new reviewed contracts; frozen retrieval changes require a new retrieval protocol.
 
 ## Use locally
 
