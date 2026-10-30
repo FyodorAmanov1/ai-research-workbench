@@ -970,11 +970,187 @@
           ]
         }
       }
+    },
+    "compatible_experiment_comparisons": {
+      "question": "Does expanding ridge reduce recorded test MAE against frozen ridge under matching evaluation conditions?",
+      "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6",
+      "contracts_sha256": "035fcce859987be47eea4bc37ae91cbfadd69d49e387438dd0fe90056b355dc6",
+      "summary": {
+        "probes": 7,
+        "decisions_matching_specification": 7,
+        "accepted": 2,
+        "incompatible_accepted": 0,
+        "unit_only_incompatible_accepted": 4
+      },
+      "rows": [
+        {
+          "name": "Stable: expanding versus frozen MAE",
+          "left_source": "statistical-learning-lab:stationary",
+          "left_metric": "Expanding ridge MAE",
+          "right_source": "statistical-learning-lab:stationary",
+          "right_metric": "Frozen ridge MAE",
+          "expected_code": "compatible",
+          "result": {
+            "accepted": true,
+            "code": "compatible",
+            "reason": "Units, dataset, evaluation protocol and quantity match",
+            "difference": 0.0007540724717869374,
+            "operation": "left minus right",
+            "unit": "",
+            "left": {
+              "source_id": "statistical-learning-lab:stationary",
+              "label": "Expanding ridge MAE",
+              "value": 0.40378462688112504,
+              "unit": "",
+              "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+              "sha256": "81ad81f9916532443c3e5aafb70bea8b9540bc39fcf1aac3a23701a518cc9779",
+              "dataset_id": "statistical-learning-lab:stationary:saved-synthetic-case",
+              "protocol_id": "chronological-test-from-1451-mae",
+              "quantity_id": "next-day-squared-return-mae",
+              "rationale": "Seed 73 synthetic process; case-specific test targets from 1451. MAE evaluates the same next-day squared-return labels; expanding training differs but evaluation is shared. Nominal coverage is a design target, not empirical test evaluation.",
+              "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json"
+            },
+            "right": {
+              "source_id": "statistical-learning-lab:stationary",
+              "label": "Frozen ridge MAE",
+              "value": 0.4030305544093381,
+              "unit": "",
+              "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+              "sha256": "81ad81f9916532443c3e5aafb70bea8b9540bc39fcf1aac3a23701a518cc9779",
+              "dataset_id": "statistical-learning-lab:stationary:saved-synthetic-case",
+              "protocol_id": "chronological-test-from-1451-mae",
+              "quantity_id": "next-day-squared-return-mae",
+              "rationale": "Seed 73 synthetic process; case-specific test targets from 1451. MAE evaluates the same next-day squared-return labels; expanding training differs but evaluation is shared. Nominal coverage is a design target, not empirical test evaluation.",
+              "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json"
+            }
+          },
+          "unit_only_baseline_accepted": true
+        },
+        {
+          "name": "Shift: expanding versus frozen MAE",
+          "left_source": "statistical-learning-lab:shift",
+          "left_metric": "Expanding ridge MAE",
+          "right_source": "statistical-learning-lab:shift",
+          "right_metric": "Frozen ridge MAE",
+          "expected_code": "compatible",
+          "result": {
+            "accepted": true,
+            "code": "compatible",
+            "reason": "Units, dataset, evaluation protocol and quantity match",
+            "difference": 0.647920008510825,
+            "operation": "left minus right",
+            "unit": "",
+            "left": {
+              "source_id": "statistical-learning-lab:shift",
+              "label": "Expanding ridge MAE",
+              "value": 9.838731697519906,
+              "unit": "",
+              "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+              "sha256": "e5294ad0b7dedd5414affa9c65295351321e84be3b304c2fff0c2f7cee250288",
+              "dataset_id": "statistical-learning-lab:shift:saved-synthetic-case",
+              "protocol_id": "chronological-test-from-1451-mae",
+              "quantity_id": "next-day-squared-return-mae",
+              "rationale": "Seed 73 synthetic process; case-specific test targets from 1451. MAE evaluates the same next-day squared-return labels; expanding training differs but evaluation is shared. Nominal coverage is a design target, not empirical test evaluation.",
+              "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json"
+            },
+            "right": {
+              "source_id": "statistical-learning-lab:shift",
+              "label": "Frozen ridge MAE",
+              "value": 9.190811689009081,
+              "unit": "",
+              "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+              "sha256": "e5294ad0b7dedd5414affa9c65295351321e84be3b304c2fff0c2f7cee250288",
+              "dataset_id": "statistical-learning-lab:shift:saved-synthetic-case",
+              "protocol_id": "chronological-test-from-1451-mae",
+              "quantity_id": "next-day-squared-return-mae",
+              "rationale": "Seed 73 synthetic process; case-specific test targets from 1451. MAE evaluates the same next-day squared-return labels; expanding training differs but evaluation is shared. Nominal coverage is a design target, not empirical test evaluation.",
+              "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json"
+            }
+          },
+          "unit_only_baseline_accepted": true
+        },
+        {
+          "name": "Cross-regime MAE",
+          "left_source": "statistical-learning-lab:stationary",
+          "left_metric": "Frozen ridge MAE",
+          "right_source": "statistical-learning-lab:shift",
+          "right_metric": "Frozen ridge MAE",
+          "expected_code": "dataset_mismatch",
+          "result": {
+            "accepted": false,
+            "code": "dataset_mismatch",
+            "reason": "Dataset mismatch: statistical-learning-lab:stationary:saved-synthetic-case versus statistical-learning-lab:shift:saved-synthetic-case"
+          },
+          "unit_only_baseline_accepted": true
+        },
+        {
+          "name": "Nominal target versus observed coverage",
+          "left_source": "statistical-learning-lab:stationary",
+          "left_metric": "Nominal interval coverage",
+          "right_source": "statistical-learning-lab:stationary",
+          "right_metric": "Observed test coverage",
+          "expected_code": "protocol_mismatch",
+          "result": {
+            "accepted": false,
+            "code": "protocol_mismatch",
+            "reason": "Protocol mismatch: nominal-design-target versus frozen-ridge-test-empirical-coverage"
+          },
+          "unit_only_baseline_accepted": true
+        },
+        {
+          "name": "MAE versus coverage",
+          "left_source": "statistical-learning-lab:stationary",
+          "left_metric": "Frozen ridge MAE",
+          "right_source": "statistical-learning-lab:stationary",
+          "right_metric": "Observed test coverage",
+          "expected_code": "unit_mismatch",
+          "result": {
+            "accepted": false,
+            "code": "unit_mismatch",
+            "reason": "Unit mismatch: exact strings required; no implicit conversion"
+          },
+          "unit_only_baseline_accepted": false
+        },
+        {
+          "name": "VaR versus expected shortfall",
+          "left_source": "quantum-estimation-lab:risk-1",
+          "left_metric": "99% value at risk",
+          "right_source": "quantum-estimation-lab:risk-1",
+          "right_metric": "99% expected shortfall",
+          "expected_code": "quantity_mismatch",
+          "result": {
+            "accepted": false,
+            "code": "quantity_mismatch",
+            "reason": "Quantity mismatch: 99% value at risk versus 99% expected shortfall"
+          },
+          "unit_only_baseline_accepted": true
+        },
+        {
+          "name": "Unreviewed dimensionless quantities",
+          "left_source": "quantum-estimation-lab:amplitude",
+          "left_metric": "Logical qubits",
+          "right_source": "quantum-estimation-lab:amplitude",
+          "right_metric": "Oracle preparation calls",
+          "expected_code": "missing_metadata",
+          "result": {
+            "accepted": false,
+            "code": "missing_metadata",
+            "reason": "Exactly one reviewed comparison contract is required for each metric"
+          },
+          "unit_only_baseline_accepted": true
+        }
+      ],
+      "limitations": [
+        "Authored contract probes, not population accuracy. Curated identities are review assertions over a saved synthetic artifact, not independently verified raw-data hashes.",
+        "Differences describe saved point estimates only; no uncertainty, significance, causal effect or real-market performance is inferred.",
+        "An empty source unit remains empty; quantity IDs disambiguate it without inventing physical units. Unreviewed metrics are rejected."
+      ]
     }
   },
   "provenance": {
     "data": "Four original short source descriptions and four authored evaluation questions",
     "confirmation": "Frozen ten-record artifact registry and 30 new source-aware authored questions; protocol and question hashes are recorded in frozen_retrieval_confirmation.",
+    "comparisons": "Saved registry metrics and reviewed case-specific dataset, evaluation protocol and quantity contracts; fingerprints and seven measured probes are recorded in compatible_experiment_comparisons.",
     "sources": [
       {
         "id": "qae",
@@ -997,6 +1173,7 @@
   "limitations": [
     "Small development fixture, not a held-out evaluation or verified full-paper retrieval.",
     "Confirmation source recall and retrieval-based false support use separate denominators; authored questions do not estimate population accuracy or entailment.",
+    "Compatible comparisons describe saved synthetic point estimates; reviewed dataset identities are not independently revalidated raw-data hashes and no statistical significance is inferred.",
     "Extractive keyword baseline; no live LLM is called by this benchmark.",
     "Evidence export is separate from any external model-provider integration."
   ]

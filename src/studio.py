@@ -7,10 +7,12 @@ try:
     from .common import finalize, metric
     from .evidence import load_registry, retrieve, answer, validate_claim, context
     from .confirmation import experiment as confirmation_experiment
+    from .comparison import experiment as comparison_experiment
 except ImportError:
     from common import finalize, metric
     from evidence import load_registry, retrieve, answer, validate_claim, context
     from confirmation import experiment as confirmation_experiment
+    from comparison import experiment as comparison_experiment
 
 # Authored regression questions, intentionally separate from source descriptions. Not a research-grade held-out benchmark.
 QUESTIONS = [
@@ -194,7 +196,7 @@ def experiment():
         "subtitle": "An inspectable bridge from experiments to evidence-based research.",
         "accent": "#ff9caa",
         "seed": None,
-        "cases": [retrieval, claims, confirmation_case()],
+        "cases": [retrieval, claims, confirmation_case(), comparison_case()],
         "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
         "references": [
             {
@@ -206,6 +208,32 @@ def experiment():
                 "url": "https://arxiv.org/abs/2005.11401",
             },
         ],
+    }
+
+
+def comparison_case():
+    result = comparison_experiment()
+    summary = result["summary"]
+    return {
+        "id": "comparisons", "label": "Compatible experiment comparisons",
+        "kicker": "REGISTERED METRICS / EXPLICIT COMPATIBILITY",
+        "title": "Compare the same evaluation before interpreting a difference.",
+        "description": result["question"],
+        "metrics": [metric("Decisions matching specification", summary["decisions_matching_specification"], "of 7"),
+                    metric("Compatible comparisons", summary["accepted"]),
+                    metric("Incompatible pairs accepted", summary["incompatible_accepted"]),
+                    metric("Unit-only baseline: incompatible accepted", summary["unit_only_incompatible_accepted"])],
+        "charts": [],
+        "table": {"columns": ["Probe", "Left source / metric", "Right source / metric", "Decision", "Reason", "Left minus right", "Unit-only baseline accepts"],
+                  "rows": [[r["name"], r["left_source"] + " / " + r["left_metric"], r["right_source"] + " / " + r["right_metric"],
+                            r["result"]["code"], r["result"]["reason"], r["result"].get("difference", "REJECTED"), r["unit_only_baseline_accepted"]] for r in result["rows"]]},
+        "method": ["Select two registered numeric metrics below. Values come from the registry; callers cannot substitute claimed numbers. Accepted differences are left minus right.",
+                   "Exact unit, dataset, evaluation protocol and quantity identities must match. Dataset IDs are case-specific; a common project, seed or source artifact is insufficient. Nominal targets and empirical coverage use different protocols.",
+                   "Reviewed contracts in docs/comparison-contracts.json bind values, units and source fingerprints. Missing metadata, ambiguous IDs, non-finite values and stale contracts fail closed. Empty units need reviewed quantity identities.",
+                   "The unit-only baseline checks exact unit strings and therefore admits cross-regime MAE, nominal versus empirical coverage, different USD quantities and unrelated unreviewed counts.",
+                   "Registry SHA-256: " + result["registry_sha256"] + "; contracts SHA-256: " + result["contracts_sha256"]],
+        "limitations": result["limitations"],
+        "reproduce": "python -m src.comparison --output results/AI02-comparisons.json",
     }
 
 
