@@ -84,4 +84,4 @@ Explain the objective and units, where each baseline obtains its information, wh
 
 - Frozen retrieval confirmation is recorded in [AI01](AI01.md): 30 new questions, source recall separated from unsupported retrieval and empty retrieval, with a term-overlap comparison and no tuning on outcomes. The studio exposes the full comparison as its third case.
 - Compatible comparisons are recorded in [AI02](AI02.md): a fourth studio case compares expanding versus frozen ridge MAE on matched saved test cases and explicitly rejects unit, dataset, protocol and quantity mismatches. A unit-only baseline admits four incompatible authored probes; reviewed contracts admit none.
-- Add explicit registry refresh and stale-artifact diagnostics while retaining source IDs and full evidence boundaries.
+- Registry freshness auditing is recorded in [AI03](AI03.md): a fifth studio case compares source-byte SHA-256 checks with indexed-text checks on ten controlled fault injections, preserves prior registry snapshots and IDs, and exposes explicit unavailable-source boundaries. The existing frozen corpus remains unchanged.

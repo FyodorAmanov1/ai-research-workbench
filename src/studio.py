@@ -8,11 +8,13 @@ try:
     from .evidence import load_registry, retrieve, answer, validate_claim, context
     from .confirmation import experiment as confirmation_experiment
     from .comparison import experiment as comparison_experiment
+    from .freshness_study import experiment as freshness_experiment
 except ImportError:
     from common import finalize, metric
     from evidence import load_registry, retrieve, answer, validate_claim, context
     from confirmation import experiment as confirmation_experiment
     from comparison import experiment as comparison_experiment
+    from freshness_study import experiment as freshness_experiment
 
 # Authored regression questions, intentionally separate from source descriptions. Not a research-grade held-out benchmark.
 QUESTIONS = [
@@ -196,7 +198,7 @@ def experiment():
         "subtitle": "An inspectable bridge from experiments to evidence-based research.",
         "accent": "#ff9caa",
         "seed": None,
-        "cases": [retrieval, claims, confirmation_case(), comparison_case()],
+        "cases": [retrieval, claims, confirmation_case(), comparison_case(), freshness_case()],
         "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
         "references": [
             {
@@ -208,6 +210,30 @@ def experiment():
                 "url": "https://arxiv.org/abs/2005.11401",
             },
         ],
+    }
+
+
+def freshness_case():
+    result = freshness_experiment()
+    summary = result["summary"]
+    return {
+        "id": "freshness", "label": "Registry freshness audit",
+        "kicker": "ARTIFACT DIGESTS / REPRODUCIBLE HISTORY",
+        "title": "Detect source drift. Keep the previous evidence.",
+        "description": result["question"],
+        "metrics": [metric("Decisions matching specification", summary["decisions_matching_specification"], "of 10"),
+                    metric("Digest: changed artifacts detected", summary["digest_changes_detected"], "of 5"),
+                    metric("Text-only: changed artifacts detected", summary["text_only_changes_detected"], "of 5"),
+                    metric("Exact prior snapshots retained", summary["prior_snapshots_retained"], "of 10")],
+        "charts": [],
+        "table": {"columns": ["Synthetic scenario", "Artifact audit", "Text-only baseline", "Refresh allowed", "Exact old snapshot retained", "Old raw source retained"],
+                  "rows": [[r["scenario"], r["status"], r["text_only_baseline"], r["ready"], r["exact_prior_snapshot_retained"], r["prior_raw_source_retained"]] for r in result["rows"]]},
+        "method": [result["fixture"],
+                   "Refresh hashes the exact bytes read once for each allowlisted source. It reports unchanged, stale, missing, invalid or unverifiable states with old/new digests and case IDs. Indexed-text hashes form the baseline.",
+                   "Before replacement, content-addressed history retains the exact prior registry, observed raw sources, candidate registry and audit. Existing history files cannot be overwritten with different bytes; invalid sources block publication. Stable source IDs remain stable; removed IDs remain in prior snapshots.",
+                   "Inspect controlled scenarios below, or use the offline refresh command with explicit source files. A source unavailable locally is unknown, never certified fresh. Public registry SHA-256: " + result["registry_sha256"]],
+        "limitations": result["limitations"],
+        "reproduce": "python -m src.freshness_study --output results/AI03-freshness.json",
     }
 
 
