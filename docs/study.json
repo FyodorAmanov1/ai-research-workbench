@@ -796,6 +796,145 @@
         "An empty source unit remains empty; quantity IDs disambiguate it without inventing physical units. Unreviewed metrics are rejected."
       ],
       "reproduce": "python -m src.comparison --output results/AI02-comparisons.json"
+    },
+    {
+      "id": "freshness",
+      "label": "Registry freshness audit",
+      "kicker": "ARTIFACT DIGESTS / REPRODUCIBLE HISTORY",
+      "title": "Detect source drift. Keep the previous evidence.",
+      "description": "Can artifact-byte checks detect changes missed by indexed-text checks while preserving reproducible prior evidence?",
+      "metrics": [
+        {
+          "label": "Decisions matching specification",
+          "value": 10.0,
+          "unit": "of 10",
+          "note": ""
+        },
+        {
+          "label": "Digest: changed artifacts detected",
+          "value": 5.0,
+          "unit": "of 5",
+          "note": ""
+        },
+        {
+          "label": "Text-only: changed artifacts detected",
+          "value": 3.0,
+          "unit": "of 5",
+          "note": ""
+        },
+        {
+          "label": "Exact prior snapshots retained",
+          "value": 10.0,
+          "unit": "of 10",
+          "note": ""
+        }
+      ],
+      "charts": [],
+      "table": {
+        "columns": [
+          "Synthetic scenario",
+          "Artifact audit",
+          "Text-only baseline",
+          "Refresh allowed",
+          "Exact old snapshot retained",
+          "Old raw source retained"
+        ],
+        "rows": [
+          [
+            "unchanged",
+            "unchanged",
+            "unchanged",
+            true,
+            true,
+            true
+          ],
+          [
+            "formatting_only",
+            "stale",
+            "unchanged",
+            true,
+            true,
+            true
+          ],
+          [
+            "source_metadata_only",
+            "stale",
+            "unchanged",
+            true,
+            true,
+            true
+          ],
+          [
+            "metric_edit",
+            "stale",
+            "changed",
+            true,
+            true,
+            true
+          ],
+          [
+            "case_added",
+            "stale",
+            "changed",
+            true,
+            true,
+            true
+          ],
+          [
+            "case_removed",
+            "stale",
+            "changed",
+            true,
+            true,
+            true
+          ],
+          [
+            "missing",
+            "missing",
+            "unknown",
+            false,
+            true,
+            true
+          ],
+          [
+            "malformed_json",
+            "invalid",
+            "unknown",
+            false,
+            true,
+            true
+          ],
+          [
+            "wrong_project",
+            "invalid",
+            "unknown",
+            false,
+            true,
+            true
+          ],
+          [
+            "duplicate_case_id",
+            "invalid",
+            "unknown",
+            false,
+            true,
+            true
+          ]
+        ]
+      },
+      "method": [
+        "Synthetic source envelopes project all ten saved registry records with their metrics and full text; mutations are controlled fault injections, not observations of live source changes.",
+        "Refresh hashes the exact bytes read once for each allowlisted source. It reports unchanged, stale, missing, invalid or unverifiable states with old/new digests and case IDs. Indexed-text hashes form the baseline.",
+        "Before replacement, content-addressed history retains the exact prior registry, observed raw sources, candidate registry and audit. Existing history files cannot be overwritten with different bytes; invalid sources block publication. Stable source IDs remain stable; removed IDs remain in prior snapshots.",
+        "Inspect controlled scenarios below, or use the offline refresh command with explicit source files. A source unavailable locally is unknown, never certified fresh. Public registry SHA-256: f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+      ],
+      "limitations": [
+        "Controlled synthetic fault injections, not a live freshness survey or an accuracy estimate. No network refresh or companion experiment was run.",
+        "Byte changes include formatting and source metadata: stale means different bytes, not necessarily different scientific results. Unavailable or invalid sources have unknown freshness and block replacement.",
+        "Prior registry snapshots retain complete recorded IDs, metrics and evidence text. Original raw sources absent from history cannot be reconstructed; this is reported explicitly. Stored hashes do not authenticate an adversary rewriting both bytes and hashes.",
+        "A refreshed registry needs new retrieval protocols and reviewed comparison contracts. Existing frozen inputs are preserved; no compute-cost advantage or model inference is measured."
+      ],
+      "reproduce": "python -m src.freshness_study --output results/AI03-freshness.json"
     }
   ],
   "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",

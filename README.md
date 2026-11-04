@@ -81,6 +81,30 @@ python -m unittest discover -s tests -v
 
 Python callers can use `load_inputs()` and `compare_metrics(registry, contracts, left_source, left_metric, right_source, right_metric)` from [src/comparison.py](src/comparison.py). Use the loader to verify the registry fingerprint. [Comparison contracts](docs/comparison-contracts.json) bind selected values, units and source fingerprints. Registry changes require new reviewed contracts; frozen retrieval changes require a new retrieval protocol.
 
+## Registry freshness and retained history
+
+Open **Registry freshness audit** (`#freshness`) to inspect ten controlled refresh scenarios, old/new source digests, case IDs and retention checks. The text-only baseline detects **3/5** changed artifacts; checking the complete source-artifact SHA-256 detects **5/5**, including source metadata outside indexed text and formatting changes. All **10/10** exact prior registry snapshots are retained; four unavailable or invalid inputs block replacement. These are synthetic fault injections around the ten saved evidence records, not a survey of current remote repositories. See [AI03](reports/AI03.md).
+
+Refresh only an explicitly supplied directory containing the four named companion study artifacts:
+
+```bash
+python -m src.freshness --workspace SOURCE_DIRECTORY --registry docs/registry.json --out results/refreshed-registry.json --archive results/registry-history --report results/refresh-audit.json
+```
+
+The default writes a separate candidate; missing, malformed, wrong-project, duplicate-case or unverifiable prior digests block replacement (exit code 2). Successful refresh reports unchanged/stale source bytes and added/changed/removed IDs. The exact prior registry, observed raw source bytes, candidate and audit are stored under SHA-256 names in history before replacement. Load an old registry with the existing `load_registry(snapshot_path)` to reproduce retrieval or claim checks against removed IDs. Previously unavailable original source bytes cannot be recovered from the registry; `old_raw_source_available` reports that boundary explicitly. Hashes detect drift, not authenticity or scientific validity.
+
+The existing `python src/ingest.py --workspace SOURCE_DIRECTORY --out REGISTRY_PATH` remains supported. When its output already exists it now performs this audit and archives history before replacement; a new output still performs initial ingestion. Prefer the separate-candidate refresh command for frozen studies: the current confirmation protocol and comparison contracts intentionally reject changed registries. Stable case IDs keep their identity; versions are distinguished by registry and artifact digests. Import a generated audit JSON in the studio to inspect it locally; imported reports are user-provided and do not establish live freshness.
+
+```bash
+python -m src.freshness_study --output results/AI03-freshness.json
+python lab.py --output results/latest.json
+python src/studio.py --out docs/study.json
+python src/studio.py --check docs/study.json
+python -m unittest discover -s tests -v
+```
+
+The browser ledger copy is `docs/freshness-study.json`; copy the measured `results/AI03-freshness.json` there after rerunning that measurement.
+
 ## Use locally
 
 Use Python 3.12 and install [requirements.txt](requirements.txt) in an activated virtual environment. Serve the bundled application:

@@ -56,6 +56,7 @@ def answer(question):
 def experiment():
     from src.confirmation import experiment as confirmation_experiment
     from src.comparison import experiment as comparison_experiment
+    from src.freshness_study import experiment as freshness_experiment
 
     outcomes = [{"question": c["question"], "expected": c["expected"],
                  "retrieved": (retrieve(c["question"], k=1) or [{"id": None}])[0]["id"]} for c in CASES]
@@ -64,14 +65,17 @@ def experiment():
             "metrics": {"retrieval_top1_accuracy": correct / len(outcomes), "evaluation_cases": outcomes,
                         "unknown_query_abstained": answer("volcanology tectonics")['status'] == "abstained",
                         "frozen_retrieval_confirmation": confirmation_experiment(),
-                        "compatible_experiment_comparisons": comparison_experiment()},
+                        "compatible_experiment_comparisons": comparison_experiment(),
+                        "registry_freshness_audit": freshness_experiment()},
             "provenance": {"data": "Four original short source descriptions and four authored evaluation questions",
                            "confirmation": "Frozen ten-record artifact registry and 30 new source-aware authored questions; protocol and question hashes are recorded in frozen_retrieval_confirmation.",
                            "comparisons": "Saved registry metrics and reviewed case-specific dataset, evaluation protocol and quantity contracts; fingerprints and seven measured probes are recorded in compatible_experiment_comparisons.",
+                           "freshness": "Controlled synthetic source envelopes preserve all ten saved records, metrics and complete text; ten refresh fault injections compare artifact digests with indexed-text checks. Original companion bytes are not reconstructed.",
                            "sources": [{"id": d["id"], "url": d["url"]} for d in CORPUS]},
             "limitations": ["Small development fixture, not a held-out evaluation or verified full-paper retrieval.",
                             "Confirmation source recall and retrieval-based false support use separate denominators; authored questions do not estimate population accuracy or entailment.",
                             "Compatible comparisons describe saved synthetic point estimates; reviewed dataset identities are not independently revalidated raw-data hashes and no statistical significance is inferred.",
+                            "Freshness scenarios are synthetic fault injections, not a survey of current remote source state; exact-byte drift includes formatting changes.",
                             "Extractive keyword baseline; no live LLM is called by this benchmark.",
                             "Evidence export is separate from any external model-provider integration."]}
 
@@ -85,6 +89,6 @@ if __name__ == "__main__":
     result = json.dumps(payload, indent=2, allow_nan=False) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(result, encoding="utf-8")
+        args.output.write_text(result, encoding="utf-8", newline="\n")
     else:
         print(result)

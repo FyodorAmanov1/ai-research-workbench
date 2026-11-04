@@ -152,6 +152,22 @@
           </div>
         </div>
       </section>
+      <section id="freshness" class="panel" hidden>
+        <div class="panel-heading">
+          <div><span class="eyebrow">SOURCE DRIFT / SAVED MEASUREMENT</span><h3>Inspect the refresh audit.</h3></div>
+          <a href="freshness-study.json" download>Download measured audit</a>
+        </div>
+        <p>Synthetic fault injections around saved evidence. These results do not check the current state of remote repositories. Missing and invalid sources block refresh.</p>
+        <label for="freshness-scenario">Controlled scenario</label>
+        <select id="freshness-scenario"></select>
+        <p><label for="freshness-audit-file">Inspect a local refresh audit JSON</label>
+          <input id="freshness-audit-file" type="file" accept="application/json,.json" /></p>
+        <p id="freshness-status" role="status"></p>
+        <details open><summary>Old and new digests, IDs and retention checks</summary>
+          <pre id="freshness-details" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre>
+        </details>
+        <p>Refresh explicit local source files with <code>python -m src.freshness --workspace SOURCE_DIRECTORY</code>, then inspect the generated <code>results/refresh-audit.json</code> here. The file stays in this browser. The default writes a separate candidate and preserves the active registry. History retains exact prior registries and observed raw sources; unavailable original bytes cannot be reconstructed.</p>
+      </section>
       <section id="charts" class="charts"></section>
       <section class="panel table-panel">
         <div class="panel-heading">
@@ -207,5 +223,6 @@
     </main>
     <script type="module" src="app.js"></script>
     <script type="module" src="comparison.js"></script>
+    <script type="module" src="freshness.js"></script>
   </body>
 </html>

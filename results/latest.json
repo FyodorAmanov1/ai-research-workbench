@@ -1145,12 +1145,351 @@
         "Differences describe saved point estimates only; no uncertainty, significance, causal effect or real-market performance is inferred.",
         "An empty source unit remains empty; quantity IDs disambiguate it without inventing physical units. Unreviewed metrics are rejected."
       ]
+    },
+    "registry_freshness_audit": {
+      "question": "Can artifact-byte checks detect changes missed by indexed-text checks while preserving reproducible prior evidence?",
+      "fixture": "Synthetic source envelopes project all ten saved registry records with their metrics and full text; mutations are controlled fault injections, not observations of live source changes.",
+      "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6",
+      "summary": {
+        "scenarios": 10,
+        "decisions_matching_specification": 10,
+        "changed_artifacts": 5,
+        "digest_changes_detected": 5,
+        "text_only_changes_detected": 3,
+        "prior_snapshots_retained": 10,
+        "blocked_refreshes": 4
+      },
+      "rows": [
+        {
+          "scenario": "unchanged",
+          "expected": "unchanged",
+          "status": "unchanged",
+          "text_only_baseline": "unchanged",
+          "ready": true,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "record_changes": [
+            {
+              "source_id": "quantum-estimation-lab:amplitude",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1.8",
+              "status": "unchanged"
+            }
+          ],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "formatting_only",
+          "expected": "stale",
+          "status": "stale",
+          "text_only_baseline": "unchanged",
+          "ready": true,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": "ca519680362201e514bc63c8268cce80d3bbdf1ce2dcf5b850bb6aa92e759d84",
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "f19876df5777732ea6c3700f211bac564f23f11f8475a9ff564a2b68cd8db458",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "record_changes": [
+            {
+              "source_id": "quantum-estimation-lab:amplitude",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1.8",
+              "status": "unchanged"
+            }
+          ],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "source_metadata_only",
+          "expected": "stale",
+          "status": "stale",
+          "text_only_baseline": "unchanged",
+          "ready": true,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": "20e8aa9323d8bf7052704e673be1788e80871a358f2733d78806fe2f606ea2a9",
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "34f8c0792b404bb95a9439a529a21fa1863923736bad4de251b28325e048064b",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "record_changes": [
+            {
+              "source_id": "quantum-estimation-lab:amplitude",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1.8",
+              "status": "unchanged"
+            }
+          ],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "metric_edit",
+          "expected": "stale",
+          "status": "stale",
+          "text_only_baseline": "changed",
+          "ready": true,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": "a74e5828b651438bc8803272d5be2f4ffee098be70cb0834033f41148287f7b8",
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "57b51161281369cd238b6f9cacbfc118b874d54f8489b20337244164376651c5",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "record_changes": [
+            {
+              "source_id": "quantum-estimation-lab:amplitude",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1",
+              "status": "changed"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1.8",
+              "status": "unchanged"
+            }
+          ],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "case_added",
+          "expected": "stale",
+          "status": "stale",
+          "text_only_baseline": "changed",
+          "ready": true,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": "963dbbda9ae79b9c49d573244b15ed9dcdeaf97d7a05762d235d9eb756661350",
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "3374c9c0bcdc0af62915791fd7b1c6ea1600bd87c3f0dcbb39ee42a81802aee5",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:synthetic-added"
+          ],
+          "record_changes": [
+            {
+              "source_id": "quantum-estimation-lab:amplitude",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1.8",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:synthetic-added",
+              "status": "added"
+            }
+          ],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "case_removed",
+          "expected": "stale",
+          "status": "stale",
+          "text_only_baseline": "changed",
+          "ready": true,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": "2ec2271a994afbf398d09bddd0dc3d58efadbf7d6c9476bc077648a3118418b4",
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "cbb9a6f66304fd1bebf8c8cdba4fd3aa568c8508de2ced955b0a4d6a5fa2fb3e",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "record_changes": [
+            {
+              "source_id": "quantum-estimation-lab:amplitude",
+              "status": "unchanged"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1",
+              "status": "removed"
+            },
+            {
+              "source_id": "quantum-estimation-lab:risk-1.8",
+              "status": "unchanged"
+            }
+          ],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "missing",
+          "expected": "missing",
+          "status": "missing",
+          "text_only_baseline": "unknown",
+          "ready": false,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": null,
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": null,
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [],
+          "record_changes": [],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "malformed_json",
+          "expected": "invalid",
+          "status": "invalid",
+          "text_only_baseline": "unknown",
+          "ready": false,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": null,
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [],
+          "record_changes": [],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "wrong_project",
+          "expected": "invalid",
+          "status": "invalid",
+          "text_only_baseline": "unknown",
+          "ready": false,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": null,
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "2e4ac8b1533ff58c12bb4cab3b2e132aa4883080ffeb4c512a46b51fee916b82",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [],
+          "record_changes": [],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        },
+        {
+          "scenario": "duplicate_case_id",
+          "expected": "invalid",
+          "status": "invalid",
+          "text_only_baseline": "unknown",
+          "ready": false,
+          "old_registry_sha256": "436dfc56b3306a43c10f5d0e2b158ffc4f74ac3bedc14be949cb0f5d2c4d8412",
+          "new_registry_sha256": null,
+          "old_source_sha256": "97ea28f7caa038319c096ed2f062543da6692a6cdfbb33726dc981f66971230e",
+          "new_source_sha256": "c1cf296e3f78fd0f76eb6b2a2f2d2db9b1a13cd994a4b41b7d0664436298aa96",
+          "old_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ],
+          "new_ids": [],
+          "record_changes": [],
+          "exact_prior_snapshot_retained": true,
+          "prior_raw_source_retained": true,
+          "blocked_refresh_preserved_active": true
+        }
+      ],
+      "limitations": [
+        "Controlled synthetic fault injections, not a live freshness survey or an accuracy estimate. No network refresh or companion experiment was run.",
+        "Byte changes include formatting and source metadata: stale means different bytes, not necessarily different scientific results. Unavailable or invalid sources have unknown freshness and block replacement.",
+        "Prior registry snapshots retain complete recorded IDs, metrics and evidence text. Original raw sources absent from history cannot be reconstructed; this is reported explicitly. Stored hashes do not authenticate an adversary rewriting both bytes and hashes.",
+        "A refreshed registry needs new retrieval protocols and reviewed comparison contracts. Existing frozen inputs are preserved; no compute-cost advantage or model inference is measured."
+      ]
     }
   },
   "provenance": {
     "data": "Four original short source descriptions and four authored evaluation questions",
     "confirmation": "Frozen ten-record artifact registry and 30 new source-aware authored questions; protocol and question hashes are recorded in frozen_retrieval_confirmation.",
     "comparisons": "Saved registry metrics and reviewed case-specific dataset, evaluation protocol and quantity contracts; fingerprints and seven measured probes are recorded in compatible_experiment_comparisons.",
+    "freshness": "Controlled synthetic source envelopes preserve all ten saved records, metrics and complete text; ten refresh fault injections compare artifact digests with indexed-text checks. Original companion bytes are not reconstructed.",
     "sources": [
       {
         "id": "qae",
@@ -1174,6 +1513,7 @@
     "Small development fixture, not a held-out evaluation or verified full-paper retrieval.",
     "Confirmation source recall and retrieval-based false support use separate denominators; authored questions do not estimate population accuracy or entailment.",
     "Compatible comparisons describe saved synthetic point estimates; reviewed dataset identities are not independently revalidated raw-data hashes and no statistical significance is inferred.",
+    "Freshness scenarios are synthetic fault injections, not a survey of current remote source state; exact-byte drift includes formatting changes.",
     "Extractive keyword baseline; no live LLM is called by this benchmark.",
     "Evidence export is separate from any external model-provider integration."
   ]
