@@ -9,12 +9,14 @@ try:
     from .confirmation import experiment as confirmation_experiment
     from .comparison import experiment as comparison_experiment
     from .freshness_study import experiment as freshness_experiment
+    from .independent_confirmation import experiment as independent_confirmation_experiment
 except ImportError:
     from common import finalize, metric
     from evidence import load_registry, retrieve, answer, validate_claim, context
     from confirmation import experiment as confirmation_experiment
     from comparison import experiment as comparison_experiment
     from freshness_study import experiment as freshness_experiment
+    from independent_confirmation import experiment as independent_confirmation_experiment
 
 # Authored regression questions, intentionally separate from source descriptions. Not a research-grade held-out benchmark.
 QUESTIONS = [
@@ -198,7 +200,7 @@ def experiment():
         "subtitle": "An inspectable bridge from experiments to evidence-based research.",
         "accent": "#ff9caa",
         "seed": None,
-        "cases": [retrieval, claims, confirmation_case(), comparison_case(), freshness_case()],
+        "cases": [retrieval, claims, confirmation_case(), comparison_case(), freshness_case(), independent_confirmation_case()],
         "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
         "references": [
             {
@@ -315,6 +317,67 @@ def confirmation_case():
             "Source recall does not grade extracted answers. Shared methods across near-duplicate records can confuse rank 1. Hashes expose accidental drift but are not tamper-proof provenance.",
         ],
         "reproduce": "python -m src.confirmation --output results/AI01-confirmation.json",
+    }
+
+
+def independent_confirmation_case():
+    result = independent_confirmation_experiment()
+    methods = result["methods"]
+    metrics = []
+    for name, data in methods.items():
+        summary = data["summary"]
+        metrics.extend([
+            metric(name + " source recall at 1", 100 * summary["source_recall"]["1"]["rate"], "%", "Answerable denominator: 20."),
+            metric(name + " source misses at 1", summary["source_misses"]["1"]["count"], "questions", "Wrong-source retrieval plus empty retrieval; denominator 20."),
+            metric(name + " unsupported false support proxy", summary["false_support"]["count"], "of 8", "Any nonempty unsupported retrieval; not entailment or generated-answer error."),
+            metric(name + " empty unsupported retrieval", summary["empty_retrieval"]["unanswerable"], "of 8", "Separate from answerable misses and false support."),
+        ])
+    return {
+        "id": "independent-confirmation",
+        "label": "Independent confirmation questions",
+        "kicker": "SECOND SEALED WAVE / RECALL, FALSE SUPPORT AND MISSES",
+        "title": "Does ranking survive new paraphrases?",
+        "description": "Twenty answerable paraphrases and eight unsupported questions test the unchanged retrievers. Inspect expected-source rank, both rankings and exact source anchors. Source-aware authorship is independent of parameter selection, not blinded evaluation.",
+        "metrics": metrics,
+        "charts": [{
+            "title": "Source recall: answerable questions only (n=20)",
+            "x": [1, 3], "xlabel": "Rank cutoff",
+            "series": [{"name": name, "values": [100 * d["summary"]["source_recall"][str(k)]["rate"] for k in (1, 3)]}
+                       for name, d in methods.items()],
+        }, {
+            "title": "Answerable misses: empty versus wrong-source retrieval (n=20)",
+            "x": [1, 3], "xlabel": "Rank cutoff; counts",
+            "series": [{"name": name + " / " + kind,
+                        "values": [d["summary"]["source_misses"][str(k)][kind] for k in (1, 3)]}
+                       for name, d in methods.items() for kind in ("empty", "wrong_source")],
+        }, {
+            "title": "Unsupported topics: false support proxy versus empty retrieval",
+            "x": ["Unrelated (n=4)", "Overlapping vocabulary (n=4)"], "xlabel": "Unsupported stratum; counts",
+            "series": [{"name": name + " / " + label,
+                        "values": [d["summary"]["strata"][s][key] for s in ("unanswerable", "misleading_overlap")]}
+                       for name, d in methods.items() for label, key in (("false support proxy", "retrieved"), ("empty", "empty"))],
+        }],
+        "table": {
+            "columns": ["ID / stratum", "Question", "Expected source", "BM25 top 3", "BM25 expected rank", "BM25 outcome at 3", "Overlap top 3", "Overlap expected rank", "Overlap outcome at 3", "Source anchors", "Label rationale"],
+            "rows": [[a["id"] + " / " + a["stratum"], a["question"], ", ".join(a["expected_sources"]) or "UNSUPPORTED",
+                      "; ".join(a["retrieved_ids"]) or "EMPTY", a["first_expected_rank"] or "ABSENT", a["outcome"],
+                      "; ".join(b["retrieved_ids"]) or "EMPTY", b["first_expected_rank"] or "ABSENT", b["outcome"],
+                      "; ".join(source + ": " + anchor for source, anchor in a["anchors"].items()), a["rationale"]]
+                     for a, b in zip(methods["bm25"]["rows"], methods["term_overlap"]["rows"])],
+        },
+        "method": [
+            "Before new questions were authored, freeze manifest fixed full registry bytes, Python/browser retrievers, baseline, evaluator, earlier questions, cutoffs and question counts. The complete new set was then sealed before evaluation. Drift fails closed.",
+            "Two answerable questions per source, four unrelated unsupported topics and four absent measurements with overlapping vocabulary. Exact answerable source anchors are validated against frozen evidence text. No rules, questions or labels were changed after evaluation.",
+            "Baseline uses unique-term intersection on the same title/text, tokenizer, positive-score filter and source-ID tie break as BM25. Both use ranks 1 and 3.",
+            "At each cutoff, answerable hits plus wrong-source misses plus empty misses equal 20. Unsupported false support plus empty retrieval equal 8; unsupported questions never inflate source recall.",
+            "Freeze SHA-256: " + result["freeze_sha256"] + "; question SHA-256: " + result["questions_sha256"],
+        ],
+        "limitations": [
+            "Source-aware authored questions with earlier results visible; not blind authorship, user sampling or population accuracy. Source anchors check label traceability, not semantic correctness automatically.",
+            "Any unsupported retrieval is a risk proxy: a limitation that rejects a premise is useful evidence but does not supply the absent measurement. No LLM or answer-generation quality is evaluated.",
+            "Saved records describe small synthetic experiments. Hashes identify drift, not authenticity or external timestamps. No runtime or cost advantage is measured; no significance claim follows from these counts.",
+        ],
+        "reproduce": "python -m src.independent_confirmation --output results/AI04-confirmation.json",
     }
 
 

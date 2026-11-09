@@ -935,6 +935,559 @@
         "A refreshed registry needs new retrieval protocols and reviewed comparison contracts. Existing frozen inputs are preserved; no compute-cost advantage or model inference is measured."
       ],
       "reproduce": "python -m src.freshness_study --output results/AI03-freshness.json"
+    },
+    {
+      "id": "independent-confirmation",
+      "label": "Independent confirmation questions",
+      "kicker": "SECOND SEALED WAVE / RECALL, FALSE SUPPORT AND MISSES",
+      "title": "Does ranking survive new paraphrases?",
+      "description": "Twenty answerable paraphrases and eight unsupported questions test the unchanged retrievers. Inspect expected-source rank, both rankings and exact source anchors. Source-aware authorship is independent of parameter selection, not blinded evaluation.",
+      "metrics": [
+        {
+          "label": "bm25 source recall at 1",
+          "value": 95.0,
+          "unit": "%",
+          "note": "Answerable denominator: 20."
+        },
+        {
+          "label": "bm25 source misses at 1",
+          "value": 1.0,
+          "unit": "questions",
+          "note": "Wrong-source retrieval plus empty retrieval; denominator 20."
+        },
+        {
+          "label": "bm25 unsupported false support proxy",
+          "value": 4.0,
+          "unit": "of 8",
+          "note": "Any nonempty unsupported retrieval; not entailment or generated-answer error."
+        },
+        {
+          "label": "bm25 empty unsupported retrieval",
+          "value": 4.0,
+          "unit": "of 8",
+          "note": "Separate from answerable misses and false support."
+        },
+        {
+          "label": "term_overlap source recall at 1",
+          "value": 80.0,
+          "unit": "%",
+          "note": "Answerable denominator: 20."
+        },
+        {
+          "label": "term_overlap source misses at 1",
+          "value": 4.0,
+          "unit": "questions",
+          "note": "Wrong-source retrieval plus empty retrieval; denominator 20."
+        },
+        {
+          "label": "term_overlap unsupported false support proxy",
+          "value": 4.0,
+          "unit": "of 8",
+          "note": "Any nonempty unsupported retrieval; not entailment or generated-answer error."
+        },
+        {
+          "label": "term_overlap empty unsupported retrieval",
+          "value": 4.0,
+          "unit": "of 8",
+          "note": "Separate from answerable misses and false support."
+        }
+      ],
+      "charts": [
+        {
+          "title": "Source recall: answerable questions only (n=20)",
+          "x": [
+            1,
+            3
+          ],
+          "xlabel": "Rank cutoff",
+          "series": [
+            {
+              "name": "bm25",
+              "values": [
+                95.0,
+                100.0
+              ]
+            },
+            {
+              "name": "term_overlap",
+              "values": [
+                80.0,
+                100.0
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Answerable misses: empty versus wrong-source retrieval (n=20)",
+          "x": [
+            1,
+            3
+          ],
+          "xlabel": "Rank cutoff; counts",
+          "series": [
+            {
+              "name": "bm25 / empty",
+              "values": [
+                0,
+                0
+              ]
+            },
+            {
+              "name": "bm25 / wrong_source",
+              "values": [
+                1,
+                0
+              ]
+            },
+            {
+              "name": "term_overlap / empty",
+              "values": [
+                0,
+                0
+              ]
+            },
+            {
+              "name": "term_overlap / wrong_source",
+              "values": [
+                4,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Unsupported topics: false support proxy versus empty retrieval",
+          "x": [
+            "Unrelated (n=4)",
+            "Overlapping vocabulary (n=4)"
+          ],
+          "xlabel": "Unsupported stratum; counts",
+          "series": [
+            {
+              "name": "bm25 / false support proxy",
+              "values": [
+                0,
+                4
+              ]
+            },
+            {
+              "name": "bm25 / empty",
+              "values": [
+                4,
+                0
+              ]
+            },
+            {
+              "name": "term_overlap / false support proxy",
+              "values": [
+                0,
+                4
+              ]
+            },
+            {
+              "name": "term_overlap / empty",
+              "values": [
+                4,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "table": {
+        "columns": [
+          "ID / stratum",
+          "Question",
+          "Expected source",
+          "BM25 top 3",
+          "BM25 expected rank",
+          "BM25 outcome at 3",
+          "Overlap top 3",
+          "Overlap expected rank",
+          "Overlap outcome at 3",
+          "Source anchors",
+          "Label rationale"
+        ],
+        "rows": [
+          [
+            "i01 / answerable",
+            "For ordinary market conditions, where does the one-percent loss tail begin in dollars?",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; statistical-learning-lab:stationary",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; statistical-learning-lab:shift",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1: 99% value at risk: 683.8816824040545 USD",
+            "Ordinary conditions refer to the Base market case; the requested loss threshold is its 99% VaR."
+          ],
+          [
+            "i02 / answerable",
+            "In the base case, is potential future exposure defined from positive book value or from losses?",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1: PFE uses positive future book value, not losses.",
+            "The base-market record explicitly defines the requested exposure quantity."
+          ],
+          [
+            "i03 / answerable",
+            "After the volatility shock, what dollar threshold marks the worst one percent of book losses?",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; statistical-learning-lab:shift; quantum-estimation-lab:risk-1",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1.8: 99% value at risk: 1118.2351435867747 USD",
+            "The shock-case VaR is the empirical 99% loss quantile."
+          ],
+          [
+            "i04 / answerable",
+            "Under the volatility shock, what is the average loss beyond that tail threshold?",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; quantum-estimation-lab:risk-1; statistical-learning-lab:shift",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1.8; quantum-estimation-lab:risk-1; statistical-learning-lab:shift",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1.8: 99% expected shortfall: 1236.1997941165755 USD",
+            "Expected shortfall is the average empirical tail loss, distinct from VaR and positive exposure."
+          ],
+          [
+            "i05 / answerable",
+            "What numerical interval bounds the likelihood estimate of the encoded payoff?",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; statistical-learning-lab:stationary; statistical-learning-lab:shift",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude: 0.24740 to 0.25293",
+            "The quantum oracle record reports these profile-likelihood bounds, with asymptotic limitations."
+          ],
+          [
+            "i06 / answerable",
+            "How is the preparation transformation undone inside the probability amplification operator?",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude: Householder state preparation is unitary and explicitly inverted inside the Grover operator.",
+            "This describes the simulated oracle construction, not compiled hardware gates."
+          ],
+          [
+            "i07 / answerable",
+            "For the eight-asset selection problem, what fraction of samples selects an exact optimum?",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation; quantum-estimation-lab:risk-1",
+            2,
+            "source_found",
+            "quantum-optimization-lab:allocation: Optimal-sample probability: 10.528668658051656 %",
+            "The allocation metric reports optimal-sample probability as a percentage."
+          ],
+          [
+            "i08 / answerable",
+            "What classical neighbourhood-search effort reaches the enumerated allocation optimum?",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude",
+            1,
+            "source_found",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude",
+            1,
+            "source_found",
+            "quantum-optimization-lab:allocation: after 30 neighbour evaluations.",
+            "The allocation source gives both the swap-search result and its neighbour evaluation count."
+          ],
+          [
+            "i09 / answerable",
+            "How closely does the variational two-site electron calculation reproduce the reference energy?",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            1,
+            "source_found",
+            "quantum-optimization-lab:electrons; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            1,
+            "source_found",
+            "quantum-optimization-lab:electrons: Maximum energy error: 5.551115123125783e-16 t",
+            "The electron record reports maximum energy error in hopping-energy units."
+          ],
+          [
+            "i10 / answerable",
+            "What transformations parameterize the small real state space for the interacting electron pair?",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude",
+            1,
+            "source_found",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude",
+            1,
+            "source_found",
+            "quantum-optimization-lab:electrons: Three real two-level Givens rotations span the four-state real sector.",
+            "The electron ansatz construction is explicitly described in the frozen record."
+          ],
+          [
+            "i11 / answerable",
+            "With equally balanced buying and selling, what uncertainty is reported for the paired policy difference?",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:balanced: Paired difference standard error: 42.4131504456951 ticks",
+            "Balanced buying and selling identifies Balanced flow; the requested uncertainty is its standard error."
+          ],
+          [
+            "i12 / answerable",
+            "How many cash or position-limit breaches appear when order flow is balanced?",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:balanced: Cash / inventory violations: 0.0",
+            "Position-limit breaches correspond to the recorded cash/inventory violation count in Balanced flow."
+          ],
+          [
+            "i13 / answerable",
+            "When order flow is one-sided, what net amount remains after closing the managed position?",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            3,
+            "source_found",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            3,
+            "source_found",
+            "market-microstructure-lab:trend: Managed net after liquidation: 611.9 ticks",
+            "One-sided directional conditions identify Directional market; the amount is measured in synthetic ticks."
+          ],
+          [
+            "i14 / answerable",
+            "In a directional market, how far behind symmetric quoting is the managed policy on paired runs?",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            1,
+            "source_found",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            1,
+            "source_found",
+            "market-microstructure-lab:trend: Paired improvement vs symmetric: -528.83125 ticks",
+            "The negative paired improvement records underperformance; preserve its sign."
+          ],
+          [
+            "i15 / answerable",
+            "With toxic order arrivals, what is the uncertainty of the managed-versus-symmetric difference?",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:adverse: Paired difference standard error: 41.90019139649006 ticks",
+            "Toxic arrivals refer to the informed-flow case; its separate standard error is requested."
+          ],
+          [
+            "i16 / answerable",
+            "Are any cash or inventory constraints violated in the informed-flow replay?",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            1,
+            "source_found",
+            "market-microstructure-lab:adverse: Cash / inventory violations: 0.0",
+            "The informed-flow record explicitly reports zero violations; this is not proof for every possible run."
+          ],
+          [
+            "i17 / answerable",
+            "When conditions remain calm, what is the fixed regressor's average absolute prediction error?",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; quantum-optimization-lab:electrons",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:risk-1",
+            2,
+            "source_found",
+            "statistical-learning-lab:stationary: Frozen ridge MAE: 0.4030305544093381",
+            "Calm conditions identify Stable regime and fixed regressor refers to frozen ridge, not expanding ridge."
+          ],
+          [
+            "i18 / answerable",
+            "For the stable case, how frequently is the expanding regression fitted again?",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; quantum-optimization-lab:electrons",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-optimization-lab:electrons",
+            2,
+            "source_found",
+            "statistical-learning-lab:stationary: Expanding ridge refits every 60 targets",
+            "The stable-case method records refitting frequency in observed targets."
+          ],
+          [
+            "i19 / answerable",
+            "After the volatility regime break, what error does the periodically refitted regression record?",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift: Expanding ridge MAE: 9.838731697519906",
+            "The expanding ridge MAE belongs to the regime-break case, not the stable case."
+          ],
+          [
+            "i20 / answerable",
+            "Under the regime break, do the saved intervals include even half of the held-out observations?",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:risk-1",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:risk-1",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift: Observed test coverage: 18.761384335154826 %",
+            "Coverage is below half; the low observed value is retained without implying a guarantee."
+          ],
+          [
+            "i21 / unanswerable",
+            "Which pigments decorate Lascaux cave paintings?",
+            "UNSUPPORTED",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "No archaeology or pigment evidence is registered."
+          ],
+          [
+            "i22 / unanswerable",
+            "Who translated Sumerian cuneiform tablets?",
+            "UNSUPPORTED",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "No philology or translation history is registered."
+          ],
+          [
+            "i23 / unanswerable",
+            "Where do axolotls inhabit freshwater lakes?",
+            "UNSUPPORTED",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "No amphibian ecology evidence is registered."
+          ],
+          [
+            "i24 / unanswerable",
+            "When were Gregorian leap-year conventions introduced?",
+            "UNSUPPORTED",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "EMPTY",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "No calendar history evidence is registered."
+          ],
+          [
+            "i25 / misleading_overlap",
+            "What confidence interval is reported for the base market 99% value at risk?",
+            "UNSUPPORTED",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; quantum-estimation-lab:amplitude",
+            "ABSENT",
+            "false_support",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; quantum-estimation-lab:amplitude",
+            "ABSENT",
+            "false_support",
+            "",
+            "The risk record says the chart compares mean-loss error and does not establish tail-quantile confidence intervals; no such interval is reported."
+          ],
+          [
+            "i26 / misleading_overlap",
+            "How many physical two-qubit gates implement the compiled constrained allocation circuit?",
+            "UNSUPPORTED",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude; quantum-optimization-lab:electrons",
+            "ABSENT",
+            "false_support",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude; market-microstructure-lab:adverse",
+            "ABSENT",
+            "false_support",
+            "",
+            "The allocation source uses dense subspace simulation and explicitly says compiled gates are not benchmarked."
+          ],
+          [
+            "i27 / misleading_overlap",
+            "Which exchange auction rules were calibrated for the directional market replay?",
+            "UNSUPPORTED",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "ABSENT",
+            "false_support",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "ABSENT",
+            "false_support",
+            "",
+            "The market source uses synthetic event flow and explicitly omits auctions and exchange-specific order types."
+          ],
+          [
+            "i28 / misleading_overlap",
+            "What molecular geometry and basis set produce the correlated-electron energy?",
+            "UNSUPPORTED",
+            "quantum-optimization-lab:electrons; quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1",
+            "ABSENT",
+            "false_support",
+            "quantum-optimization-lab:electrons; quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1",
+            "ABSENT",
+            "false_support",
+            "",
+            "The electron source is an effective two-site model, explicitly excluding molecular geometry and basis-set error."
+          ]
+        ]
+      },
+      "method": [
+        "Before new questions were authored, freeze manifest fixed full registry bytes, Python/browser retrievers, baseline, evaluator, earlier questions, cutoffs and question counts. The complete new set was then sealed before evaluation. Drift fails closed.",
+        "Two answerable questions per source, four unrelated unsupported topics and four absent measurements with overlapping vocabulary. Exact answerable source anchors are validated against frozen evidence text. No rules, questions or labels were changed after evaluation.",
+        "Baseline uses unique-term intersection on the same title/text, tokenizer, positive-score filter and source-ID tie break as BM25. Both use ranks 1 and 3.",
+        "At each cutoff, answerable hits plus wrong-source misses plus empty misses equal 20. Unsupported false support plus empty retrieval equal 8; unsupported questions never inflate source recall.",
+        "Freeze SHA-256: 3c72e3ec1e6b5255e32cdf0acbe2d251779687c664a3fc3d153bff7ac383a9aa; question SHA-256: 65d6524e8a42c74610f5fc0340e7ea13d7f0942cb2e6b013d95217217e5064f3"
+      ],
+      "limitations": [
+        "Source-aware authored questions with earlier results visible; not blind authorship, user sampling or population accuracy. Source anchors check label traceability, not semantic correctness automatically.",
+        "Any unsupported retrieval is a risk proxy: a limitation that rejects a premise is useful evidence but does not supply the absent measurement. No LLM or answer-generation quality is evaluated.",
+        "Saved records describe small synthetic experiments. Hashes identify drift, not authenticity or external timestamps. No runtime or cost advantage is measured; no significance claim follows from these counts."
+      ],
+      "reproduce": "python -m src.independent_confirmation --output results/AI04-confirmation.json"
     }
   ],
   "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",

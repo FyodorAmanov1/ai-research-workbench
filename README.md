@@ -62,6 +62,31 @@ python src/studio.py --check docs/study.json
 python -m unittest discover -s tests -v
 ```
 
+## Independent confirmation questions
+
+The [second confirmation wave](reports/AI04.md) freezes the current registry, Python/browser retrievers, baseline and evaluator before authoring 28 additional questions, then seals all questions and labels before evaluation. Open **Independent confirmation questions** (`#independent-confirmation`) to inspect both rankings, expected-source rank, exact source anchors and separate miss/unsupported charts.
+
+| Measure | BM25 | Unique-term overlap |
+| --- | --- | --- |
+| Source recall at 1, answerable only | 19/20 | 16/20 |
+| Source recall at 3, answerable only | 20/20 | 20/20 |
+| Wrong-source misses at 1 | 1/20 | 4/20 |
+| Empty answerable retrieval | 0/20 | 0/20 |
+| Unsupported false support proxy | 4/8 | 4/8 |
+| Empty unsupported retrieval | 4/8 | 4/8 |
+
+Both methods rank the directional-market source third for a question using “one-sided” order flow. Both return records for all four absent measurements with overlapping vocabulary; four unrelated topics return nothing. Better source ranking still does not establish answer support. These are source-aware authored questions, with earlier results visible, not blinded or representative user samples. The new wave's aggregate unsupported rate must not be interpreted as an improvement over the earlier question mixture.
+
+```bash
+python -m src.independent_confirmation --output results/AI04-confirmation.json
+python lab.py --output results/latest.json
+python src/studio.py --out docs/study.json
+python src/studio.py --check docs/study.json
+python -m unittest discover -s tests -v
+```
+
+The [measured ledger](results/AI04-confirmation.json) separately records source recall, wrong-source and empty misses at each cutoff, unsupported false support and empty unsupported retrieval. The earlier confirmation protocol remains reproducible.
+
 ## Compatible experiment comparisons
 
 Open **Compatible experiment comparisons** in the explorer (`#comparisons`) to choose two records and metrics. Accepted results show left minus right and both source contracts; incompatible pairs show a rejection reason without a numerical difference. Values come from registered metrics, with exact unit strings and reviewed dataset, evaluation protocol and quantity identities. Missing metadata fails closed. The frozen retrieval registry and rules are preserved.
