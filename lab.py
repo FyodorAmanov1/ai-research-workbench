@@ -57,6 +57,7 @@ def experiment():
     from src.confirmation import experiment as confirmation_experiment
     from src.comparison import experiment as comparison_experiment
     from src.freshness_study import experiment as freshness_experiment
+    from src.independent_confirmation import experiment as independent_confirmation_experiment
 
     outcomes = [{"question": c["question"], "expected": c["expected"],
                  "retrieved": (retrieve(c["question"], k=1) or [{"id": None}])[0]["id"]} for c in CASES]
@@ -66,9 +67,11 @@ def experiment():
                         "unknown_query_abstained": answer("volcanology tectonics")['status'] == "abstained",
                         "frozen_retrieval_confirmation": confirmation_experiment(),
                         "compatible_experiment_comparisons": comparison_experiment(),
-                        "registry_freshness_audit": freshness_experiment()},
+                        "registry_freshness_audit": freshness_experiment(),
+                        "independent_confirmation": independent_confirmation_experiment()},
             "provenance": {"data": "Four original short source descriptions and four authored evaluation questions",
                            "confirmation": "Frozen ten-record artifact registry and 30 new source-aware authored questions; protocol and question hashes are recorded in frozen_retrieval_confirmation.",
+                           "independent_confirmation": "Second sealed wave: 28 new source-aware authored questions over the unchanged registry and retrieval rules; source misses are partitioned into wrong-source and empty retrieval at each cutoff.",
                            "comparisons": "Saved registry metrics and reviewed case-specific dataset, evaluation protocol and quantity contracts; fingerprints and seven measured probes are recorded in compatible_experiment_comparisons.",
                            "freshness": "Controlled synthetic source envelopes preserve all ten saved records, metrics and complete text; ten refresh fault injections compare artifact digests with indexed-text checks. Original companion bytes are not reconstructed.",
                            "sources": [{"id": d["id"], "url": d["url"]} for d in CORPUS]},

@@ -1,18 +1,18 @@
 {
-  "task_id": "AI03",
+  "task_id": "AI04",
   "status": "completed",
-  "summary": "Added explicit source-artifact digest checks on registry refresh, stale and unknown diagnostics, content-addressed prior registry and observed-source history, and preserved source IDs in historical snapshots. The studio exposes measured scenarios and local audit inspection. Ten controlled decisions match specification; digest checks detect five changed artifacts versus three for text-only checks, with all ten prior snapshots retained and four invalid or unavailable inputs blocking replacement.",
+  "summary": "Froze the current registry, Python/browser retrieval rules, comparator and evaluator before authoring a second sealed wave of 28 confirmation questions. Added exact evidence anchors and a studio ledger with separate source recall, wrong-source and empty misses, unsupported false support and empty unsupported retrieval. BM25 finds 19/20 expected sources at rank 1 versus 16/20 for overlap; both find 20/20 at rank 3 and return evidence for 4/8 unsupported questions. Negative outcomes and prior studies are preserved.",
   "evidence_paths": [
-    "src/freshness.py",
-    "src/freshness_study.py",
-    "src/ingest.py",
-    "tests/test_freshness.py",
-    "docs/freshness.js",
-    "docs/freshness-study.json",
-    "docs/index.html",
-    "results/AI03-freshness.json",
+    "experiments/AI04-freeze.json",
+    "experiments/AI04-questions.json",
+    "experiments/AI04-seal.json",
+    "src/independent_confirmation.py",
+    "tests/test_independent_confirmation.py",
+    "src/studio.py",
+    "lab.py",
+    "results/AI04-confirmation.json",
     "results/latest.json",
     "docs/study.json",
-    "reports/AI03.md"
+    "reports/AI04.md"
   ]
 }

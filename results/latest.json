@@ -1483,11 +1483,1130 @@
         "Prior registry snapshots retain complete recorded IDs, metrics and evidence text. Original raw sources absent from history cannot be reconstructed; this is reported explicitly. Stored hashes do not authenticate an adversary rewriting both bytes and hashes.",
         "A refreshed registry needs new retrieval protocols and reviewed comparison contracts. Existing frozen inputs are preserved; no compute-cost advantage or model inference is measured."
       ]
+    },
+    "independent_confirmation": {
+      "protocol_id": "AI04-independent-confirmation-v1",
+      "freeze_sha256": "3c72e3ec1e6b5255e32cdf0acbe2d251779687c664a3fc3d153bff7ac383a9aa",
+      "questions_sha256": "65d6524e8a42c74610f5fc0340e7ea13d7f0942cb2e6b013d95217217e5064f3",
+      "frozen_files": {
+        "docs/registry.json": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6",
+        "src/evidence.py": "6858b07ccab8920d760add5b1cfc9ae908ba618826003c027a9b69b758e65100",
+        "docs/app.js": "afd7bd309d21989edc50958ed847fc6c025804830b5c6d6a0fd48781a03ef863",
+        "src/confirmation.py": "d0bea4cea8baac6a6f28d346640d6736f42ced364b33fe3f80d6bbcea3a48601",
+        "src/independent_confirmation.py": "3ad55acba551f1c9e7fbafa506b4b9264775121d09a8917ba68fd227a0eaf00d",
+        "experiments/AI01-questions.json": "f9d2e6e5246cdba01ad2cbcb7a5a7effbc2c420a23ac53933f6ef70116ef7d2c"
+      },
+      "question_count": 28,
+      "definitions": {
+        "authoring": "Freeze registry, Python/browser retrieval, comparator and evaluator first. Author and label all questions before either method runs. Seal the manifest and complete questions before evaluation; do not tune rules or labels on outcomes.",
+        "source_recall": "Answerable questions only: a labelled acceptable source appears at rank 1 or in the first 3 results.",
+        "source_misses": "Answerable questions only at each cutoff: expected source absent; partition into empty retrieval and nonempty wrong-source retrieval. Hits plus misses equal the answerable denominator.",
+        "false_support": "Unsupported questions only: any nonempty retrieval, a retrieval-as-support risk proxy, not entailment or generated-answer error.",
+        "empty_retrieval": "Report separately for answerable and unsupported questions and each unsupported stratum.",
+        "independence": "A new source-aware authored wave, distinct from earlier questions and independent of retrieval parameter selection. Earlier results were visible; no blinded annotator or representative user sampling is claimed.",
+        "strata": [
+          "answerable",
+          "unanswerable",
+          "misleading_overlap"
+        ],
+        "costs": "Both methods use the same saved title/text and return at most three records. No runtime, operation-count or infrastructure cost advantage is measured."
+      },
+      "methods": {
+        "bm25": {
+          "summary": {
+            "answerable_count": 20,
+            "unanswerable_count": 8,
+            "source_recall": {
+              "1": {
+                "hits": 19,
+                "total": 20,
+                "rate": 0.95
+              },
+              "3": {
+                "hits": 20,
+                "total": 20,
+                "rate": 1.0
+              }
+            },
+            "false_support": {
+              "count": 4,
+              "total": 8,
+              "rate": 0.5
+            },
+            "empty_retrieval": {
+              "answerable": 0,
+              "unanswerable": 4
+            },
+            "strata": {
+              "answerable": {
+                "count": 20,
+                "retrieved": 20,
+                "empty": 0
+              },
+              "unanswerable": {
+                "count": 4,
+                "retrieved": 0,
+                "empty": 4
+              },
+              "misleading_overlap": {
+                "count": 4,
+                "retrieved": 4,
+                "empty": 0
+              }
+            },
+            "source_misses": {
+              "1": {
+                "count": 1,
+                "total": 20,
+                "rate": 0.05,
+                "empty": 0,
+                "wrong_source": 1
+              },
+              "3": {
+                "count": 0,
+                "total": 20,
+                "rate": 0.0,
+                "empty": 0,
+                "wrong_source": 0
+              }
+            }
+          },
+          "rows": [
+            {
+              "id": "i01",
+              "stratum": "answerable",
+              "question": "For ordinary market conditions, where does the one-percent loss tail begin in dollars?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1": "99% value at risk: 683.8816824040545 USD"
+              },
+              "rationale": "Ordinary conditions refer to the Base market case; the requested loss threshold is its 99% VaR.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1",
+                "quantum-estimation-lab:risk-1.8",
+                "statistical-learning-lab:stationary"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i02",
+              "stratum": "answerable",
+              "question": "In the base case, is potential future exposure defined from positive book value or from losses?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1": "PFE uses positive future book value, not losses."
+              },
+              "rationale": "The base-market record explicitly defines the requested exposure quantity.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1",
+                "quantum-estimation-lab:risk-1.8",
+                "market-microstructure-lab:adverse"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i03",
+              "stratum": "answerable",
+              "question": "After the volatility shock, what dollar threshold marks the worst one percent of book losses?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1.8"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1.8": "99% value at risk: 1118.2351435867747 USD"
+              },
+              "rationale": "The shock-case VaR is the empirical 99% loss quantile.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1.8",
+                "statistical-learning-lab:shift",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i04",
+              "stratum": "answerable",
+              "question": "Under the volatility shock, what is the average loss beyond that tail threshold?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1.8"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1.8": "99% expected shortfall: 1236.1997941165755 USD"
+              },
+              "rationale": "Expected shortfall is the average empirical tail loss, distinct from VaR and positive exposure.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1.8",
+                "quantum-estimation-lab:risk-1",
+                "statistical-learning-lab:shift"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i05",
+              "stratum": "answerable",
+              "question": "What numerical interval bounds the likelihood estimate of the encoded payoff?",
+              "expected_sources": [
+                "quantum-estimation-lab:amplitude"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:amplitude": "0.24740 to 0.25293"
+              },
+              "rationale": "The quantum oracle record reports these profile-likelihood bounds, with asymptotic limitations.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:amplitude",
+                "statistical-learning-lab:stationary",
+                "statistical-learning-lab:shift"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i06",
+              "stratum": "answerable",
+              "question": "How is the preparation transformation undone inside the probability amplification operator?",
+              "expected_sources": [
+                "quantum-estimation-lab:amplitude"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:amplitude": "Householder state preparation is unitary and explicitly inverted inside the Grover operator."
+              },
+              "rationale": "This describes the simulated oracle construction, not compiled hardware gates.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:amplitude",
+                "quantum-optimization-lab:allocation"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i07",
+              "stratum": "answerable",
+              "question": "For the eight-asset selection problem, what fraction of samples selects an exact optimum?",
+              "expected_sources": [
+                "quantum-optimization-lab:allocation"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:allocation": "Optimal-sample probability: 10.528668658051656 %"
+              },
+              "rationale": "The allocation metric reports optimal-sample probability as a percentage.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:amplitude",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i08",
+              "stratum": "answerable",
+              "question": "What classical neighbourhood-search effort reaches the enumerated allocation optimum?",
+              "expected_sources": [
+                "quantum-optimization-lab:allocation"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:allocation": "after 30 neighbour evaluations."
+              },
+              "rationale": "The allocation source gives both the swap-search result and its neighbour evaluation count.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:amplitude"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i09",
+              "stratum": "answerable",
+              "question": "How closely does the variational two-site electron calculation reproduce the reference energy?",
+              "expected_sources": [
+                "quantum-optimization-lab:electrons"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:electrons": "Maximum energy error: 5.551115123125783e-16 t"
+              },
+              "rationale": "The electron record reports maximum energy error in hopping-energy units.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:electrons",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i10",
+              "stratum": "answerable",
+              "question": "What transformations parameterize the small real state space for the interacting electron pair?",
+              "expected_sources": [
+                "quantum-optimization-lab:electrons"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:electrons": "Three real two-level Givens rotations span the four-state real sector."
+              },
+              "rationale": "The electron ansatz construction is explicitly described in the frozen record.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:electrons",
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:amplitude"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i11",
+              "stratum": "answerable",
+              "question": "With equally balanced buying and selling, what uncertainty is reported for the paired policy difference?",
+              "expected_sources": [
+                "market-microstructure-lab:balanced"
+              ],
+              "anchors": {
+                "market-microstructure-lab:balanced": "Paired difference standard error: 42.4131504456951 ticks"
+              },
+              "rationale": "Balanced buying and selling identifies Balanced flow; the requested uncertainty is its standard error.",
+              "retrieved_ids": [
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i12",
+              "stratum": "answerable",
+              "question": "How many cash or position-limit breaches appear when order flow is balanced?",
+              "expected_sources": [
+                "market-microstructure-lab:balanced"
+              ],
+              "anchors": {
+                "market-microstructure-lab:balanced": "Cash / inventory violations: 0.0"
+              },
+              "rationale": "Position-limit breaches correspond to the recorded cash/inventory violation count in Balanced flow.",
+              "retrieved_ids": [
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i13",
+              "stratum": "answerable",
+              "question": "When order flow is one-sided, what net amount remains after closing the managed position?",
+              "expected_sources": [
+                "market-microstructure-lab:trend"
+              ],
+              "anchors": {
+                "market-microstructure-lab:trend": "Managed net after liquidation: 611.9 ticks"
+              },
+              "rationale": "One-sided directional conditions identify Directional market; the amount is measured in synthetic ticks.",
+              "retrieved_ids": [
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 3,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i14",
+              "stratum": "answerable",
+              "question": "In a directional market, how far behind symmetric quoting is the managed policy on paired runs?",
+              "expected_sources": [
+                "market-microstructure-lab:trend"
+              ],
+              "anchors": {
+                "market-microstructure-lab:trend": "Paired improvement vs symmetric: -528.83125 ticks"
+              },
+              "rationale": "The negative paired improvement records underperformance; preserve its sign.",
+              "retrieved_ids": [
+                "market-microstructure-lab:trend",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i15",
+              "stratum": "answerable",
+              "question": "With toxic order arrivals, what is the uncertainty of the managed-versus-symmetric difference?",
+              "expected_sources": [
+                "market-microstructure-lab:adverse"
+              ],
+              "anchors": {
+                "market-microstructure-lab:adverse": "Paired difference standard error: 41.90019139649006 ticks"
+              },
+              "rationale": "Toxic arrivals refer to the informed-flow case; its separate standard error is requested.",
+              "retrieved_ids": [
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i16",
+              "stratum": "answerable",
+              "question": "Are any cash or inventory constraints violated in the informed-flow replay?",
+              "expected_sources": [
+                "market-microstructure-lab:adverse"
+              ],
+              "anchors": {
+                "market-microstructure-lab:adverse": "Cash / inventory violations: 0.0"
+              },
+              "rationale": "The informed-flow record explicitly reports zero violations; this is not proof for every possible run.",
+              "retrieved_ids": [
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i17",
+              "stratum": "answerable",
+              "question": "When conditions remain calm, what is the fixed regressor's average absolute prediction error?",
+              "expected_sources": [
+                "statistical-learning-lab:stationary"
+              ],
+              "anchors": {
+                "statistical-learning-lab:stationary": "Frozen ridge MAE: 0.4030305544093381"
+              },
+              "rationale": "Calm conditions identify Stable regime and fixed regressor refers to frozen ridge, not expanding ridge.",
+              "retrieved_ids": [
+                "statistical-learning-lab:stationary",
+                "statistical-learning-lab:shift",
+                "quantum-optimization-lab:electrons"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i18",
+              "stratum": "answerable",
+              "question": "For the stable case, how frequently is the expanding regression fitted again?",
+              "expected_sources": [
+                "statistical-learning-lab:stationary"
+              ],
+              "anchors": {
+                "statistical-learning-lab:stationary": "Expanding ridge refits every 60 targets"
+              },
+              "rationale": "The stable-case method records refitting frequency in observed targets.",
+              "retrieved_ids": [
+                "statistical-learning-lab:stationary",
+                "statistical-learning-lab:shift",
+                "quantum-optimization-lab:electrons"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i19",
+              "stratum": "answerable",
+              "question": "After the volatility regime break, what error does the periodically refitted regression record?",
+              "expected_sources": [
+                "statistical-learning-lab:shift"
+              ],
+              "anchors": {
+                "statistical-learning-lab:shift": "Expanding ridge MAE: 9.838731697519906"
+              },
+              "rationale": "The expanding ridge MAE belongs to the regime-break case, not the stable case.",
+              "retrieved_ids": [
+                "statistical-learning-lab:shift",
+                "statistical-learning-lab:stationary",
+                "market-microstructure-lab:adverse"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i20",
+              "stratum": "answerable",
+              "question": "Under the regime break, do the saved intervals include even half of the held-out observations?",
+              "expected_sources": [
+                "statistical-learning-lab:shift"
+              ],
+              "anchors": {
+                "statistical-learning-lab:shift": "Observed test coverage: 18.761384335154826 %"
+              },
+              "rationale": "Coverage is below half; the low observed value is retained without implying a guarantee.",
+              "retrieved_ids": [
+                "statistical-learning-lab:shift",
+                "statistical-learning-lab:stationary",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i21",
+              "stratum": "unanswerable",
+              "question": "Which pigments decorate Lascaux cave paintings?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No archaeology or pigment evidence is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i22",
+              "stratum": "unanswerable",
+              "question": "Who translated Sumerian cuneiform tablets?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No philology or translation history is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i23",
+              "stratum": "unanswerable",
+              "question": "Where do axolotls inhabit freshwater lakes?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No amphibian ecology evidence is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i24",
+              "stratum": "unanswerable",
+              "question": "When were Gregorian leap-year conventions introduced?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No calendar history evidence is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i25",
+              "stratum": "misleading_overlap",
+              "question": "What confidence interval is reported for the base market 99% value at risk?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The risk record says the chart compares mean-loss error and does not establish tail-quantile confidence intervals; no such interval is reported.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1",
+                "quantum-estimation-lab:risk-1.8",
+                "quantum-estimation-lab:amplitude"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            },
+            {
+              "id": "i26",
+              "stratum": "misleading_overlap",
+              "question": "How many physical two-qubit gates implement the compiled constrained allocation circuit?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The allocation source uses dense subspace simulation and explicitly says compiled gates are not benchmarked.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:amplitude",
+                "quantum-optimization-lab:electrons"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            },
+            {
+              "id": "i27",
+              "stratum": "misleading_overlap",
+              "question": "Which exchange auction rules were calibrated for the directional market replay?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The market source uses synthetic event flow and explicitly omits auctions and exchange-specific order types.",
+              "retrieved_ids": [
+                "market-microstructure-lab:trend",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            },
+            {
+              "id": "i28",
+              "stratum": "misleading_overlap",
+              "question": "What molecular geometry and basis set produce the correlated-electron energy?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The electron source is an effective two-site model, explicitly excluding molecular geometry and basis-set error.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:electrons",
+                "quantum-estimation-lab:amplitude",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            }
+          ]
+        },
+        "term_overlap": {
+          "summary": {
+            "answerable_count": 20,
+            "unanswerable_count": 8,
+            "source_recall": {
+              "1": {
+                "hits": 16,
+                "total": 20,
+                "rate": 0.8
+              },
+              "3": {
+                "hits": 20,
+                "total": 20,
+                "rate": 1.0
+              }
+            },
+            "false_support": {
+              "count": 4,
+              "total": 8,
+              "rate": 0.5
+            },
+            "empty_retrieval": {
+              "answerable": 0,
+              "unanswerable": 4
+            },
+            "strata": {
+              "answerable": {
+                "count": 20,
+                "retrieved": 20,
+                "empty": 0
+              },
+              "unanswerable": {
+                "count": 4,
+                "retrieved": 0,
+                "empty": 4
+              },
+              "misleading_overlap": {
+                "count": 4,
+                "retrieved": 4,
+                "empty": 0
+              }
+            },
+            "source_misses": {
+              "1": {
+                "count": 4,
+                "total": 20,
+                "rate": 0.2,
+                "empty": 0,
+                "wrong_source": 4
+              },
+              "3": {
+                "count": 0,
+                "total": 20,
+                "rate": 0.0,
+                "empty": 0,
+                "wrong_source": 0
+              }
+            }
+          },
+          "rows": [
+            {
+              "id": "i01",
+              "stratum": "answerable",
+              "question": "For ordinary market conditions, where does the one-percent loss tail begin in dollars?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1": "99% value at risk: 683.8816824040545 USD"
+              },
+              "rationale": "Ordinary conditions refer to the Base market case; the requested loss threshold is its 99% VaR.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1",
+                "quantum-estimation-lab:risk-1.8",
+                "statistical-learning-lab:shift"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i02",
+              "stratum": "answerable",
+              "question": "In the base case, is potential future exposure defined from positive book value or from losses?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1": "PFE uses positive future book value, not losses."
+              },
+              "rationale": "The base-market record explicitly defines the requested exposure quantity.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1",
+                "quantum-estimation-lab:risk-1.8",
+                "market-microstructure-lab:adverse"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i03",
+              "stratum": "answerable",
+              "question": "After the volatility shock, what dollar threshold marks the worst one percent of book losses?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1.8"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1.8": "99% value at risk: 1118.2351435867747 USD"
+              },
+              "rationale": "The shock-case VaR is the empirical 99% loss quantile.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1.8",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i04",
+              "stratum": "answerable",
+              "question": "Under the volatility shock, what is the average loss beyond that tail threshold?",
+              "expected_sources": [
+                "quantum-estimation-lab:risk-1.8"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:risk-1.8": "99% expected shortfall: 1236.1997941165755 USD"
+              },
+              "rationale": "Expected shortfall is the average empirical tail loss, distinct from VaR and positive exposure.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1.8",
+                "quantum-estimation-lab:risk-1",
+                "statistical-learning-lab:shift"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i05",
+              "stratum": "answerable",
+              "question": "What numerical interval bounds the likelihood estimate of the encoded payoff?",
+              "expected_sources": [
+                "quantum-estimation-lab:amplitude"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:amplitude": "0.24740 to 0.25293"
+              },
+              "rationale": "The quantum oracle record reports these profile-likelihood bounds, with asymptotic limitations.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:amplitude",
+                "quantum-estimation-lab:risk-1",
+                "quantum-estimation-lab:risk-1.8"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i06",
+              "stratum": "answerable",
+              "question": "How is the preparation transformation undone inside the probability amplification operator?",
+              "expected_sources": [
+                "quantum-estimation-lab:amplitude"
+              ],
+              "anchors": {
+                "quantum-estimation-lab:amplitude": "Householder state preparation is unitary and explicitly inverted inside the Grover operator."
+              },
+              "rationale": "This describes the simulated oracle construction, not compiled hardware gates.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:amplitude",
+                "quantum-optimization-lab:allocation"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i07",
+              "stratum": "answerable",
+              "question": "For the eight-asset selection problem, what fraction of samples selects an exact optimum?",
+              "expected_sources": [
+                "quantum-optimization-lab:allocation"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:allocation": "Optimal-sample probability: 10.528668658051656 %"
+              },
+              "rationale": "The allocation metric reports optimal-sample probability as a percentage.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:amplitude",
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": 2,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i08",
+              "stratum": "answerable",
+              "question": "What classical neighbourhood-search effort reaches the enumerated allocation optimum?",
+              "expected_sources": [
+                "quantum-optimization-lab:allocation"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:allocation": "after 30 neighbour evaluations."
+              },
+              "rationale": "The allocation source gives both the swap-search result and its neighbour evaluation count.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:amplitude"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i09",
+              "stratum": "answerable",
+              "question": "How closely does the variational two-site electron calculation reproduce the reference energy?",
+              "expected_sources": [
+                "quantum-optimization-lab:electrons"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:electrons": "Maximum energy error: 5.551115123125783e-16 t"
+              },
+              "rationale": "The electron record reports maximum energy error in hopping-energy units.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:electrons",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i10",
+              "stratum": "answerable",
+              "question": "What transformations parameterize the small real state space for the interacting electron pair?",
+              "expected_sources": [
+                "quantum-optimization-lab:electrons"
+              ],
+              "anchors": {
+                "quantum-optimization-lab:electrons": "Three real two-level Givens rotations span the four-state real sector."
+              },
+              "rationale": "The electron ansatz construction is explicitly described in the frozen record.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:electrons",
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:amplitude"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i11",
+              "stratum": "answerable",
+              "question": "With equally balanced buying and selling, what uncertainty is reported for the paired policy difference?",
+              "expected_sources": [
+                "market-microstructure-lab:balanced"
+              ],
+              "anchors": {
+                "market-microstructure-lab:balanced": "Paired difference standard error: 42.4131504456951 ticks"
+              },
+              "rationale": "Balanced buying and selling identifies Balanced flow; the requested uncertainty is its standard error.",
+              "retrieved_ids": [
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i12",
+              "stratum": "answerable",
+              "question": "How many cash or position-limit breaches appear when order flow is balanced?",
+              "expected_sources": [
+                "market-microstructure-lab:balanced"
+              ],
+              "anchors": {
+                "market-microstructure-lab:balanced": "Cash / inventory violations: 0.0"
+              },
+              "rationale": "Position-limit breaches correspond to the recorded cash/inventory violation count in Balanced flow.",
+              "retrieved_ids": [
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i13",
+              "stratum": "answerable",
+              "question": "When order flow is one-sided, what net amount remains after closing the managed position?",
+              "expected_sources": [
+                "market-microstructure-lab:trend"
+              ],
+              "anchors": {
+                "market-microstructure-lab:trend": "Managed net after liquidation: 611.9 ticks"
+              },
+              "rationale": "One-sided directional conditions identify Directional market; the amount is measured in synthetic ticks.",
+              "retrieved_ids": [
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 3,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i14",
+              "stratum": "answerable",
+              "question": "In a directional market, how far behind symmetric quoting is the managed policy on paired runs?",
+              "expected_sources": [
+                "market-microstructure-lab:trend"
+              ],
+              "anchors": {
+                "market-microstructure-lab:trend": "Paired improvement vs symmetric: -528.83125 ticks"
+              },
+              "rationale": "The negative paired improvement records underperformance; preserve its sign.",
+              "retrieved_ids": [
+                "market-microstructure-lab:trend",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i15",
+              "stratum": "answerable",
+              "question": "With toxic order arrivals, what is the uncertainty of the managed-versus-symmetric difference?",
+              "expected_sources": [
+                "market-microstructure-lab:adverse"
+              ],
+              "anchors": {
+                "market-microstructure-lab:adverse": "Paired difference standard error: 41.90019139649006 ticks"
+              },
+              "rationale": "Toxic arrivals refer to the informed-flow case; its separate standard error is requested.",
+              "retrieved_ids": [
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i16",
+              "stratum": "answerable",
+              "question": "Are any cash or inventory constraints violated in the informed-flow replay?",
+              "expected_sources": [
+                "market-microstructure-lab:adverse"
+              ],
+              "anchors": {
+                "market-microstructure-lab:adverse": "Cash / inventory violations: 0.0"
+              },
+              "rationale": "The informed-flow record explicitly reports zero violations; this is not proof for every possible run.",
+              "retrieved_ids": [
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced",
+                "market-microstructure-lab:trend"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i17",
+              "stratum": "answerable",
+              "question": "When conditions remain calm, what is the fixed regressor's average absolute prediction error?",
+              "expected_sources": [
+                "statistical-learning-lab:stationary"
+              ],
+              "anchors": {
+                "statistical-learning-lab:stationary": "Frozen ridge MAE: 0.4030305544093381"
+              },
+              "rationale": "Calm conditions identify Stable regime and fixed regressor refers to frozen ridge, not expanding ridge.",
+              "retrieved_ids": [
+                "statistical-learning-lab:shift",
+                "statistical-learning-lab:stationary",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": 2,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i18",
+              "stratum": "answerable",
+              "question": "For the stable case, how frequently is the expanding regression fitted again?",
+              "expected_sources": [
+                "statistical-learning-lab:stationary"
+              ],
+              "anchors": {
+                "statistical-learning-lab:stationary": "Expanding ridge refits every 60 targets"
+              },
+              "rationale": "The stable-case method records refitting frequency in observed targets.",
+              "retrieved_ids": [
+                "statistical-learning-lab:shift",
+                "statistical-learning-lab:stationary",
+                "quantum-optimization-lab:electrons"
+              ],
+              "first_expected_rank": 2,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i19",
+              "stratum": "answerable",
+              "question": "After the volatility regime break, what error does the periodically refitted regression record?",
+              "expected_sources": [
+                "statistical-learning-lab:shift"
+              ],
+              "anchors": {
+                "statistical-learning-lab:shift": "Expanding ridge MAE: 9.838731697519906"
+              },
+              "rationale": "The expanding ridge MAE belongs to the regime-break case, not the stable case.",
+              "retrieved_ids": [
+                "statistical-learning-lab:shift",
+                "statistical-learning-lab:stationary",
+                "market-microstructure-lab:adverse"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i20",
+              "stratum": "answerable",
+              "question": "Under the regime break, do the saved intervals include even half of the held-out observations?",
+              "expected_sources": [
+                "statistical-learning-lab:shift"
+              ],
+              "anchors": {
+                "statistical-learning-lab:shift": "Observed test coverage: 18.761384335154826 %"
+              },
+              "rationale": "Coverage is below half; the low observed value is retained without implying a guarantee.",
+              "retrieved_ids": [
+                "statistical-learning-lab:shift",
+                "statistical-learning-lab:stationary",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": 1,
+              "outcome": "source_found"
+            },
+            {
+              "id": "i21",
+              "stratum": "unanswerable",
+              "question": "Which pigments decorate Lascaux cave paintings?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No archaeology or pigment evidence is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i22",
+              "stratum": "unanswerable",
+              "question": "Who translated Sumerian cuneiform tablets?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No philology or translation history is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i23",
+              "stratum": "unanswerable",
+              "question": "Where do axolotls inhabit freshwater lakes?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No amphibian ecology evidence is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i24",
+              "stratum": "unanswerable",
+              "question": "When were Gregorian leap-year conventions introduced?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "No calendar history evidence is registered.",
+              "retrieved_ids": [],
+              "first_expected_rank": null,
+              "outcome": "empty_unsupported"
+            },
+            {
+              "id": "i25",
+              "stratum": "misleading_overlap",
+              "question": "What confidence interval is reported for the base market 99% value at risk?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The risk record says the chart compares mean-loss error and does not establish tail-quantile confidence intervals; no such interval is reported.",
+              "retrieved_ids": [
+                "quantum-estimation-lab:risk-1",
+                "quantum-estimation-lab:risk-1.8",
+                "quantum-estimation-lab:amplitude"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            },
+            {
+              "id": "i26",
+              "stratum": "misleading_overlap",
+              "question": "How many physical two-qubit gates implement the compiled constrained allocation circuit?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The allocation source uses dense subspace simulation and explicitly says compiled gates are not benchmarked.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:allocation",
+                "quantum-estimation-lab:amplitude",
+                "market-microstructure-lab:adverse"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            },
+            {
+              "id": "i27",
+              "stratum": "misleading_overlap",
+              "question": "Which exchange auction rules were calibrated for the directional market replay?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The market source uses synthetic event flow and explicitly omits auctions and exchange-specific order types.",
+              "retrieved_ids": [
+                "market-microstructure-lab:trend",
+                "market-microstructure-lab:adverse",
+                "market-microstructure-lab:balanced"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            },
+            {
+              "id": "i28",
+              "stratum": "misleading_overlap",
+              "question": "What molecular geometry and basis set produce the correlated-electron energy?",
+              "expected_sources": [],
+              "anchors": {},
+              "rationale": "The electron source is an effective two-site model, explicitly excluding molecular geometry and basis-set error.",
+              "retrieved_ids": [
+                "quantum-optimization-lab:electrons",
+                "quantum-estimation-lab:amplitude",
+                "quantum-estimation-lab:risk-1"
+              ],
+              "first_expected_rank": null,
+              "outcome": "false_support"
+            }
+          ]
+        }
+      }
     }
   },
   "provenance": {
     "data": "Four original short source descriptions and four authored evaluation questions",
     "confirmation": "Frozen ten-record artifact registry and 30 new source-aware authored questions; protocol and question hashes are recorded in frozen_retrieval_confirmation.",
+    "independent_confirmation": "Second sealed wave: 28 new source-aware authored questions over the unchanged registry and retrieval rules; source misses are partitioned into wrong-source and empty retrieval at each cutoff.",
     "comparisons": "Saved registry metrics and reviewed case-specific dataset, evaluation protocol and quantity contracts; fingerprints and seven measured probes are recorded in compatible_experiment_comparisons.",
     "freshness": "Controlled synthetic source envelopes preserve all ten saved records, metrics and complete text; ten refresh fault injections compare artifact digests with indexed-text checks. Original companion bytes are not reconstructed.",
     "sources": [
