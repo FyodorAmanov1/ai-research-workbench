@@ -130,6 +130,31 @@ python -m unittest discover -s tests -v
 
 The browser ledger copy is `docs/freshness-study.json`; copy the measured `results/AI03-freshness.json` there after rerunning that measurement.
 
+## Structured project, experiment and metric queries
+
+Open **Structured query tool** (`#structured-query`) to list projects or experiments, fetch exact metrics, or try an absent measurement. Editable selectors offer known IDs and labels while allowing unknown requests. Responses distinguish `unknown_project`, `unknown_experiment` and `unknown_metric`; missing data is never replaced by zero or a nearby search result.
+
+```python
+from src.structured_query import QueryTool, ProjectQuery, ExperimentQuery, MetricQuery
+
+tool = QueryTool.from_path()
+tool.execute(ProjectQuery())  # list projects
+tool.execute(ExperimentQuery("statistical-learning-lab"))  # list experiments
+result = tool.execute(MetricQuery("statistical-learning-lab", "stationary", "Frozen ridge MAE"))
+print(result["data"][0])
+```
+
+Selectors are case-sensitive. Experiment IDs are local to a project (`stationary`, not the full source ID). Omit an optional selector or supply JSON `null` to list its scope; blank strings, wrong types and extra fields return `invalid_query`. Project is required for experiment queries; project and experiment are required for metric queries. The CLI accepts the same JSON shape and exits 2 on errors:
+
+```bash
+python -m src.structured_query --query '{"kind":"metric","project_id":"statistical-learning-lab","experiment_id":"stationary","metric_label":"Frozen ridge MAE"}'
+python -m src.query_study --output results/AI05-queries.json
+```
+
+Every response from a loaded tool includes the exact registry-byte SHA-256. Successful queries also include source IDs, URLs, source-artifact and indexed-text hashes, plus a complete-record hash covering metrics and metadata. Unknown metric errors retain selected source references and return no `data`. Invalid or unreadable registries raise `QueryError` in Python and produce structured CLI errors. Hashes identify snapshots, not authenticity, remote freshness or scientific validity.
+
+The [AI05 study](reports/AI05.md) measures 12 authored probes: six known requests return expected saved data and six absent requests return explicit errors without values. BM25 returns related records for all six absent requests and empty retrieval for none. This compares an exact-selector contract with the risk of interpreting lexical results as answers; it does not estimate natural-language understanding or deployment accuracy. Zero violations and negative policy improvement remain intact. See [the measured ledger](results/AI05-queries.json).
+
 ## Use locally
 
 Use Python 3.12 and install [requirements.txt](requirements.txt) in an activated virtual environment. Serve the bundled application:

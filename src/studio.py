@@ -10,6 +10,8 @@ try:
     from .comparison import experiment as comparison_experiment
     from .freshness_study import experiment as freshness_experiment
     from .independent_confirmation import experiment as independent_confirmation_experiment
+    from .query_study import experiment as query_experiment
+    from .structured_query import QueryTool, ProjectQuery
 except ImportError:
     from common import finalize, metric
     from evidence import load_registry, retrieve, answer, validate_claim, context
@@ -17,6 +19,8 @@ except ImportError:
     from comparison import experiment as comparison_experiment
     from freshness_study import experiment as freshness_experiment
     from independent_confirmation import experiment as independent_confirmation_experiment
+    from query_study import experiment as query_experiment
+    from structured_query import QueryTool, ProjectQuery
 
 # Authored regression questions, intentionally separate from source descriptions. Not a research-grade held-out benchmark.
 QUESTIONS = [
@@ -200,7 +204,7 @@ def experiment():
         "subtitle": "An inspectable bridge from experiments to evidence-based research.",
         "accent": "#ff9caa",
         "seed": None,
-        "cases": [retrieval, claims, confirmation_case(), comparison_case(), freshness_case(), independent_confirmation_case()],
+        "cases": [retrieval, claims, confirmation_case(), comparison_case(), freshness_case(), independent_confirmation_case(), query_case()],
         "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
         "references": [
             {
@@ -212,6 +216,34 @@ def experiment():
                 "url": "https://arxiv.org/abs/2005.11401",
             },
         ],
+    }
+
+
+def query_case():
+    result = query_experiment()
+    summary = result["summary"]
+    return {
+        "id": "structured-query", "label": "Structured query tool",
+        "kicker": "EXACT SELECTORS / EXPLICIT UNKNOWN DATA",
+        "title": "Request a recorded measurement. Keep absence explicit.",
+        "description": result["question"],
+        "metrics": [metric("Probes matching specification", summary["matching_specification"], "of 12"),
+                    metric("Explicit unknown-data errors", summary["explicit_unknown_errors"], "of 6"),
+                    metric("Values returned for unknown data", summary["unknown_values_returned"]),
+                    metric("BM25 related retrieval on unknown requests", summary["bm25_nonempty_on_unknown"], "of 6")],
+        "charts": [],
+        "table": {"columns": ["Probe", "Exact selectors", "Expected", "Query result", "Recorded values", "BM25 source IDs", "Matches specification"],
+                  "rows": [[r["id"], str(r["query"]), r["expected_code"], r["result"]["code"],
+                            "; ".join(str(d["value"]) + " " + d["unit"] for d in r["result"].get("data", []) if "value" in d),
+                            "; ".join(r["bm25_source_ids"]) or "EMPTY", r["matches_specification"]] for r in result["rows"]]},
+        "query_snapshot": QueryTool.from_path().execute(ProjectQuery()),
+        "method": ["Exact case-sensitive project IDs, local experiment IDs and metric labels. Omitted optional selectors enumerate the selected scope. Empty strings and wrong field types fail runtime validation; no fuzzy fallback or implicit unit conversion.",
+                   "The browser verifies registry bytes against the study snapshot before querying. Every successful response includes a full-registry SHA-256 and source IDs, URLs, indexed-text, source-artifact and complete-record hashes. Unknown metrics retain the selected source boundary but return no data value.",
+                   "Complete-record SHA-256 uses sorted-key ASCII JSON with compact separators, including metrics. Source-artifact hashes are inherited registry metadata; raw companion artifacts are not re-fetched or authenticated.",
+                   "Compare twelve authored exact requests with BM25 lexical renderings over the same saved records. Nonempty retrieval on an unknown request is reported separately from empty retrieval; this is not answer-generation accuracy.",
+                   "Registry SHA-256: " + result["registry_sha256"] + "; fixture SHA-256: " + result["fixtures_sha256"]],
+        "limitations": result["limitations"],
+        "reproduce": "python -m src.query_study --output results/AI05-queries.json",
     }
 
 

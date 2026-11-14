@@ -101,6 +101,24 @@
           <p id="claim-status" role="status"></p>
         </details>
       </section>
+      <section id="structured-query" class="panel" hidden>
+        <span class="eyebrow">EXACT SAVED DATA</span>
+        <h3>Query projects, experiments and metrics.</h3>
+        <p>Use exact IDs and labels, or type an absent measurement to inspect its error. Blank optional selectors list the selected scope. Experiment IDs are local, such as stationary.</p>
+        <form id="structured-query-form">
+          <div class="claim-grid">
+            <label>Query type<select id="sq-kind"><option value="project">Projects</option><option value="experiment">Experiments</option><option value="metric" selected>Metrics</option></select></label>
+            <label>Project ID<input id="sq-project" list="sq-projects" value="statistical-learning-lab"><datalist id="sq-projects"></datalist></label>
+            <label>Experiment ID<input id="sq-experiment" list="sq-experiments" value="stationary"><datalist id="sq-experiments"></datalist></label>
+            <label>Metric label<input id="sq-metric" list="sq-metrics" value="Frozen ridge MAE"><datalist id="sq-metrics"></datalist></label>
+          </div>
+          <button type="submit">Query saved data</button>
+          <button type="button" id="sq-unknown">Try an absent measurement</button>
+        </form>
+        <p id="sq-status" role="status" aria-live="polite">Checking registry snapshot...</p>
+        <pre id="sq-result" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre>
+        <p class="subtle">Hashes identify saved evidence, not scientific validity, authenticity or live freshness. Units and negative or zero values are returned as recorded.</p>
+      </section>
       <section id="comparisons" class="panel" hidden>
         <span class="eyebrow">COMPATIBILITY GATE</span>
         <h3>Compare two registered metrics.</h3>
@@ -224,5 +242,6 @@
     <script type="module" src="app.js"></script>
     <script type="module" src="comparison.js"></script>
     <script type="module" src="freshness.js"></script>
+    <script type="module" src="structured-query.js"></script>
   </body>
 </html>
