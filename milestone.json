@@ -1,18 +1,1 @@
-{
-  "task_id": "AI04",
-  "status": "completed",
-  "summary": "Froze the current registry, Python/browser retrieval rules, comparator and evaluator before authoring a second sealed wave of 28 confirmation questions. Added exact evidence anchors and a studio ledger with separate source recall, wrong-source and empty misses, unsupported false support and empty unsupported retrieval. BM25 finds 19/20 expected sources at rank 1 versus 16/20 for overlap; both find 20/20 at rank 3 and return evidence for 4/8 unsupported questions. Negative outcomes and prior studies are preserved.",
-  "evidence_paths": [
-    "experiments/AI04-freeze.json",
-    "experiments/AI04-questions.json",
-    "experiments/AI04-seal.json",
-    "src/independent_confirmation.py",
-    "tests/test_independent_confirmation.py",
-    "src/studio.py",
-    "lab.py",
-    "results/AI04-confirmation.json",
-    "results/latest.json",
-    "docs/study.json",
-    "reports/AI04.md"
-  ]
-}
+{"task_id":"AI05","status":"completed","summary":"Added typed project, experiment and metric queries in Python, JSON CLI and studio, with explicit unknown-data errors and source hashes. All twelve authored probes match specification: six known requests return saved data; six absent requests return errors without values, while BM25 retrieves related records on all six. Zero and negative findings are preserved.","evidence_paths":["src/structured_query.py","src/query_study.py","experiments/AI05-queries.json","tests/test_structured_query.py","src/studio.py","docs/structured-query.js","docs/index.html","docs/study.json","results/AI05-queries.json","results/latest.json","reports/AI05.md"]}

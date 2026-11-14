@@ -1,0 +1,17 @@
+{
+  "description": "Authored exact-selector regression probes; not held-out natural-language questions.",
+  "probes": [
+    {"id":"projects","query":{"kind":"project"},"expected_code":"ok","expected_count":4,"baseline":"research experiment"},
+    {"id":"experiments","query":{"kind":"experiment","project_id":"statistical-learning-lab"},"expected_code":"ok","expected_count":2,"baseline":"statistical learning ridge"},
+    {"id":"stable-error","query":{"kind":"metric","project_id":"statistical-learning-lab","experiment_id":"stationary","metric_label":"Frozen ridge MAE"},"expected_code":"ok","expected_value":0.4030305544093381,"baseline":"stable regime frozen ridge MAE"},
+    {"id":"shift-coverage","query":{"kind":"metric","project_id":"statistical-learning-lab","experiment_id":"shift","metric_label":"Observed test coverage"},"expected_code":"ok","expected_value":18.761384335154826,"baseline":"regime break observed test coverage"},
+    {"id":"negative-improvement","query":{"kind":"metric","project_id":"market-microstructure-lab","experiment_id":"trend","metric_label":"Paired improvement vs symmetric"},"expected_code":"ok","expected_value":-528.83125,"baseline":"directional market paired improvement symmetric"},
+    {"id":"reported-zero","query":{"kind":"metric","project_id":"market-microstructure-lab","experiment_id":"balanced","metric_label":"Cash / inventory violations"},"expected_code":"ok","expected_value":0.0,"baseline":"balanced flow cash inventory violations"},
+    {"id":"absent-project","query":{"kind":"project","project_id":"clinical-risk-lab"},"expected_code":"unknown_project","baseline":"clinical risk experiment"},
+    {"id":"absent-experiment","query":{"kind":"experiment","project_id":"statistical-learning-lab","experiment_id":"live-market"},"expected_code":"unknown_experiment","baseline":"live market statistical learning ridge"},
+    {"id":"absent-tail-interval","query":{"kind":"metric","project_id":"quantum-estimation-lab","experiment_id":"risk-1","metric_label":"99% value at risk confidence interval"},"expected_code":"unknown_metric","baseline":"base market 99% value at risk confidence interval"},
+    {"id":"absent-gates","query":{"kind":"metric","project_id":"quantum-optimization-lab","experiment_id":"allocation","metric_label":"Physical two-qubit gates"},"expected_code":"unknown_metric","baseline":"compiled allocation physical two qubit gates"},
+    {"id":"absent-auctions","query":{"kind":"metric","project_id":"market-microstructure-lab","experiment_id":"trend","metric_label":"Exchange auction calibration error"},"expected_code":"unknown_metric","baseline":"directional market exchange auction calibration error"},
+    {"id":"absent-live-error","query":{"kind":"metric","project_id":"statistical-learning-lab","experiment_id":"stationary","metric_label":"Live market MAE"},"expected_code":"unknown_metric","baseline":"stable regime live market MAE"}
+  ]
+}

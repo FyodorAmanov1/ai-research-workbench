@@ -1,5 +1,7 @@
 # Primary references and implementation boundaries
 
+[AI05](reports/AI05.md) uses Python standard-library [dataclasses](https://docs.python.org/3.12/library/dataclasses.html) for query request types and explicit runtime checks at the JSON boundary. Python [type annotations are not runtime enforcement](https://docs.python.org/3.12/library/typing.html), so malformed selectors are checked separately (official documentation links verified). Exact lookup and unknown-data codes are application contracts, not a new retrieval algorithm. Complete-record and registry-byte hashes distinguish evidence versions following the identity motivation in [W3C PROV-DM](https://www.w3.org/TR/prov-dm/) (link verified again); this is not a PROV serialization or authenticity claim.
+
 - [BM25: The Probabilistic Relevance Framework](https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf)
 - [Retrieval-augmented generation](https://arxiv.org/abs/2005.11401)
 

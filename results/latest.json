@@ -2601,6 +2601,582 @@
           ]
         }
       }
+    },
+    "structured_queries": {
+      "question": "Can exact selectors return saved metrics, preserve zero and negative findings, and distinguish absent measurements from related records?",
+      "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6",
+      "fixtures_sha256": "756171007a90d35bcd11879250e2bdc0f52c64ce35b5334a813a2446ac4fd7a0",
+      "summary": {
+        "probes": 12,
+        "matching_specification": 12,
+        "known_requests": 6,
+        "known_requests_correct": 6,
+        "unknown_requests": 6,
+        "explicit_unknown_errors": 6,
+        "unknown_values_returned": 0,
+        "bm25_nonempty_on_unknown": 6,
+        "bm25_empty_on_unknown": 0
+      },
+      "rows": [
+        {
+          "id": "projects",
+          "query": {
+            "kind": "project"
+          },
+          "expected_code": "ok",
+          "expected_count": 4,
+          "baseline": "research experiment",
+          "result": {
+            "status": "ok",
+            "code": "ok",
+            "query": {
+              "project_id": null,
+              "kind": "project"
+            },
+            "data": [
+              {
+                "project_id": "market-microstructure-lab",
+                "experiment_ids": [
+                  "adverse",
+                  "balanced",
+                  "trend"
+                ]
+              },
+              {
+                "project_id": "quantum-estimation-lab",
+                "experiment_ids": [
+                  "amplitude",
+                  "risk-1",
+                  "risk-1.8"
+                ]
+              },
+              {
+                "project_id": "quantum-optimization-lab",
+                "experiment_ids": [
+                  "allocation",
+                  "electrons"
+                ]
+              },
+              {
+                "project_id": "statistical-learning-lab",
+                "experiment_ids": [
+                  "shift",
+                  "stationary"
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "source_id": "market-microstructure-lab:adverse",
+                "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+                "sha256": "29fd62dc459aa0b1794ad78ecd351f4880dacc4caa03436689053253eeb5634a",
+                "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+                "record_sha256": "345b6ebc551a47435fb7ed49d93f9900ea6bf28a2e3c8e4df622b3001bee5b18"
+              },
+              {
+                "source_id": "market-microstructure-lab:balanced",
+                "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+                "sha256": "0ed10fd6f4e4504b5b45e63938fcc6dc895219b3a3521675ec0e518294ea1a38",
+                "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+                "record_sha256": "19ce015a5415c02b12fb95e97613dd4e20c4185e76a48feeaf4612b8db28f5dd"
+              },
+              {
+                "source_id": "market-microstructure-lab:trend",
+                "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+                "sha256": "227a2044c36503afb0b1ac941a0c2271f09ea1ccc9aa2490c8f63723a549d85b",
+                "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+                "record_sha256": "e2da2c9000a990f49ccf71d40076a28c7aa27456bd21ac9c92d7c3f8d340c981"
+              },
+              {
+                "source_id": "quantum-estimation-lab:amplitude",
+                "url": "https://github.com/FyodorAmanov1/quantum-estimation-lab/blob/main/docs/study.json",
+                "sha256": "c51d294d25a2e2daf70ebe017889d70d6ae42edf877607767399785965fec5b9",
+                "artifact_sha256": "ba04f0ea58315cf2726365152a0a6605c408736148587c179374b557a6acd2cd",
+                "record_sha256": "d4df303e9b696f08edbb159b432db8634e410c4dfbf6a1d11d0c2bb5ec1f6932"
+              },
+              {
+                "source_id": "quantum-estimation-lab:risk-1",
+                "url": "https://github.com/FyodorAmanov1/quantum-estimation-lab/blob/main/docs/study.json",
+                "sha256": "abba3f498ae01d530e8be24804a6a1a34e58d8072e173242801c7b1f0e3a7d22",
+                "artifact_sha256": "ba04f0ea58315cf2726365152a0a6605c408736148587c179374b557a6acd2cd",
+                "record_sha256": "35092176450d4cd76c3cb0e74f4be45466e1d687c85227fe614af82d2152e638"
+              },
+              {
+                "source_id": "quantum-estimation-lab:risk-1.8",
+                "url": "https://github.com/FyodorAmanov1/quantum-estimation-lab/blob/main/docs/study.json",
+                "sha256": "5f9cf2762b13fe3a9326ff4555cc08803182eb75d4a215481aec38578c92e0d7",
+                "artifact_sha256": "ba04f0ea58315cf2726365152a0a6605c408736148587c179374b557a6acd2cd",
+                "record_sha256": "e19c04f385a163204d046a78c13861657216fa230827095fc28479b519ceb702"
+              },
+              {
+                "source_id": "quantum-optimization-lab:allocation",
+                "url": "https://github.com/FyodorAmanov1/quantum-optimization-lab/blob/main/docs/study.json",
+                "sha256": "fed5029b22d68894da4373c3daa54be9145e0b13b053a5d5883378dff965fd04",
+                "artifact_sha256": "2c9ab0856b7af244fa88c92ec86473493dde682410c3559f1835156115457a64",
+                "record_sha256": "60c6a432dd4466c7f9fc92e1df2e03cfc22c9d60167de62df02667b50d9caed3"
+              },
+              {
+                "source_id": "quantum-optimization-lab:electrons",
+                "url": "https://github.com/FyodorAmanov1/quantum-optimization-lab/blob/main/docs/study.json",
+                "sha256": "a251bb80a19f49515539e560fb574b499ef7e19a592916f838a2f2a262a4f851",
+                "artifact_sha256": "2c9ab0856b7af244fa88c92ec86473493dde682410c3559f1835156115457a64",
+                "record_sha256": "cac46cd4a3b96e0191fad331766a82391e45c20518e0ecb855e4cedc92a07626"
+              },
+              {
+                "source_id": "statistical-learning-lab:shift",
+                "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+                "sha256": "e5294ad0b7dedd5414affa9c65295351321e84be3b304c2fff0c2f7cee250288",
+                "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+                "record_sha256": "626a1e1f0015a91c38380fa0f702ed1fe5358f5f2e88f155a5f76a65a489655a"
+              },
+              {
+                "source_id": "statistical-learning-lab:stationary",
+                "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+                "sha256": "81ad81f9916532443c3e5aafb70bea8b9540bc39fcf1aac3a23701a518cc9779",
+                "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+                "record_sha256": "3475b976088a7ccf53ab872984c0487a5f12d9d3caf4b8dde0e7245be508a5d5"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": []
+        },
+        {
+          "id": "experiments",
+          "query": {
+            "kind": "experiment",
+            "project_id": "statistical-learning-lab"
+          },
+          "expected_code": "ok",
+          "expected_count": 2,
+          "baseline": "statistical learning ridge",
+          "result": {
+            "status": "ok",
+            "code": "ok",
+            "query": {
+              "project_id": "statistical-learning-lab",
+              "experiment_id": null,
+              "kind": "experiment"
+            },
+            "data": [
+              {
+                "project_id": "statistical-learning-lab",
+                "experiment_id": "shift",
+                "source_id": "statistical-learning-lab:shift",
+                "title": "RegimeLab / Volatility regime break",
+                "metric_labels": [
+                  "Frozen ridge MAE",
+                  "Expanding ridge MAE",
+                  "Nominal interval coverage",
+                  "Observed test coverage"
+                ]
+              },
+              {
+                "project_id": "statistical-learning-lab",
+                "experiment_id": "stationary",
+                "source_id": "statistical-learning-lab:stationary",
+                "title": "RegimeLab / Stable regime",
+                "metric_labels": [
+                  "Frozen ridge MAE",
+                  "Expanding ridge MAE",
+                  "Nominal interval coverage",
+                  "Observed test coverage"
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "source_id": "statistical-learning-lab:shift",
+                "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+                "sha256": "e5294ad0b7dedd5414affa9c65295351321e84be3b304c2fff0c2f7cee250288",
+                "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+                "record_sha256": "626a1e1f0015a91c38380fa0f702ed1fe5358f5f2e88f155a5f76a65a489655a"
+              },
+              {
+                "source_id": "statistical-learning-lab:stationary",
+                "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+                "sha256": "81ad81f9916532443c3e5aafb70bea8b9540bc39fcf1aac3a23701a518cc9779",
+                "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+                "record_sha256": "3475b976088a7ccf53ab872984c0487a5f12d9d3caf4b8dde0e7245be508a5d5"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift"
+          ]
+        },
+        {
+          "id": "stable-error",
+          "query": {
+            "kind": "metric",
+            "project_id": "statistical-learning-lab",
+            "experiment_id": "stationary",
+            "metric_label": "Frozen ridge MAE"
+          },
+          "expected_code": "ok",
+          "expected_value": 0.4030305544093381,
+          "baseline": "stable regime frozen ridge MAE",
+          "result": {
+            "status": "ok",
+            "code": "ok",
+            "query": {
+              "project_id": "statistical-learning-lab",
+              "experiment_id": "stationary",
+              "metric_label": "Frozen ridge MAE",
+              "kind": "metric"
+            },
+            "data": [
+              {
+                "source_id": "statistical-learning-lab:stationary",
+                "label": "Frozen ridge MAE",
+                "value": 0.4030305544093381,
+                "unit": "",
+                "note": ""
+              }
+            ],
+            "sources": [
+              {
+                "source_id": "statistical-learning-lab:stationary",
+                "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+                "sha256": "81ad81f9916532443c3e5aafb70bea8b9540bc39fcf1aac3a23701a518cc9779",
+                "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+                "record_sha256": "3475b976088a7ccf53ab872984c0487a5f12d9d3caf4b8dde0e7245be508a5d5"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift",
+            "market-microstructure-lab:adverse"
+          ]
+        },
+        {
+          "id": "shift-coverage",
+          "query": {
+            "kind": "metric",
+            "project_id": "statistical-learning-lab",
+            "experiment_id": "shift",
+            "metric_label": "Observed test coverage"
+          },
+          "expected_code": "ok",
+          "expected_value": 18.761384335154826,
+          "baseline": "regime break observed test coverage",
+          "result": {
+            "status": "ok",
+            "code": "ok",
+            "query": {
+              "project_id": "statistical-learning-lab",
+              "experiment_id": "shift",
+              "metric_label": "Observed test coverage",
+              "kind": "metric"
+            },
+            "data": [
+              {
+                "source_id": "statistical-learning-lab:shift",
+                "label": "Observed test coverage",
+                "value": 18.761384335154826,
+                "unit": "%",
+                "note": ""
+              }
+            ],
+            "sources": [
+              {
+                "source_id": "statistical-learning-lab:shift",
+                "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+                "sha256": "e5294ad0b7dedd5414affa9c65295351321e84be3b304c2fff0c2f7cee250288",
+                "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+                "record_sha256": "626a1e1f0015a91c38380fa0f702ed1fe5358f5f2e88f155a5f76a65a489655a"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:stationary",
+            "market-microstructure-lab:adverse"
+          ]
+        },
+        {
+          "id": "negative-improvement",
+          "query": {
+            "kind": "metric",
+            "project_id": "market-microstructure-lab",
+            "experiment_id": "trend",
+            "metric_label": "Paired improvement vs symmetric"
+          },
+          "expected_code": "ok",
+          "expected_value": -528.83125,
+          "baseline": "directional market paired improvement symmetric",
+          "result": {
+            "status": "ok",
+            "code": "ok",
+            "query": {
+              "project_id": "market-microstructure-lab",
+              "experiment_id": "trend",
+              "metric_label": "Paired improvement vs symmetric",
+              "kind": "metric"
+            },
+            "data": [
+              {
+                "source_id": "market-microstructure-lab:trend",
+                "label": "Paired improvement vs symmetric",
+                "value": -528.83125,
+                "unit": "ticks",
+                "note": ""
+              }
+            ],
+            "sources": [
+              {
+                "source_id": "market-microstructure-lab:trend",
+                "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+                "sha256": "227a2044c36503afb0b1ac941a0c2271f09ea1ccc9aa2490c8f63723a549d85b",
+                "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+                "record_sha256": "e2da2c9000a990f49ccf71d40076a28c7aa27456bd21ac9c92d7c3f8d340c981"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:balanced"
+          ]
+        },
+        {
+          "id": "reported-zero",
+          "query": {
+            "kind": "metric",
+            "project_id": "market-microstructure-lab",
+            "experiment_id": "balanced",
+            "metric_label": "Cash / inventory violations"
+          },
+          "expected_code": "ok",
+          "expected_value": 0.0,
+          "baseline": "balanced flow cash inventory violations",
+          "result": {
+            "status": "ok",
+            "code": "ok",
+            "query": {
+              "project_id": "market-microstructure-lab",
+              "experiment_id": "balanced",
+              "metric_label": "Cash / inventory violations",
+              "kind": "metric"
+            },
+            "data": [
+              {
+                "source_id": "market-microstructure-lab:balanced",
+                "label": "Cash / inventory violations",
+                "value": 0.0,
+                "unit": "",
+                "note": ""
+              }
+            ],
+            "sources": [
+              {
+                "source_id": "market-microstructure-lab:balanced",
+                "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+                "sha256": "0ed10fd6f4e4504b5b45e63938fcc6dc895219b3a3521675ec0e518294ea1a38",
+                "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+                "record_sha256": "19ce015a5415c02b12fb95e97613dd4e20c4185e76a48feeaf4612b8db28f5dd"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:trend"
+          ]
+        },
+        {
+          "id": "absent-project",
+          "query": {
+            "kind": "project",
+            "project_id": "clinical-risk-lab"
+          },
+          "expected_code": "unknown_project",
+          "baseline": "clinical risk experiment",
+          "result": {
+            "status": "error",
+            "code": "unknown_project",
+            "message": "Project is absent from this snapshot",
+            "sources": [],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ]
+        },
+        {
+          "id": "absent-experiment",
+          "query": {
+            "kind": "experiment",
+            "project_id": "statistical-learning-lab",
+            "experiment_id": "live-market"
+          },
+          "expected_code": "unknown_experiment",
+          "baseline": "live market statistical learning ridge",
+          "result": {
+            "status": "error",
+            "code": "unknown_experiment",
+            "message": "Experiment is absent from the selected project",
+            "sources": [],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift",
+            "market-microstructure-lab:trend"
+          ]
+        },
+        {
+          "id": "absent-tail-interval",
+          "query": {
+            "kind": "metric",
+            "project_id": "quantum-estimation-lab",
+            "experiment_id": "risk-1",
+            "metric_label": "99% value at risk confidence interval"
+          },
+          "expected_code": "unknown_metric",
+          "baseline": "base market 99% value at risk confidence interval",
+          "result": {
+            "status": "error",
+            "code": "unknown_metric",
+            "message": "Metric is absent from the selected experiment",
+            "sources": [
+              {
+                "source_id": "quantum-estimation-lab:risk-1",
+                "url": "https://github.com/FyodorAmanov1/quantum-estimation-lab/blob/main/docs/study.json",
+                "sha256": "abba3f498ae01d530e8be24804a6a1a34e58d8072e173242801c7b1f0e3a7d22",
+                "artifact_sha256": "ba04f0ea58315cf2726365152a0a6605c408736148587c179374b557a6acd2cd",
+                "record_sha256": "35092176450d4cd76c3cb0e74f4be45466e1d687c85227fe614af82d2152e638"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:amplitude"
+          ]
+        },
+        {
+          "id": "absent-gates",
+          "query": {
+            "kind": "metric",
+            "project_id": "quantum-optimization-lab",
+            "experiment_id": "allocation",
+            "metric_label": "Physical two-qubit gates"
+          },
+          "expected_code": "unknown_metric",
+          "baseline": "compiled allocation physical two qubit gates",
+          "result": {
+            "status": "error",
+            "code": "unknown_metric",
+            "message": "Metric is absent from the selected experiment",
+            "sources": [
+              {
+                "source_id": "quantum-optimization-lab:allocation",
+                "url": "https://github.com/FyodorAmanov1/quantum-optimization-lab/blob/main/docs/study.json",
+                "sha256": "fed5029b22d68894da4373c3daa54be9145e0b13b053a5d5883378dff965fd04",
+                "artifact_sha256": "2c9ab0856b7af244fa88c92ec86473493dde682410c3559f1835156115457a64",
+                "record_sha256": "60c6a432dd4466c7f9fc92e1df2e03cfc22c9d60167de62df02667b50d9caed3"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "quantum-optimization-lab:allocation",
+            "quantum-estimation-lab:amplitude",
+            "quantum-optimization-lab:electrons"
+          ]
+        },
+        {
+          "id": "absent-auctions",
+          "query": {
+            "kind": "metric",
+            "project_id": "market-microstructure-lab",
+            "experiment_id": "trend",
+            "metric_label": "Exchange auction calibration error"
+          },
+          "expected_code": "unknown_metric",
+          "baseline": "directional market exchange auction calibration error",
+          "result": {
+            "status": "error",
+            "code": "unknown_metric",
+            "message": "Metric is absent from the selected experiment",
+            "sources": [
+              {
+                "source_id": "market-microstructure-lab:trend",
+                "url": "https://github.com/FyodorAmanov1/market-microstructure-lab/blob/main/docs/study.json",
+                "sha256": "227a2044c36503afb0b1ac941a0c2271f09ea1ccc9aa2490c8f63723a549d85b",
+                "artifact_sha256": "79c119fd9625a93b177d18448223754e758f467f46625f321d9edb8a57b01165",
+                "record_sha256": "e2da2c9000a990f49ccf71d40076a28c7aa27456bd21ac9c92d7c3f8d340c981"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:balanced"
+          ]
+        },
+        {
+          "id": "absent-live-error",
+          "query": {
+            "kind": "metric",
+            "project_id": "statistical-learning-lab",
+            "experiment_id": "stationary",
+            "metric_label": "Live market MAE"
+          },
+          "expected_code": "unknown_metric",
+          "baseline": "stable regime live market MAE",
+          "result": {
+            "status": "error",
+            "code": "unknown_metric",
+            "message": "Metric is absent from the selected experiment",
+            "sources": [
+              {
+                "source_id": "statistical-learning-lab:stationary",
+                "url": "https://github.com/FyodorAmanov1/statistical-learning-lab/blob/main/docs/study.json",
+                "sha256": "81ad81f9916532443c3e5aafb70bea8b9540bc39fcf1aac3a23701a518cc9779",
+                "artifact_sha256": "6640abb471a4e8a81b6cc23aecb4012ed14edb5586f78e2f8d15901fd38bf0fa",
+                "record_sha256": "3475b976088a7ccf53ab872984c0487a5f12d9d3caf4b8dde0e7245be508a5d5"
+              }
+            ],
+            "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6"
+          },
+          "matches_specification": true,
+          "bm25_source_ids": [
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift",
+            "market-microstructure-lab:trend"
+          ]
+        }
+      ],
+      "limitations": [
+        "Twelve source-aware authored regression probes; no independent user sample, natural-language parsing or population accuracy estimate.",
+        "Exact selectors require known identities and labels. BM25 receives authored lexical renderings, returns related records and does not promise typed answers; nonempty unsupported retrieval is a risk proxy, not generated falsehood.",
+        "Saved synthetic studies only. Unknown means absent from this snapshot, not absent everywhere. Registry and record hashes detect drift; original artifact hashes are inherited, not authenticated or verified against remote bytes.",
+        "No model, API, latency, infrastructure cost or scientific superiority is measured. Exact lookup does not establish scientific validity or comparison compatibility."
+      ]
     }
   },
   "provenance": {
