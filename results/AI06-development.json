@@ -1,0 +1,931 @@
+{
+  "phase": "development",
+  "registry_sha256": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6",
+  "questions_sha256": "b50b813319d382e3048b57cc874c267a1d759e378fa79c0d47dc976d76b521ed",
+  "selection_rule": "Maximize development source recall@1, then recall@3, then minimize false support count; ties prefer bm25, tfidf, keyword_overlap in that order.",
+  "selected_method": "bm25",
+  "question_count": 13,
+  "methods": {
+    "bm25": {
+      "summary": {
+        "answerable_count": 10,
+        "unanswerable_count": 3,
+        "source_recall": {
+          "1": {
+            "hits": 10,
+            "total": 10,
+            "rate": 1.0
+          },
+          "3": {
+            "hits": 10,
+            "total": 10,
+            "rate": 1.0
+          }
+        },
+        "false_support": {
+          "count": 1,
+          "total": 3,
+          "rate": 0.3333333333333333
+        },
+        "empty_retrieval": {
+          "answerable": 0,
+          "unanswerable": 2
+        },
+        "strata": {
+          "answerable": {
+            "count": 10,
+            "retrieved": 10,
+            "empty": 0
+          },
+          "unanswerable": {
+            "count": 2,
+            "retrieved": 0,
+            "empty": 2
+          },
+          "misleading_overlap": {
+            "count": 1,
+            "retrieved": 1,
+            "empty": 0
+          }
+        },
+        "source_misses": {
+          "1": {
+            "count": 0,
+            "total": 10,
+            "rate": 0.0,
+            "empty": 0,
+            "wrong_source": 0
+          },
+          "3": {
+            "count": 0,
+            "total": 10,
+            "rate": 0.0,
+            "empty": 0,
+            "wrong_source": 0
+          }
+        }
+      },
+      "rows": [
+        {
+          "id": "d01",
+          "question": "tail exposure option book",
+          "expected_sources": [
+            "quantum-estimation-lab:risk-1"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "market-microstructure-lab:adverse"
+          ],
+          "scores": [
+            7.517749619,
+            7.517749619,
+            0.905974706
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d02",
+          "question": "stressed annual volatility derivatives",
+          "expected_sources": [
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:risk-1.8",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:stationary"
+          ],
+          "scores": [
+            1.3553103018,
+            1.293382561,
+            1.1057632445
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d03",
+          "question": "Grover oracle preparation calls",
+          "expected_sources": [
+            "quantum-estimation-lab:amplitude"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:amplitude",
+            "quantum-optimization-lab:allocation"
+          ],
+          "scores": [
+            11.7618956361,
+            2.1389482513
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d04",
+          "question": "exactly three holdings turnover",
+          "expected_sources": [
+            "quantum-optimization-lab:allocation"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:electrons",
+            "quantum-estimation-lab:risk-1"
+          ],
+          "scores": [
+            8.4478457968,
+            1.3132572339,
+            1.0339838249
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d05",
+          "question": "fermionic electron double occupancy",
+          "expected_sources": [
+            "quantum-optimization-lab:electrons"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-optimization-lab:electrons"
+          ],
+          "scores": [
+            11.344211132
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d06",
+          "question": "informed flow latency",
+          "expected_sources": [
+            "market-microstructure-lab:adverse"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            5.2062598024,
+            4.5399540936,
+            4.2922891693
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d07",
+          "question": "directional market inventory",
+          "expected_sources": [
+            "market-microstructure-lab:trend"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:balanced"
+          ],
+          "scores": [
+            5.1100786674,
+            2.3784238825,
+            2.3784238825
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d08",
+          "question": "balanced flow cancellations",
+          "expected_sources": [
+            "market-microstructure-lab:balanced"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            5.6474107082,
+            3.0432143941,
+            2.7955494698
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d09",
+          "question": "volatility regime break coverage",
+          "expected_sources": [
+            "statistical-learning-lab:shift"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:stationary",
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "scores": [
+            6.1244047282,
+            5.3842109082,
+            1.3553103018
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d10",
+          "question": "stable regime chronological calibration",
+          "expected_sources": [
+            "statistical-learning-lab:stationary"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift",
+            "market-microstructure-lab:adverse"
+          ],
+          "scores": [
+            3.9653654715,
+            3.4018951784,
+            0.6444143197
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d11",
+          "question": "volcanology tectonic magma",
+          "expected_sources": [],
+          "stratum": "unanswerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [],
+          "scores": [],
+          "first_expected_rank": null,
+          "outcome": "empty_unsupported"
+        },
+        {
+          "id": "d12",
+          "question": "medieval manuscript paleography",
+          "expected_sources": [],
+          "stratum": "unanswerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [],
+          "scores": [],
+          "first_expected_rank": null,
+          "outcome": "empty_unsupported"
+        },
+        {
+          "id": "d13",
+          "question": "quantum portfolio guaranteed profit tomorrow",
+          "expected_sources": [],
+          "stratum": "misleading_overlap",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:amplitude",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift"
+          ],
+          "scores": [
+            3.3011231822,
+            1.2749286565,
+            1.2727259464
+          ],
+          "first_expected_rank": null,
+          "outcome": "false_support"
+        }
+      ]
+    },
+    "tfidf": {
+      "summary": {
+        "answerable_count": 10,
+        "unanswerable_count": 3,
+        "source_recall": {
+          "1": {
+            "hits": 10,
+            "total": 10,
+            "rate": 1.0
+          },
+          "3": {
+            "hits": 10,
+            "total": 10,
+            "rate": 1.0
+          }
+        },
+        "false_support": {
+          "count": 1,
+          "total": 3,
+          "rate": 0.3333333333333333
+        },
+        "empty_retrieval": {
+          "answerable": 0,
+          "unanswerable": 2
+        },
+        "strata": {
+          "answerable": {
+            "count": 10,
+            "retrieved": 10,
+            "empty": 0
+          },
+          "unanswerable": {
+            "count": 2,
+            "retrieved": 0,
+            "empty": 2
+          },
+          "misleading_overlap": {
+            "count": 1,
+            "retrieved": 1,
+            "empty": 0
+          }
+        },
+        "source_misses": {
+          "1": {
+            "count": 0,
+            "total": 10,
+            "rate": 0.0,
+            "empty": 0,
+            "wrong_source": 0
+          },
+          "3": {
+            "count": 0,
+            "total": 10,
+            "rate": 0.0,
+            "empty": 0,
+            "wrong_source": 0
+          }
+        }
+      },
+      "rows": [
+        {
+          "id": "d01",
+          "question": "tail exposure option book",
+          "expected_sources": [
+            "quantum-estimation-lab:risk-1"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            0.2962037324,
+            0.296008089,
+            0.0294367106
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d02",
+          "question": "stressed annual volatility derivatives",
+          "expected_sources": [
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:risk-1.8",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:stationary"
+          ],
+          "scores": [
+            0.123283318,
+            0.1058698096,
+            0.0704726559
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d03",
+          "question": "Grover oracle preparation calls",
+          "expected_sources": [
+            "quantum-estimation-lab:amplitude"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:amplitude",
+            "quantum-optimization-lab:allocation"
+          ],
+          "scores": [
+            0.4050165792,
+            0.0501015443
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d04",
+          "question": "exactly three holdings turnover",
+          "expected_sources": [
+            "quantum-optimization-lab:allocation"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:electrons",
+            "quantum-estimation-lab:risk-1"
+          ],
+          "scores": [
+            0.1758481471,
+            0.0328385901,
+            0.0219993143
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d05",
+          "question": "fermionic electron double occupancy",
+          "expected_sources": [
+            "quantum-optimization-lab:electrons"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-optimization-lab:electrons"
+          ],
+          "scores": [
+            0.278493365
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d06",
+          "question": "informed flow latency",
+          "expected_sources": [
+            "market-microstructure-lab:adverse"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            0.2810821571,
+            0.2250148209,
+            0.17072812
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d07",
+          "question": "directional market inventory",
+          "expected_sources": [
+            "market-microstructure-lab:trend"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:adverse"
+          ],
+          "scores": [
+            0.255672511,
+            0.1315651539,
+            0.1314779785
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d08",
+          "question": "balanced flow cancellations",
+          "expected_sources": [
+            "market-microstructure-lab:balanced"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            0.2400622147,
+            0.1496936693,
+            0.1010258946
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d09",
+          "question": "volatility regime break coverage",
+          "expected_sources": [
+            "statistical-learning-lab:shift"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:stationary",
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "scores": [
+            0.2009871937,
+            0.1593393075,
+            0.0545257977
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d10",
+          "question": "stable regime chronological calibration",
+          "expected_sources": [
+            "statistical-learning-lab:stationary"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            0.1141878113,
+            0.0855979221,
+            0.0174270333
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d11",
+          "question": "volcanology tectonic magma",
+          "expected_sources": [],
+          "stratum": "unanswerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [],
+          "scores": [],
+          "first_expected_rank": null,
+          "outcome": "empty_unsupported"
+        },
+        {
+          "id": "d12",
+          "question": "medieval manuscript paleography",
+          "expected_sources": [],
+          "stratum": "unanswerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [],
+          "scores": [],
+          "first_expected_rank": null,
+          "outcome": "empty_unsupported"
+        },
+        {
+          "id": "d13",
+          "question": "quantum portfolio guaranteed profit tomorrow",
+          "expected_sources": [],
+          "stratum": "misleading_overlap",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "scores": [
+            0.0816001451,
+            0.0456680197,
+            0.0456378558
+          ],
+          "first_expected_rank": null,
+          "outcome": "false_support"
+        }
+      ]
+    },
+    "keyword_overlap": {
+      "summary": {
+        "answerable_count": 10,
+        "unanswerable_count": 3,
+        "source_recall": {
+          "1": {
+            "hits": 8,
+            "total": 10,
+            "rate": 0.8
+          },
+          "3": {
+            "hits": 10,
+            "total": 10,
+            "rate": 1.0
+          }
+        },
+        "false_support": {
+          "count": 1,
+          "total": 3,
+          "rate": 0.3333333333333333
+        },
+        "empty_retrieval": {
+          "answerable": 0,
+          "unanswerable": 2
+        },
+        "strata": {
+          "answerable": {
+            "count": 10,
+            "retrieved": 10,
+            "empty": 0
+          },
+          "unanswerable": {
+            "count": 2,
+            "retrieved": 0,
+            "empty": 2
+          },
+          "misleading_overlap": {
+            "count": 1,
+            "retrieved": 1,
+            "empty": 0
+          }
+        },
+        "source_misses": {
+          "1": {
+            "count": 2,
+            "total": 10,
+            "rate": 0.2,
+            "empty": 0,
+            "wrong_source": 2
+          },
+          "3": {
+            "count": 0,
+            "total": 10,
+            "rate": 0.0,
+            "empty": 0,
+            "wrong_source": 0
+          }
+        }
+      },
+      "rows": [
+        {
+          "id": "d01",
+          "question": "tail exposure option book",
+          "expected_sources": [
+            "quantum-estimation-lab:risk-1"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "market-microstructure-lab:adverse"
+          ],
+          "scores": [
+            4,
+            4,
+            1
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d02",
+          "question": "stressed annual volatility derivatives",
+          "expected_sources": [
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8",
+            "statistical-learning-lab:shift"
+          ],
+          "scores": [
+            1,
+            1,
+            1
+          ],
+          "first_expected_rank": 2,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d03",
+          "question": "Grover oracle preparation calls",
+          "expected_sources": [
+            "quantum-estimation-lab:amplitude"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:amplitude",
+            "quantum-optimization-lab:allocation"
+          ],
+          "scores": [
+            4,
+            1
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d04",
+          "question": "exactly three holdings turnover",
+          "expected_sources": [
+            "quantum-optimization-lab:allocation"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-optimization-lab:allocation",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "scores": [
+            4,
+            1,
+            1
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d05",
+          "question": "fermionic electron double occupancy",
+          "expected_sources": [
+            "quantum-optimization-lab:electrons"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-optimization-lab:electrons"
+          ],
+          "scores": [
+            4
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d06",
+          "question": "informed flow latency",
+          "expected_sources": [
+            "market-microstructure-lab:adverse"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            3,
+            3,
+            3
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d07",
+          "question": "directional market inventory",
+          "expected_sources": [
+            "market-microstructure-lab:trend"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:balanced"
+          ],
+          "scores": [
+            3,
+            2,
+            2
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d08",
+          "question": "balanced flow cancellations",
+          "expected_sources": [
+            "market-microstructure-lab:balanced"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:trend"
+          ],
+          "scores": [
+            3,
+            2,
+            2
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d09",
+          "question": "volatility regime break coverage",
+          "expected_sources": [
+            "statistical-learning-lab:shift"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:stationary",
+            "market-microstructure-lab:adverse"
+          ],
+          "scores": [
+            4,
+            4,
+            1
+          ],
+          "first_expected_rank": 1,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d10",
+          "question": "stable regime chronological calibration",
+          "expected_sources": [
+            "statistical-learning-lab:stationary"
+          ],
+          "stratum": "answerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:stationary",
+            "market-microstructure-lab:adverse"
+          ],
+          "scores": [
+            3,
+            3,
+            1
+          ],
+          "first_expected_rank": 2,
+          "outcome": "source_found"
+        },
+        {
+          "id": "d11",
+          "question": "volcanology tectonic magma",
+          "expected_sources": [],
+          "stratum": "unanswerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [],
+          "scores": [],
+          "first_expected_rank": null,
+          "outcome": "empty_unsupported"
+        },
+        {
+          "id": "d12",
+          "question": "medieval manuscript paleography",
+          "expected_sources": [],
+          "stratum": "unanswerable",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [],
+          "scores": [],
+          "first_expected_rank": null,
+          "outcome": "empty_unsupported"
+        },
+        {
+          "id": "d13",
+          "question": "quantum portfolio guaranteed profit tomorrow",
+          "expected_sources": [],
+          "stratum": "misleading_overlap",
+          "rationale": "Existing studio development fixture; expected source or absence authored before this comparison.",
+          "retrieved_ids": [
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1.8"
+          ],
+          "scores": [
+            2,
+            1,
+            1
+          ],
+          "first_expected_rank": null,
+          "outcome": "false_support"
+        }
+      ]
+    }
+  }
+}

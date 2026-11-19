@@ -82,6 +82,8 @@ Explain the objective and units, where each baseline obtains its information, wh
 
 ## Next work
 
+- Retrieval baseline comparison is recorded in [AI06](AI06.md): BM25, TF-IDF and keyword overlap are compared on existing development questions before freezing selection and authoring fourteen sealed confirmation questions. TF-IDF ties BM25 at 10/10 rank-one source hits in both phases; overlap reaches 8/10 on development and 9/10 on confirmation. All three retrieve on 3/4 unsupported confirmation questions, including an unrelated topic matching only “through”; one unsupported question returns empty. The eighth studio case exposes both phases and all rankings. These are authored diagnostics, not population accuracy.
+
 - Structured queries are recorded in [AI05](AI05.md): typed project, experiment and metric requests expose exact saved data and explicit unknown-data errors in Python, CLI and a seventh studio case. Six known requests match their expected data; six absent requests return no values, whereas BM25 retrieves related records for all six. Registry and complete-record hashes cover metrics and metadata. This is a small authored contract study, not natural-language interpretation or real-world accuracy.
 
 - Frozen retrieval confirmation is recorded in [AI01](AI01.md): 30 new questions, source recall separated from unsupported retrieval and empty retrieval, with a term-overlap comparison and no tuning on outcomes. The studio exposes the full comparison as its third case.

@@ -12,6 +12,7 @@ try:
     from .independent_confirmation import experiment as independent_confirmation_experiment
     from .query_study import experiment as query_experiment
     from .structured_query import QueryTool, ProjectQuery
+    from .baseline_study import experiment as baseline_experiment
 except ImportError:
     from common import finalize, metric
     from evidence import load_registry, retrieve, answer, validate_claim, context
@@ -21,6 +22,7 @@ except ImportError:
     from independent_confirmation import experiment as independent_confirmation_experiment
     from query_study import experiment as query_experiment
     from structured_query import QueryTool, ProjectQuery
+    from baseline_study import experiment as baseline_experiment
 
 # Authored regression questions, intentionally separate from source descriptions. Not a research-grade held-out benchmark.
 QUESTIONS = [
@@ -204,9 +206,13 @@ def experiment():
         "subtitle": "An inspectable bridge from experiments to evidence-based research.",
         "accent": "#ff9caa",
         "seed": None,
-        "cases": [retrieval, claims, confirmation_case(), comparison_case(), freshness_case(), independent_confirmation_case(), query_case()],
+        "cases": [retrieval, claims, confirmation_case(), comparison_case(), freshness_case(), independent_confirmation_case(), query_case(), baseline_case()],
         "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
         "references": [
+            {
+                "title": "Introduction to Information Retrieval: TF-IDF weighting",
+                "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
+            },
             {
                 "title": "BM25: The Probabilistic Relevance Framework",
                 "url": "https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf",
@@ -216,6 +222,49 @@ def experiment():
                 "url": "https://arxiv.org/abs/2005.11401",
             },
         ],
+    }
+
+
+def baseline_case():
+    result = baseline_experiment()
+    methods = result["confirmation"]["methods"]
+    selected = methods[result["selected_method"]]["summary"]
+    rows = []
+    for phase in ("development", "confirmation"):
+        for name, data in result[phase]["methods"].items():
+            for row in data["rows"]:
+                rows.append([phase, name, row["id"] + " / " + row["stratum"], row["question"],
+                             "; ".join(row["expected_sources"]) or "UNSUPPORTED",
+                             "; ".join(row["retrieved_ids"]) or "EMPTY", str(row["scores"]),
+                             row["first_expected_rank"] or "ABSENT", row["outcome"],
+                             "; ".join(s + ": " + a for s, a in row.get("anchors", {}).items()),
+                             row["rationale"]])
+    return {
+        "id": "retrieval-baselines", "label": "Retrieval baseline comparison",
+        "kicker": "DEVELOPMENT SELECTION / SEALED CONFIRMATION",
+        "title": "Does TF-IDF improve the evidence ranking?",
+        "description": result["question"] + " Inspect development and confirmation separately. The development tie retains BM25; confirmation never changes the selection.",
+        "metrics": [metric("Selected on development", result["selected_method"]),
+                    metric("Selected confirmation recall at 1", selected["source_recall"]["1"]["hits"], "of 10"),
+                    metric("TF-IDF minus BM25 confirmation hits at 1", methods["tfidf"]["summary"]["source_recall"]["1"]["hits"] - methods["bm25"]["summary"]["source_recall"]["1"]["hits"]),
+                    metric("Selected unsupported retrieval / empty", str(selected["false_support"]["count"]) + " / " + str(selected["empty_retrieval"]["unanswerable"]), "of 4")],
+        "charts": [{"title": phase.capitalize() + ": answerable source recall only (n=10)",
+                    "x": [1, 3], "xlabel": "Rank cutoff; percent",
+                    "series": [{"name": name, "values": [100 * data["summary"]["source_recall"][str(k)]["rate"] for k in (1, 3)]}
+                               for name, data in result[phase]["methods"].items()]}
+                   for phase in ("development", "confirmation")] + [
+                       {"title": phase.capitalize() + ": unsupported retrieval versus empty results",
+                        "x": ["False support proxy", "Empty unsupported", "Empty answerable"],
+                        "xlabel": "Counts; unsupported n=" + str(next(iter(result[phase]["methods"].values()))["summary"]["unanswerable_count"]),
+                        "series": [{"name": name, "values": [data["summary"]["false_support"]["count"], data["summary"]["empty_retrieval"]["unanswerable"], data["summary"]["empty_retrieval"]["answerable"]]}
+                                   for name, data in result[phase]["methods"].items()]}
+                       for phase in ("development", "confirmation")],
+        "table": {"columns": ["Phase", "Method", "ID / stratum", "Question", "Expected sources", "Ranked source IDs", "Relevance scores", "Expected rank", "Outcome at 3", "Source anchors", "Label rationale"], "rows": rows},
+        "method": result["rules"] + [result["selection_rule"],
+                   "Confirmation includes a marine-acoustics question that unexpectedly retrieves records through the generic term 'through'. It remains labelled unsupported; no tokenizer or label repair was made after evaluation.",
+                   "Freeze SHA-256: " + result["freeze_sha256"] + "; confirmation questions SHA-256: " + result["questions_sha256"]],
+        "limitations": result["limitations"],
+        "reproduce": "python -m src.baseline_study --output results/AI06-baselines.json",
     }
 
 

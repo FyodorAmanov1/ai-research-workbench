@@ -1,0 +1,158 @@
+{
+  "protocol_id": "AI06-development-first-baselines-v1",
+  "authoring": "Fresh source-aware questions authored after development selection and code freeze; all labels sealed before any confirmation retrieval. Earlier study outcomes were visible.",
+  "questions": [
+    {
+      "id": "c01",
+      "question": "In the base market option book, how is positive future exposure distinguished from a loss quantile?",
+      "expected_sources": [
+        "quantum-estimation-lab:risk-1"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "quantum-estimation-lab:risk-1": "PFE uses positive future book value, not losses."
+      },
+      "rationale": "Base-market scope identifies the saved case; the source distinguishes the exposure quantity from VaR."
+    },
+    {
+      "id": "c02",
+      "question": "For the volatility shock option case, what expected shortfall was recorded in dollars?",
+      "expected_sources": [
+        "quantum-estimation-lab:risk-1.8"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "quantum-estimation-lab:risk-1.8": "99% expected shortfall: 1236.1997941165755 USD"
+      },
+      "rationale": "The shock case has its own saved USD shortfall; the base case is not an acceptable substitute."
+    },
+    {
+      "id": "c03",
+      "question": "How does the eight-scenario payoff register invert its Householder preparation inside amplification?",
+      "expected_sources": [
+        "quantum-estimation-lab:amplitude"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "quantum-estimation-lab:amplitude": "Householder state preparation is unitary and explicitly inverted inside the Grover operator."
+      },
+      "rationale": "The discrete expectation experiment explicitly documents inverse preparation."
+    },
+    {
+      "id": "c04",
+      "question": "Which allocation study compares a ring-XY mixer against swap local search and exhaustive enumeration?",
+      "expected_sources": [
+        "quantum-optimization-lab:allocation"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "quantum-optimization-lab:allocation": "Swap local search gives A, D, H, cost -0.038294, after 30 neighbour evaluations."
+      },
+      "rationale": "The allocation record contains both the mixer method and the classical search result."
+    },
+    {
+      "id": "c05",
+      "question": "How do Givens rotations represent the spin-up and spin-down sector in the Hubbard dimer?",
+      "expected_sources": [
+        "quantum-optimization-lab:electrons"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "quantum-optimization-lab:electrons": "Three real two-level Givens rotations span the four-state real sector."
+      },
+      "rationale": "The electron record states the sector and variational representation, without a materials claim."
+    },
+    {
+      "id": "c06",
+      "question": "For balanced flow, does the paired policy comparison improve on symmetric quoting after liquidation?",
+      "expected_sources": [
+        "market-microstructure-lab:balanced"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "market-microstructure-lab:balanced": "Paired improvement vs symmetric: -497.64374999999995 ticks"
+      },
+      "rationale": "The signed paired result is negative; retrieving this source must preserve that finding."
+    },
+    {
+      "id": "c07",
+      "question": "In the directional market case, what uncertainty accompanies the paired policy difference?",
+      "expected_sources": [
+        "market-microstructure-lab:trend"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "market-microstructure-lab:trend": "Paired difference standard error: 115.80331123603143 ticks"
+      },
+      "rationale": "The directional case has a distinct saved standard error in ticks."
+    },
+    {
+      "id": "c08",
+      "question": "For informed flow, what net value remains after liquidating the managed inventory?",
+      "expected_sources": [
+        "market-microstructure-lab:adverse"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "market-microstructure-lab:adverse": "Managed net after liquidation: 367.5 ticks"
+      },
+      "rationale": "The informed-flow case reports liquidated net rather than mark-to-mid equity."
+    },
+    {
+      "id": "c09",
+      "question": "Under stable variance conditions, what test coverage did the frozen ridge interval achieve?",
+      "expected_sources": [
+        "statistical-learning-lab:stationary"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "statistical-learning-lab:stationary": "Observed test coverage: 91.07468123861567 %"
+      },
+      "rationale": "The stable case reports observed coverage separately from the nominal target."
+    },
+    {
+      "id": "c10",
+      "question": "After the variance regime break, does expanding ridge reduce MAE relative to frozen ridge?",
+      "expected_sources": [
+        "statistical-learning-lab:shift"
+      ],
+      "stratum": "answerable",
+      "anchors": {
+        "statistical-learning-lab:shift": "Expanding ridge MAE: 9.838731697519906"
+      },
+      "rationale": "The shifted expanding MAE exceeds frozen MAE; the record preserves a negative adaptation finding."
+    },
+    {
+      "id": "c11",
+      "question": "What battery voltage was measured for the Hubbard dimer on a physical device?",
+      "expected_sources": [],
+      "stratum": "misleading_overlap",
+      "anchors": {},
+      "rationale": "The source explicitly excludes battery voltage and device noise; a related electron record cannot supply this measurement."
+    },
+    {
+      "id": "c12",
+      "question": "What exchange network latency in nanoseconds was measured for balanced flow quoting?",
+      "expected_sources": [],
+      "stratum": "misleading_overlap",
+      "anchors": {},
+      "rationale": "The source measures latency in event batches, explicitly not network nanoseconds."
+    },
+    {
+      "id": "c13",
+      "question": "Which paleolithic cave pigments contain ochre hematite?",
+      "expected_sources": [],
+      "stratum": "unanswerable",
+      "anchors": {},
+      "rationale": "No archaeology or pigment experiment is present in the registry."
+    },
+    {
+      "id": "c14",
+      "question": "How do cetacean echolocation clicks propagate through seawater?",
+      "expected_sources": [],
+      "stratum": "unanswerable",
+      "anchors": {},
+      "rationale": "No marine acoustics study is present in the registry."
+    }
+  ]
+}
