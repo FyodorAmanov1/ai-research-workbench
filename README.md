@@ -38,6 +38,23 @@ That failure is useful: **lexical relevance does not establish support for a cla
 
 The saved context example contains **7,522 characters**, below the default 8,000-character cap. Character limits make exports predictable but do not measure token use or reasoning quality.
 
+## Retrieval baseline comparison
+
+Open **Retrieval baseline comparison** (`#retrieval-baselines`) for separate development and sealed confirmation results from BM25, TF-IDF cosine and unique keyword overlap. All methods use the same registry, text fields, tokenizer, positive-score filter and source-ID tie break. TF-IDF learns vocabulary and smoothed IDF from documents only.
+
+Development source recall at one is **10/10, 10/10 and 8/10**, respectively. The fixed tie rule retains BM25 before fourteen fresh confirmation questions are authored and sealed. Confirmation recall at one is **10/10, 10/10 and 9/10**; all three reach 10/10 at three. TF-IDF provides no observed source-hit gain over BM25 here. Every method retrieves on **3/4 unsupported questions** and returns nothing on **1/4**; no answerable question returns empty. An unrelated marine-acoustics question unexpectedly matches trading records through the word “through”; this failure remains unchanged. These small source-aware authored sets do not estimate real-world accuracy.
+
+Inspect [AI06 methods and limitations](reports/AI06.md), [development results](results/AI06-development.json) and [the complete ledger](results/AI06-baselines.json). The studio offers phase-specific charts and all question rankings, source anchors and rationales. Reproduce with:
+
+```bash
+python -m src.baseline_study --development --output results/AI06-development.json
+python -m src.baseline_study --output results/AI06-baselines.json
+python lab.py --output results/latest.json
+python src/studio.py --out docs/study.json
+python src/studio.py --check docs/study.json
+python -m unittest discover -s tests -v
+```
+
 ## Frozen retrieval confirmation
 
 The [confirmation study](reports/AI01.md) freezes the ten-record registry, Python and browser retrieval implementations, BM25 settings and evaluation protocol before authoring 30 new questions. The question set is sealed before evaluation; drift in the inputs causes evaluation to fail. No rules or labels were tuned on these outcomes.

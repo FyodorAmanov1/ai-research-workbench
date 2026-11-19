@@ -1,0 +1,116 @@
+{
+  "origin": "Existing thirteen studio development fixtures, copied without relabelling.",
+  "questions": [
+    {
+      "id": "d01",
+      "question": "tail exposure option book",
+      "expected_sources": [
+        "quantum-estimation-lab:risk-1"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d02",
+      "question": "stressed annual volatility derivatives",
+      "expected_sources": [
+        "quantum-estimation-lab:risk-1.8"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d03",
+      "question": "Grover oracle preparation calls",
+      "expected_sources": [
+        "quantum-estimation-lab:amplitude"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d04",
+      "question": "exactly three holdings turnover",
+      "expected_sources": [
+        "quantum-optimization-lab:allocation"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d05",
+      "question": "fermionic electron double occupancy",
+      "expected_sources": [
+        "quantum-optimization-lab:electrons"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d06",
+      "question": "informed flow latency",
+      "expected_sources": [
+        "market-microstructure-lab:adverse"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d07",
+      "question": "directional market inventory",
+      "expected_sources": [
+        "market-microstructure-lab:trend"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d08",
+      "question": "balanced flow cancellations",
+      "expected_sources": [
+        "market-microstructure-lab:balanced"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d09",
+      "question": "volatility regime break coverage",
+      "expected_sources": [
+        "statistical-learning-lab:shift"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d10",
+      "question": "stable regime chronological calibration",
+      "expected_sources": [
+        "statistical-learning-lab:stationary"
+      ],
+      "stratum": "answerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d11",
+      "question": "volcanology tectonic magma",
+      "expected_sources": [],
+      "stratum": "unanswerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d12",
+      "question": "medieval manuscript paleography",
+      "expected_sources": [],
+      "stratum": "unanswerable",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    },
+    {
+      "id": "d13",
+      "question": "quantum portfolio guaranteed profit tomorrow",
+      "expected_sources": [],
+      "stratum": "misleading_overlap",
+      "rationale": "Existing studio development fixture; expected source or absence authored before this comparison."
+    }
+  ]
+}

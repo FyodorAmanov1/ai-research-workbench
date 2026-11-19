@@ -1770,10 +1770,1272 @@
         "No model, API, latency, infrastructure cost or scientific superiority is measured. Exact lookup does not establish scientific validity or comparison compatibility."
       ],
       "reproduce": "python -m src.query_study --output results/AI05-queries.json"
+    },
+    {
+      "id": "retrieval-baselines",
+      "label": "Retrieval baseline comparison",
+      "kicker": "DEVELOPMENT SELECTION / SEALED CONFIRMATION",
+      "title": "Does TF-IDF improve the evidence ranking?",
+      "description": "Does TF-IDF improve source retrieval over BM25 and unique keyword overlap when selection uses development questions only? Inspect development and confirmation separately. The development tie retains BM25; confirmation never changes the selection.",
+      "metrics": [
+        {
+          "label": "Selected on development",
+          "value": "bm25",
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Selected confirmation recall at 1",
+          "value": 10.0,
+          "unit": "of 10",
+          "note": ""
+        },
+        {
+          "label": "TF-IDF minus BM25 confirmation hits at 1",
+          "value": 0.0,
+          "unit": "",
+          "note": ""
+        },
+        {
+          "label": "Selected unsupported retrieval / empty",
+          "value": "3 / 1",
+          "unit": "of 4",
+          "note": ""
+        }
+      ],
+      "charts": [
+        {
+          "title": "Development: answerable source recall only (n=10)",
+          "x": [
+            1,
+            3
+          ],
+          "xlabel": "Rank cutoff; percent",
+          "series": [
+            {
+              "name": "bm25",
+              "values": [
+                100.0,
+                100.0
+              ]
+            },
+            {
+              "name": "tfidf",
+              "values": [
+                100.0,
+                100.0
+              ]
+            },
+            {
+              "name": "keyword_overlap",
+              "values": [
+                80.0,
+                100.0
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Confirmation: answerable source recall only (n=10)",
+          "x": [
+            1,
+            3
+          ],
+          "xlabel": "Rank cutoff; percent",
+          "series": [
+            {
+              "name": "bm25",
+              "values": [
+                100.0,
+                100.0
+              ]
+            },
+            {
+              "name": "tfidf",
+              "values": [
+                100.0,
+                100.0
+              ]
+            },
+            {
+              "name": "keyword_overlap",
+              "values": [
+                90.0,
+                100.0
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Development: unsupported retrieval versus empty results",
+          "x": [
+            "False support proxy",
+            "Empty unsupported",
+            "Empty answerable"
+          ],
+          "xlabel": "Counts; unsupported n=3",
+          "series": [
+            {
+              "name": "bm25",
+              "values": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "name": "tfidf",
+              "values": [
+                1,
+                2,
+                0
+              ]
+            },
+            {
+              "name": "keyword_overlap",
+              "values": [
+                1,
+                2,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Confirmation: unsupported retrieval versus empty results",
+          "x": [
+            "False support proxy",
+            "Empty unsupported",
+            "Empty answerable"
+          ],
+          "xlabel": "Counts; unsupported n=4",
+          "series": [
+            {
+              "name": "bm25",
+              "values": [
+                3,
+                1,
+                0
+              ]
+            },
+            {
+              "name": "tfidf",
+              "values": [
+                3,
+                1,
+                0
+              ]
+            },
+            {
+              "name": "keyword_overlap",
+              "values": [
+                3,
+                1,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "table": {
+        "columns": [
+          "Phase",
+          "Method",
+          "ID / stratum",
+          "Question",
+          "Expected sources",
+          "Ranked source IDs",
+          "Relevance scores",
+          "Expected rank",
+          "Outcome at 3",
+          "Source anchors",
+          "Label rationale"
+        ],
+        "rows": [
+          [
+            "development",
+            "bm25",
+            "d01 / answerable",
+            "tail exposure option book",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            "[7.517749619, 7.517749619, 0.905974706]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d02 / answerable",
+            "stressed annual volatility derivatives",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; statistical-learning-lab:shift; statistical-learning-lab:stationary",
+            "[1.3553103018, 1.293382561, 1.1057632445]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d03 / answerable",
+            "Grover oracle preparation calls",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "[11.7618956361, 2.1389482513]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d04 / answerable",
+            "exactly three holdings turnover",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-optimization-lab:electrons; quantum-estimation-lab:risk-1",
+            "[8.4478457968, 1.3132572339, 1.0339838249]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d05 / answerable",
+            "fermionic electron double occupancy",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons",
+            "[11.344211132]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d06 / answerable",
+            "informed flow latency",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[5.2062598024, 4.5399540936, 4.2922891693]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d07 / answerable",
+            "directional market inventory",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "[5.1100786674, 2.3784238825, 2.3784238825]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d08 / answerable",
+            "balanced flow cancellations",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[5.6474107082, 3.0432143941, 2.7955494698]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d09 / answerable",
+            "volatility regime break coverage",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:risk-1.8",
+            "[6.1244047282, 5.3842109082, 1.3553103018]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d10 / answerable",
+            "stable regime chronological calibration",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; market-microstructure-lab:adverse",
+            "[3.9653654715, 3.4018951784, 0.6444143197]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d11 / unanswerable",
+            "volcanology tectonic magma",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d12 / unanswerable",
+            "medieval manuscript paleography",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "bm25",
+            "d13 / misleading_overlap",
+            "quantum portfolio guaranteed profit tomorrow",
+            "UNSUPPORTED",
+            "quantum-estimation-lab:amplitude; statistical-learning-lab:stationary; statistical-learning-lab:shift",
+            "[3.3011231822, 1.2749286565, 1.2727259464]",
+            "ABSENT",
+            "false_support",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d01 / answerable",
+            "tail exposure option book",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:trend",
+            "[0.2962037324, 0.296008089, 0.0294367106]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d02 / answerable",
+            "stressed annual volatility derivatives",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; statistical-learning-lab:shift; statistical-learning-lab:stationary",
+            "[0.123283318, 0.1058698096, 0.0704726559]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d03 / answerable",
+            "Grover oracle preparation calls",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "[0.4050165792, 0.0501015443]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d04 / answerable",
+            "exactly three holdings turnover",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-optimization-lab:electrons; quantum-estimation-lab:risk-1",
+            "[0.1758481471, 0.0328385901, 0.0219993143]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d05 / answerable",
+            "fermionic electron double occupancy",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons",
+            "[0.278493365]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d06 / answerable",
+            "informed flow latency",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[0.2810821571, 0.2250148209, 0.17072812]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d07 / answerable",
+            "directional market inventory",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:balanced; market-microstructure-lab:adverse",
+            "[0.255672511, 0.1315651539, 0.1314779785]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d08 / answerable",
+            "balanced flow cancellations",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[0.2400622147, 0.1496936693, 0.1010258946]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d09 / answerable",
+            "volatility regime break coverage",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:risk-1.8",
+            "[0.2009871937, 0.1593393075, 0.0545257977]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d10 / answerable",
+            "stable regime chronological calibration",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; market-microstructure-lab:trend",
+            "[0.1141878113, 0.0855979221, 0.0174270333]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d11 / unanswerable",
+            "volcanology tectonic magma",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d12 / unanswerable",
+            "medieval manuscript paleography",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "tfidf",
+            "d13 / misleading_overlap",
+            "quantum portfolio guaranteed profit tomorrow",
+            "UNSUPPORTED",
+            "quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8",
+            "[0.0816001451, 0.0456680197, 0.0456378558]",
+            "ABSENT",
+            "false_support",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d01 / answerable",
+            "tail exposure option book",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            "[4, 4, 1]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d02 / answerable",
+            "stressed annual volatility derivatives",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; statistical-learning-lab:shift",
+            "[1, 1, 1]",
+            2,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d03 / answerable",
+            "Grover oracle preparation calls",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "[4, 1]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d04 / answerable",
+            "exactly three holdings turnover",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8",
+            "[4, 1, 1]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d05 / answerable",
+            "fermionic electron double occupancy",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons",
+            "[4]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d06 / answerable",
+            "informed flow latency",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[3, 3, 3]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d07 / answerable",
+            "directional market inventory",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "[3, 2, 2]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d08 / answerable",
+            "balanced flow cancellations",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[3, 2, 2]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d09 / answerable",
+            "volatility regime break coverage",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "[4, 4, 1]",
+            1,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d10 / answerable",
+            "stable regime chronological calibration",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "[3, 3, 1]",
+            2,
+            "source_found",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d11 / unanswerable",
+            "volcanology tectonic magma",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d12 / unanswerable",
+            "medieval manuscript paleography",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "development",
+            "keyword_overlap",
+            "d13 / misleading_overlap",
+            "quantum portfolio guaranteed profit tomorrow",
+            "UNSUPPORTED",
+            "quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8",
+            "[2, 1, 1]",
+            "ABSENT",
+            "false_support",
+            "",
+            "Existing studio development fixture; expected source or absence authored before this comparison."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c01 / answerable",
+            "In the base market option book, how is positive future exposure distinguished from a loss quantile?",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:trend",
+            "[14.0275176641, 11.5849550658, 1.5340213677]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1: PFE uses positive future book value, not losses.",
+            "Base-market scope identifies the saved case; the source distinguishes the exposure quantity from VaR."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c02 / answerable",
+            "For the volatility shock option case, what expected shortfall was recorded in dollars?",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; quantum-estimation-lab:risk-1; statistical-learning-lab:shift",
+            "[8.9095625327, 7.2635273967, 3.5497985241]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1.8: 99% expected shortfall: 1236.1997941165755 USD",
+            "The shock case has its own saved USD shortfall; the base case is not an acceptable substitute."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c03 / answerable",
+            "How does the eight-scenario payoff register invert its Householder preparation inside amplification?",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "[19.5223400852, 4.2778965026]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude: Householder state preparation is unitary and explicitly inverted inside the Grover operator.",
+            "The discrete expectation experiment explicitly documents inverse preparation."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c04 / answerable",
+            "Which allocation study compares a ring-XY mixer against swap local search and exhaustive enumeration?",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1",
+            "[22.2082869569, 2.2627598855, 1.7139455043]",
+            1,
+            "source_found",
+            "quantum-optimization-lab:allocation: Swap local search gives A, D, H, cost -0.038294, after 30 neighbour evaluations.",
+            "The allocation record contains both the mixer method and the classical search result."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c05 / answerable",
+            "How do Givens rotations represent the spin-up and spin-down sector in the Hubbard dimer?",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation",
+            "[18.9248200641, 1.5917324498]",
+            1,
+            "source_found",
+            "quantum-optimization-lab:electrons: Three real two-level Givens rotations span the four-state real sector.",
+            "The electron record states the sector and variational representation, without a materials claim."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c06 / answerable",
+            "For balanced flow, does the paired policy comparison improve on symmetric quoting after liquidation?",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[12.3194902388, 9.7152939247, 9.4676290004]",
+            1,
+            "source_found",
+            "market-microstructure-lab:balanced: Paired improvement vs symmetric: -497.64374999999995 ticks",
+            "The signed paired result is negative; retrieving this source must preserve that finding."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c07 / answerable",
+            "In the directional market case, what uncertainty accompanies the paired policy difference?",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "[7.8837367481, 5.1520819633, 5.1520819633]",
+            1,
+            "source_found",
+            "market-microstructure-lab:trend: Paired difference standard error: 115.80331123603143 ticks",
+            "The directional case has a distinct saved standard error in ticks."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c08 / answerable",
+            "For informed flow, what net value remains after liquidating the managed inventory?",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[10.130191564, 9.4638858553, 9.216220931]",
+            1,
+            "source_found",
+            "market-microstructure-lab:adverse: Managed net after liquidation: 367.5 ticks",
+            "The informed-flow case reports liquidated net rather than mark-to-mid equity."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c09 / answerable",
+            "Under stable variance conditions, what test coverage did the frozen ridge interval achieve?",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; quantum-estimation-lab:amplitude",
+            "[18.1112188148, 17.5354908674, 1.3005020139]",
+            1,
+            "source_found",
+            "statistical-learning-lab:stationary: Observed test coverage: 91.07468123861567 %",
+            "The stable case reports observed coverage separately from the nominal target."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c10 / answerable",
+            "After the variance regime break, does expanding ridge reduce MAE relative to frozen ridge?",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "[13.8761620232, 13.3311377994, 1.8126746981]",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift: Expanding ridge MAE: 9.838731697519906",
+            "The shifted expanding MAE exceeds frozen MAE; the record preserves a negative adaptation finding."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c11 / misleading_overlap",
+            "What battery voltage was measured for the Hubbard dimer on a physical device?",
+            "UNSUPPORTED",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude",
+            "[11.5185046595, 2.140527826, 1.6826262626]",
+            "ABSENT",
+            "false_support",
+            "",
+            "The source explicitly excludes battery voltage and device noise; a related electron record cannot supply this measurement."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c12 / misleading_overlap",
+            "What exchange network latency in nanoseconds was measured for balanced flow quoting?",
+            "UNSUPPORTED",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[11.4145481879, 8.8103518738, 8.5626869496]",
+            "ABSENT",
+            "false_support",
+            "",
+            "The source measures latency in event batches, explicitly not network nanoseconds."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c13 / unanswerable",
+            "Which paleolithic cave pigments contain ochre hematite?",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "No archaeology or pigment experiment is present in the registry."
+          ],
+          [
+            "confirmation",
+            "bm25",
+            "c14 / unanswerable",
+            "How do cetacean echolocation clicks propagate through seawater?",
+            "UNSUPPORTED",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[1.4967396995, 1.4967396995, 1.4967396995]",
+            "ABSENT",
+            "false_support",
+            "",
+            "No marine acoustics study is present in the registry."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c01 / answerable",
+            "In the base market option book, how is positive future exposure distinguished from a loss quantile?",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:trend",
+            "[0.3081047046, 0.2577938843, 0.0476515094]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1: PFE uses positive future book value, not losses.",
+            "Base-market scope identifies the saved case; the source distinguishes the exposure quantity from VaR."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c02 / answerable",
+            "For the volatility shock option case, what expected shortfall was recorded in dollars?",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; quantum-estimation-lab:risk-1; statistical-learning-lab:shift",
+            "[0.2482703221, 0.2030772032, 0.0677981264]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1.8: 99% expected shortfall: 1236.1997941165755 USD",
+            "The shock case has its own saved USD shortfall; the base case is not an acceptable substitute."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c03 / answerable",
+            "How does the eight-scenario payoff register invert its Householder preparation inside amplification?",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "[0.3299109795, 0.0708542834]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude: Householder state preparation is unitary and explicitly inverted inside the Grover operator.",
+            "The discrete expectation experiment explicitly documents inverse preparation."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c04 / answerable",
+            "Which allocation study compares a ring-XY mixer against swap local search and exhaustive enumeration?",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude; quantum-estimation-lab:risk-1",
+            "[0.2602734913, 0.0206353693, 0.0201795261]",
+            1,
+            "source_found",
+            "quantum-optimization-lab:allocation: Swap local search gives A, D, H, cost -0.038294, after 30 neighbour evaluations.",
+            "The allocation record contains both the mixer method and the classical search result."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c05 / answerable",
+            "How do Givens rotations represent the spin-up and spin-down sector in the Hubbard dimer?",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation",
+            "[0.2797986516, 0.0173925878]",
+            1,
+            "source_found",
+            "quantum-optimization-lab:electrons: Three real two-level Givens rotations span the four-state real sector.",
+            "The electron record states the sector and variational representation, without a materials claim."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c06 / answerable",
+            "For balanced flow, does the paired policy comparison improve on symmetric quoting after liquidation?",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[0.3189336806, 0.2586897973, 0.2282631618]",
+            1,
+            "source_found",
+            "market-microstructure-lab:balanced: Paired improvement vs symmetric: -497.64374999999995 ticks",
+            "The signed paired result is negative; retrieving this source must preserve that finding."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c07 / answerable",
+            "In the directional market case, what uncertainty accompanies the paired policy difference?",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:balanced; market-microstructure-lab:adverse",
+            "[0.220171243, 0.1362837603, 0.1361934584]",
+            1,
+            "source_found",
+            "market-microstructure-lab:trend: Paired difference standard error: 115.80331123603143 ticks",
+            "The directional case has a distinct saved standard error in ticks."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c08 / answerable",
+            "For informed flow, what net value remains after liquidating the managed inventory?",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[0.3578420851, 0.3215049929, 0.2882516609]",
+            1,
+            "source_found",
+            "market-microstructure-lab:adverse: Managed net after liquidation: 367.5 ticks",
+            "The informed-flow case reports liquidated net rather than mark-to-mid equity."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c09 / answerable",
+            "Under stable variance conditions, what test coverage did the frozen ridge interval achieve?",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:stationary; statistical-learning-lab:shift; quantum-estimation-lab:amplitude",
+            "[0.4176583982, 0.4029696037, 0.0151502592]",
+            1,
+            "source_found",
+            "statistical-learning-lab:stationary: Observed test coverage: 91.07468123861567 %",
+            "The stable case reports observed coverage separately from the nominal target."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c10 / answerable",
+            "After the variance regime break, does expanding ridge reduce MAE relative to frozen ridge?",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:trend",
+            "[0.3743667367, 0.3567885944, 0.0359160813]",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift: Expanding ridge MAE: 9.838731697519906",
+            "The shifted expanding MAE exceeds frozen MAE; the record preserves a negative adaptation finding."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c11 / misleading_overlap",
+            "What battery voltage was measured for the Hubbard dimer on a physical device?",
+            "UNSUPPORTED",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation; quantum-estimation-lab:amplitude",
+            "[0.186836423, 0.0266982111, 0.019885615]",
+            "ABSENT",
+            "false_support",
+            "",
+            "The source explicitly excludes battery voltage and device noise; a related electron record cannot supply this measurement."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c12 / misleading_overlap",
+            "What exchange network latency in nanoseconds was measured for balanced flow quoting?",
+            "UNSUPPORTED",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[0.2724662389, 0.211711984, 0.1804032607]",
+            "ABSENT",
+            "false_support",
+            "",
+            "The source measures latency in event batches, explicitly not network nanoseconds."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c13 / unanswerable",
+            "Which paleolithic cave pigments contain ochre hematite?",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "No archaeology or pigment experiment is present in the registry."
+          ],
+          [
+            "confirmation",
+            "tfidf",
+            "c14 / unanswerable",
+            "How do cetacean echolocation clicks propagate through seawater?",
+            "UNSUPPORTED",
+            "market-microstructure-lab:trend; market-microstructure-lab:balanced; market-microstructure-lab:adverse",
+            "[0.098569926, 0.0974342756, 0.0973697154]",
+            "ABSENT",
+            "false_support",
+            "",
+            "No marine acoustics study is present in the registry."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c01 / answerable",
+            "In the base market option book, how is positive future exposure distinguished from a loss quantile?",
+            "quantum-estimation-lab:risk-1",
+            "quantum-estimation-lab:risk-1; quantum-estimation-lab:risk-1.8; market-microstructure-lab:adverse",
+            "[9, 8, 2]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1: PFE uses positive future book value, not losses.",
+            "Base-market scope identifies the saved case; the source distinguishes the exposure quantity from VaR."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c02 / answerable",
+            "For the volatility shock option case, what expected shortfall was recorded in dollars?",
+            "quantum-estimation-lab:risk-1.8",
+            "quantum-estimation-lab:risk-1.8; quantum-estimation-lab:risk-1; statistical-learning-lab:shift",
+            "[5, 4, 3]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:risk-1.8: 99% expected shortfall: 1236.1997941165755 USD",
+            "The shock case has its own saved USD shortfall; the base case is not an acceptable substitute."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c03 / answerable",
+            "How does the eight-scenario payoff register invert its Householder preparation inside amplification?",
+            "quantum-estimation-lab:amplitude",
+            "quantum-estimation-lab:amplitude; quantum-optimization-lab:allocation",
+            "[8, 2]",
+            1,
+            "source_found",
+            "quantum-estimation-lab:amplitude: Householder state preparation is unitary and explicitly inverted inside the Grover operator.",
+            "The discrete expectation experiment explicitly documents inverse preparation."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c04 / answerable",
+            "Which allocation study compares a ring-XY mixer against swap local search and exhaustive enumeration?",
+            "quantum-optimization-lab:allocation",
+            "quantum-optimization-lab:allocation; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "[9, 1, 1]",
+            1,
+            "source_found",
+            "quantum-optimization-lab:allocation: Swap local search gives A, D, H, cost -0.038294, after 30 neighbour evaluations.",
+            "The allocation record contains both the mixer method and the classical search result."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c05 / answerable",
+            "How do Givens rotations represent the spin-up and spin-down sector in the Hubbard dimer?",
+            "quantum-optimization-lab:electrons",
+            "quantum-optimization-lab:electrons; quantum-optimization-lab:allocation",
+            "[8, 1]",
+            1,
+            "source_found",
+            "quantum-optimization-lab:electrons: Three real two-level Givens rotations span the four-state real sector.",
+            "The electron record states the sector and variational representation, without a materials claim."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c06 / answerable",
+            "For balanced flow, does the paired policy comparison improve on symmetric quoting after liquidation?",
+            "market-microstructure-lab:balanced",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[8, 7, 7]",
+            1,
+            "source_found",
+            "market-microstructure-lab:balanced: Paired improvement vs symmetric: -497.64374999999995 ticks",
+            "The signed paired result is negative; retrieving this source must preserve that finding."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c07 / answerable",
+            "In the directional market case, what uncertainty accompanies the paired policy difference?",
+            "market-microstructure-lab:trend",
+            "market-microstructure-lab:trend; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "[6, 5, 5]",
+            1,
+            "source_found",
+            "market-microstructure-lab:trend: Paired difference standard error: 115.80331123603143 ticks",
+            "The directional case has a distinct saved standard error in ticks."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c08 / answerable",
+            "For informed flow, what net value remains after liquidating the managed inventory?",
+            "market-microstructure-lab:adverse",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[6, 6, 6]",
+            1,
+            "source_found",
+            "market-microstructure-lab:adverse: Managed net after liquidation: 367.5 ticks",
+            "The informed-flow case reports liquidated net rather than mark-to-mid equity."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c09 / answerable",
+            "Under stable variance conditions, what test coverage did the frozen ridge interval achieve?",
+            "statistical-learning-lab:stationary",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; quantum-estimation-lab:amplitude",
+            "[9, 9, 1]",
+            2,
+            "source_found",
+            "statistical-learning-lab:stationary: Observed test coverage: 91.07468123861567 %",
+            "The stable case reports observed coverage separately from the nominal target."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c10 / answerable",
+            "After the variance regime break, does expanding ridge reduce MAE relative to frozen ridge?",
+            "statistical-learning-lab:shift",
+            "statistical-learning-lab:shift; statistical-learning-lab:stationary; market-microstructure-lab:adverse",
+            "[7, 7, 2]",
+            1,
+            "source_found",
+            "statistical-learning-lab:shift: Expanding ridge MAE: 9.838731697519906",
+            "The shifted expanding MAE exceeds frozen MAE; the record preserves a negative adaptation finding."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c11 / misleading_overlap",
+            "What battery voltage was measured for the Hubbard dimer on a physical device?",
+            "UNSUPPORTED",
+            "quantum-optimization-lab:electrons; market-microstructure-lab:adverse; market-microstructure-lab:balanced",
+            "[5, 1, 1]",
+            "ABSENT",
+            "false_support",
+            "",
+            "The source explicitly excludes battery voltage and device noise; a related electron record cannot supply this measurement."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c12 / misleading_overlap",
+            "What exchange network latency in nanoseconds was measured for balanced flow quoting?",
+            "UNSUPPORTED",
+            "market-microstructure-lab:balanced; market-microstructure-lab:adverse; market-microstructure-lab:trend",
+            "[8, 7, 7]",
+            "ABSENT",
+            "false_support",
+            "",
+            "The source measures latency in event batches, explicitly not network nanoseconds."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c13 / unanswerable",
+            "Which paleolithic cave pigments contain ochre hematite?",
+            "UNSUPPORTED",
+            "EMPTY",
+            "[]",
+            "ABSENT",
+            "empty_unsupported",
+            "",
+            "No archaeology or pigment experiment is present in the registry."
+          ],
+          [
+            "confirmation",
+            "keyword_overlap",
+            "c14 / unanswerable",
+            "How do cetacean echolocation clicks propagate through seawater?",
+            "UNSUPPORTED",
+            "market-microstructure-lab:adverse; market-microstructure-lab:balanced; market-microstructure-lab:trend",
+            "[1, 1, 1]",
+            "ABSENT",
+            "false_support",
+            "",
+            "No marine acoustics study is present in the registry."
+          ]
+        ]
+      },
+      "method": [
+        "All methods use the same ten saved title + text records, existing ASCII tokenizer and STOP set; positive scores only; ascending source ID breaks ties; cutoffs 1 and 3.",
+        "BM25 unchanged: k1=1.2, b=0.75, IDF=ln(1+(N-df+0.5)/(df+0.5)); binary query terms.",
+        "TF-IDF: document raw term counts, binary query terms; IDF=1+ln((N+1)/(df+1)) on documents only; both vectors IDF weighted and L2 normalized; OOV query terms discarded.",
+        "Keyword overlap: size of unique query/document term intersection.",
+        "Scores saved rounded to ten decimal places after ranking to suppress floating-point summation noise; scores across methods are not comparable confidence values.",
+        "Development uses the existing thirteen authored fixtures. Compare all three, select by the recorded rule and freeze the measured development artifact and evaluator before authoring new questions.",
+        "Author one answerable question per source and four unsupported questions, distinct from both earlier confirmation waves and development. Seal the entire set before running any method on it. Report all methods; never reselect on confirmation.",
+        "Source recall denominators contain answerable questions only. At each cutoff report wrong-source and empty misses separately. Unsupported nonempty retrieval is a false support risk proxy; report empty unsupported retrieval separately.",
+        "Maximize development source recall@1, then recall@3, then minimize false support count; ties prefer bm25, tfidf, keyword_overlap in that order.",
+        "Confirmation includes a marine-acoustics question that unexpectedly retrieves records through the generic term 'through'. It remains labelled unsupported; no tokenizer or label repair was made after evaluation.",
+        "Freeze SHA-256: 44bac1d6f8f6d818604864bf2c826c64175c2fbc3759bc596e18ba00ef286b9f; confirmation questions SHA-256: 19f23d053b402473d532f3a692882f05283f0e06045615fc699b4cce0a88fc8a"
+      ],
+      "limitations": [
+        "Small source-aware authored questions, with earlier study outcomes visible; independent of method selection, not blind authorship, independent human annotation or representative user sampling.",
+        "Some source records share almost all text; small ranking differences do not establish statistical or real-world superiority. No semantic entailment or generated answer quality is measured.",
+        "Records describe synthetic companion experiments; this measures lexical retrieval over saved reports, not scientific validity, live market performance or quantum advantage.",
+        "No runtime, token usage, infrastructure price or cost advantage is measured; all methods access identical evidence, with no external model inference.",
+        "Hashes detect drift relative to local manifests; they do not authenticate history or prove external timestamps. Future rule changes need a new protocol and fresh questions."
+      ],
+      "reproduce": "python -m src.baseline_study --output results/AI06-baselines.json"
     }
   ],
   "provenance": "Registry derived solely from the four public companion study artifacts. No unpublished research, credentials or paper text is ingested.",
   "references": [
+    {
+      "title": "Introduction to Information Retrieval: TF-IDF weighting",
+      "url": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html"
+    },
     {
       "title": "BM25: The Probabilistic Relevance Framework",
       "url": "https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf"

@@ -1,1 +1,20 @@
-{"task_id":"AI05","status":"completed","summary":"Added typed project, experiment and metric queries in Python, JSON CLI and studio, with explicit unknown-data errors and source hashes. All twelve authored probes match specification: six known requests return saved data; six absent requests return errors without values, while BM25 retrieves related records on all six. Zero and negative findings are preserved.","evidence_paths":["src/structured_query.py","src/query_study.py","experiments/AI05-queries.json","tests/test_structured_query.py","src/studio.py","docs/structured-query.js","docs/index.html","docs/study.json","results/AI05-queries.json","results/latest.json","reports/AI05.md"]}
+{
+  "task_id": "AI06",
+  "status": "completed",
+  "summary": "Compared BM25, TF-IDF cosine and unique keyword overlap on thirteen development questions before freezing measured selection, code and protocol and authoring fourteen sealed confirmation questions. BM25 and TF-IDF tie at 10/10 rank-one source hits in both phases; overlap scores 8/10 and 9/10. All methods retrieve on 3/4 unsupported confirmation questions and return empty on 1/4, preserving an unexpected generic-term overlap. Added the eighth studio case with separate phase charts and all rankings, anchors and rationales.",
+  "evidence_paths": [
+    "src/retrieval_baselines.py",
+    "src/baseline_study.py",
+    "tests/test_baseline_study.py",
+    "experiments/AI06-development.json",
+    "experiments/AI06-freeze.json",
+    "experiments/AI06-questions.json",
+    "experiments/AI06-seal.json",
+    "results/AI06-development.json",
+    "results/AI06-baselines.json",
+    "results/latest.json",
+    "src/studio.py",
+    "docs/study.json",
+    "reports/AI06.md"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "protocol_id": "AI06-development-first-baselines-v1",
+  "question": "Does TF-IDF improve source retrieval over BM25 and unique keyword overlap when selection uses development questions only?",
+  "files": {
+    "docs/registry.json": "f9cae56d0b0258a8d2faf57190e731e1c4bbc83bac72aea22a21f4afaa538fe6",
+    "src/evidence.py": "6858b07ccab8920d760add5b1cfc9ae908ba618826003c027a9b69b758e65100",
+    "src/confirmation.py": "d0bea4cea8baac6a6f28d346640d6736f42ced364b33fe3f80d6bbcea3a48601",
+    "src/independent_confirmation.py": "3ad55acba551f1c9e7fbafa506b4b9264775121d09a8917ba68fd227a0eaf00d",
+    "src/retrieval_baselines.py": "cd118e11ac25ddaf628e9a908625a148dddbc256e8dced8132e7fb5ba24bf9ab",
+    "src/baseline_study.py": "27eb35eb2d27e2b4a8d468f36048ec89c5281a87760ccd77cc242690f00d238c",
+    "experiments/AI06-development.json": "b50b813319d382e3048b57cc874c267a1d759e378fa79c0d47dc976d76b521ed",
+    "results/AI06-development.json": "caf06e832847b66b25ca4d0a7251920a24913877643aac0d4c910cde48d727ce",
+    "experiments/AI01-questions.json": "f9d2e6e5246cdba01ad2cbcb7a5a7effbc2c420a23ac53933f6ef70116ef7d2c",
+    "experiments/AI04-questions.json": "65d6524e8a42c74610f5fc0340e7ea13d7f0942cb2e6b013d95217217e5064f3"
+  },
+  "selected_method": "bm25",
+  "selection_rule": "Maximize development source recall@1, then recall@3, then minimize false support count; ties prefer bm25, tfidf, keyword_overlap in that order.",
+  "question_plan": {
+    "answerable": 10,
+    "unanswerable": 2,
+    "misleading_overlap": 2
+  },
+  "rules": [
+    "All methods use the same ten saved title + text records, existing ASCII tokenizer and STOP set; positive scores only; ascending source ID breaks ties; cutoffs 1 and 3.",
+    "BM25 unchanged: k1=1.2, b=0.75, IDF=ln(1+(N-df+0.5)/(df+0.5)); binary query terms.",
+    "TF-IDF: document raw term counts, binary query terms; IDF=1+ln((N+1)/(df+1)) on documents only; both vectors IDF weighted and L2 normalized; OOV query terms discarded.",
+    "Keyword overlap: size of unique query/document term intersection.",
+    "Scores saved rounded to ten decimal places after ranking to suppress floating-point summation noise; scores across methods are not comparable confidence values.",
+    "Development uses the existing thirteen authored fixtures. Compare all three, select by the recorded rule and freeze the measured development artifact and evaluator before authoring new questions.",
+    "Author one answerable question per source and four unsupported questions, distinct from both earlier confirmation waves and development. Seal the entire set before running any method on it. Report all methods; never reselect on confirmation.",
+    "Source recall denominators contain answerable questions only. At each cutoff report wrong-source and empty misses separately. Unsupported nonempty retrieval is a false support risk proxy; report empty unsupported retrieval separately."
+  ],
+  "limitations": [
+    "Small source-aware authored questions, with earlier study outcomes visible; independent of method selection, not blind authorship, independent human annotation or representative user sampling.",
+    "Some source records share almost all text; small ranking differences do not establish statistical or real-world superiority. No semantic entailment or generated answer quality is measured.",
+    "Records describe synthetic companion experiments; this measures lexical retrieval over saved reports, not scientific validity, live market performance or quantum advantage.",
+    "No runtime, token usage, infrastructure price or cost advantage is measured; all methods access identical evidence, with no external model inference.",
+    "Hashes detect drift relative to local manifests; they do not authenticate history or prove external timestamps. Future rule changes need a new protocol and fresh questions."
+  ]
+}
